@@ -1,0 +1,16 @@
+---
+
+---
+
+<header 
+  class="fixed top-0 w-full transition duration-300 h-20 z-50 border-b border-b-gray-200 px-4"
+  x-data="{ scrolled: false }"
+  x-init="window.onscroll = () => { scrolled = (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) }"
+  :class="{ 'bg-white/60 backdrop-blur-md': scrolled, 'bg-transparent': !scrolled }"
+>
+    <section class="px-2.5 w-full h-full lg:mx-auto *max-w-5xl border-x"
+    :class="{ 'border-transparent': scrolled, 'border-x-gray-200': !scrolled }"
+    >
+
+    </section>
+</header>
