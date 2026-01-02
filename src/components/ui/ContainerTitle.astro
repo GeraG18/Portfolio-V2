@@ -1,0 +1,29 @@
+---
+const { className, id, title } = Astro.props;
+
+const words = title.split(' ');
+---
+
+<section id={id}
+  class={"sticky top-16 left-0 z-40 w-full duration-300 px-4 bg-[--title]/40 backdrop-blur-sm supports-backdrop-filter:bg-(--titleRGBA) transition-all md:static flex flex-row "+ className}
+>
+    <div class=" w-full h-full lg:mx-auto border-x border-x-gray-200 overflow-y-auto before:content-[''] before:absolute before:top-0 before:left-0 before:bg-gray-200 before:w-full before:h-px after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-gray-200 after:w-full after:h-px flex flex-row overflow-hidden">
+        <h2 class="text-2xl px-2.5 py-5 w-full h-full">
+            {
+                words.map((word, index) => (
+                    <span class={ index === words.length - 1 ? 'text-gradient' : 'text-(--text)' }>
+                    {word}
+                </span>
+            ))
+          }
+        </h2>
+        <div class="w-10 row-span-full row-start-1 hidden border-l border-l-gray-200 bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px] bg-fixed [--pattern-fg:var(--text)]/10 md:col-start-3 md:block"></div>
+    </div>
+</section>
+<!-- Agregar h1, colocar sticky y hacer el for para colorear las palabras -->
+
+<!-- 
+<h1 class=" text-start py-5 duration-300 px-4 undefined">SOBRE <span class="text-gradient">MI</span></h1>
+
+<div class="row-span-full row-start-1 hidden border-x border-x-(--pattern-fg) bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/5 md:col-start-3 md:block dark:[--pattern-fg:var(--color-white)]/10"></div>
+-->

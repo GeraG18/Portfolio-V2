@@ -1,0 +1,330 @@
+---
+// src/pages/projects/[...project].astro
+import Container from '../../components/UI/Container.astro';
+import BaseLayout from '../../layouts/Layout.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import { getCollection } from 'astro:content';
+
+// 1. EXPORTAR getStaticPaths() - ¡ESTO ES OBLIGATORIO!
+export async function getStaticPaths() {
+  console.log('🔧 Generando rutas estáticas para proyectos...');
+  
+  try {
+    // Obtener todos los proyectos
+    const allProjects = await getCollection('projects' as any);
+    
+    if (!allProjects || allProjects.length === 0) {
+      console.log('⚠️ No se encontraron proyectos para generar rutas');
+      return [];
+    }
+    
+    // Función para extraer idioma del ID
+    function getLocaleFromId(id: string): 'es' | 'en' {
+      const filename = id.split('/')[1] || '';
+      if (filename.includes('-en')) return 'en';
+      if (filename.includes('-es')) return 'es';
+      return 'es';
+    }
+    
+    // Crear rutas para cada proyecto en cada idioma
+    const paths: Array<{ params: { project: string }, props?: any }> = [];
+    const processedProjects = new Set();
+    
+    (allProjects as any[]).forEach(item => {
+      try {
+        // Extraer nombre del proyecto (carpeta)
+        const projectName = item.id.split('/')[0];
+        const projectKey = `${projectName}`;
+        
+        // Solo procesar cada proyecto una vez
+        if (processedProjects.has(projectKey)) {
+          return;
+        }
+        processedProjects.add(projectKey);
+        
+        console.log(`   📍 Generando ruta para: ${projectName}`);
+        
+        // Crear entrada para español e inglés
+        paths.push({
+          params: { project: projectName },
+          props: { 
+            projectName,
+            defaultLocale: 'es'
+          }
+        });
+        
+      } catch (error) {
+        console.error(`Error procesando proyecto ${item.id}:`, error);
+      }
+    });
+    
+    console.log(`✅ Rutas generadas: ${paths.length} proyectos`);
+    return paths;
+    
+  } catch (error) {
+    console.error('❌ Error en getStaticPaths:', error);
+    return [];
+  }
+}
+
+// 2. Obtener parámetro de la ruta (esto viene de getStaticPaths)
+const { project } = Astro.params;
+const currentLocale = Astro.currentLocale || 'es';
+
+// 3. Si no hay parámetro, redirigir a la lista
+if (!project) {
+  return Astro.redirect('/projects');
+}
+
+// 4. Obtener todos los proyectos (Astro pasa esto automáticamente desde getStaticPaths)
+const allProjects = await getCollection('projects' as any);
+
+// 5. Función para extraer idioma del ID
+function getLocaleFromId(id: string): 'es' | 'en' {
+  const filename = id.split('/')[1] || '';
+  if (filename.includes('-en')) return 'en';
+  if (filename.includes('-es')) return 'es';
+  return 'es';
+}
+
+// 6. Buscar el proyecto por nombre e idioma
+let foundProject = null;
+let projectData = null;
+
+// Debug: mostrar qué estamos buscando
+console.log(`🔍 Buscando proyecto: ${project} (locale: ${currentLocale})`);
+console.log(`📁 Total proyectos disponibles: ${(allProjects as any[]).length}`);
+
+// Mostrar todos los proyectos disponibles para debug
+(allProjects as any[]).forEach((item, index) => {
+  const projectName = item.id.split('/')[0];
+  const projectLocale = item.data.lang || getLocaleFromId(item.id);
+  console.log(`   ${index + 1}. ${item.id} -> nombre: ${projectName}, locale: ${projectLocale}`);
+});
+
+for (const item of (allProjects as any[])) {
+  // Extraer nombre del proyecto del ID
+  const projectName = item.id.split('/')[0];
+  
+  // Determinar idioma
+  const projectLocale = item.data.lang || getLocaleFromId(item.id);
+  
+  // Verificar coincidencia
+  if (projectName === project && projectLocale === currentLocale) {
+    foundProject = item;
+    console.log(`✅ Proyecto encontrado: ${item.id}`);
+    break;
+  }
+}
+
+// 7. Si no se encuentra, mostrar 404
+if (!foundProject) {
+  console.log(`❌ Proyecto no encontrado: ${project} (${currentLocale})`);
+  
+  // Intentar encontrar cualquier versión del proyecto para sugerencia
+  const alternativeVersions = (allProjects as any[]).filter(item => {
+    const projectName = item.id.split('/')[0];
+    return projectName === project;
+  });
+  
+  if (alternativeVersions.length > 0) {
+    console.log(`💡 Versiones alternativas encontradas:`);
+    alternativeVersions.forEach(v => {
+      const lang = v.data.lang || getLocaleFromId(v.id);
+      console.log(`   - ${lang}: ${v.id}`);
+    });
+  }
+  
+  return notFound();
+}
+
+// 8. Renderizar contenido markdown
+let Content = null;
+let headings = [];
+
+try {
+  const rendered = await foundProject.render();
+  Content = rendered.Content;
+  headings = rendered.headings || [];
+  console.log(`📝 Contenido renderizado exitosamente`);
+} catch (error) {
+  console.error('❌ Error rendering project:', error);
+}
+
+// 9. Obtener todas las versiones del mismo proyecto para selector de idioma
+const projectVersions = (allProjects as any[])
+  .filter(item => {
+    const projectName = item.id.split('/')[0];
+    return projectName === project;
+  })
+  .map(item => ({
+    lang: item.data.lang || getLocaleFromId(item.id),
+    url: `/projects/${project}` // Astro maneja el prefijo de idioma automáticamente
+  }));
+
+console.log(`🌐 Versiones disponibles: ${projectVersions.map(v => v.lang).join(', ')}`);
+
+// 10. Extraer datos del proyecto
+projectData = {
+  id: foundProject.id,
+  slug: project,
+  title: foundProject.data.title || 'Sin título',
+  description: foundProject.data.description || '',
+  lang: foundProject.data.lang || getLocaleFromId(foundProject.id),
+  technologies: foundProject.data.technologies || [],
+  urls: foundProject.data.urls || [],
+  coverImage: foundProject.data.coverImage,
+  coverAlt: foundProject.data.coverAlt || foundProject.data.title,
+  date: foundProject.data.date || {},
+  role: foundProject.data.role,
+  status: foundProject.data.status || 'finished',
+  featured: Boolean(foundProject.data.featured),
+  client: foundProject.data.client,
+  category: foundProject.data.category,
+  duration: foundProject.data.duration,
+};
+
+// 11. Metadatos para SEO
+const metaTitle = `${projectData.title} | Proyectos`;
+const metaDescription = projectData.description || `Detalles del proyecto ${projectData.title}`;
+const metaImage = projectData.coverImage || '/images/default-project.jpg';
+
+// 12. Generar URL canónica
+const canonicalUrl = new URL(Astro.url);
+canonicalUrl.pathname = `/projects/${project}`;
+---
+
+<!-- El resto del código HTML/JSX permanece igual -->
+<BaseLayout 
+  title={metaTitle}
+  description={metaDescription}
+  image={metaImage}
+  canonical={canonicalUrl.toString()}
+>
+  <Container>
+    <article class="project-detail">
+    <header class="project-header">
+      <h1 class="project-title">{projectData.title}</h1>
+      
+      {projectData.description && (
+        <p class="project-description">{projectData.description}</p>
+      )}
+      
+      <div class="project-meta">
+        <div class="meta-grid">
+          {projectData.date?.start && (
+            <div class="meta-item">
+              <span class="meta-label">Fecha inicio:</span>
+              <span class="meta-value">
+                {new Date(projectData.date.start).toLocaleDateString(currentLocale)}
+              </span>
+            </div>
+          )}
+          
+          {projectData.date?.end && (
+            <div class="meta-item">
+              <span class="meta-label">Fecha fin:</span>
+              <span class="meta-value">
+                {new Date(projectData.date.end).toLocaleDateString(currentLocale)}
+              </span>
+            </div>
+          )}
+          
+          {projectData.role && (
+            <div class="meta-item">
+              <span class="meta-label">Rol:</span>
+              <span class="meta-value">{projectData.role}</span>
+            </div>
+          )}
+          
+          {projectData.client && (
+            <div class="meta-item">
+              <span class="meta-label">Cliente:</span>
+              <span class="meta-value">{projectData.client}</span>
+            </div>
+          )}
+          
+          {projectData.status && (
+            <div class="meta-item">
+              <span class="meta-label">Estado:</span>
+              <span class={`meta-value status-${projectData.status}`}>
+                {projectData.status}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {projectData.technologies.length > 0 && (
+        <div class="technologies-container">
+          <h3>Tecnologías utilizadas</h3>
+          <div class="technologies-list">
+            {projectData.technologies.map(tech => (
+              <span class="technology-badge">{tech}</span>
+            ))}
+          </div>
+        </div>
+      )}
+    </header>
+    
+    {projectData.coverImage && (
+      <img 
+        src={projectData.coverImage} 
+        alt={projectData.coverAlt || projectData.title}
+        width="1200"
+        height="675"
+        class="project-cover"
+        loading="lazy"
+      />
+    )}
+    
+    <div class="project-content prose">
+      <Content />
+    </div>
+    
+    {projectData.urls.length > 0 && (
+      <div class="project-links">
+        <h3>Enlaces relacionados</h3>
+        <div class="links-grid">
+          {projectData.urls.map(link => (
+            <a 
+              href={link.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="link-button"
+            >
+              {link.name} →
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+    
+    {/* Selector de idioma */}
+    <!-- {Object.keys(languageUrls).length > 1 && (
+      <div class="language-switcher">
+        <span class="switcher-label">Ver en:</span>
+        <div class="switcher-buttons">
+          {Object.entries(languageUrls).map(([lang, url]) => (
+            <a 
+              href={url}
+              class={`switcher-button ${lang === currentLocale ? 'active' : ''}`}
+              hreflang={lang}
+            >
+              {lang === 'es' ? 'Español' : 'English'}
+            </a>
+          ))}
+        </div>
+      </div>
+    )} -->
+  </article>
+  </Container>
+</BaseLayout>
+
+<style>
+/* ... todos los estilos de antes ... */
+</style>
+
+<script>
+/* ... todo el JavaScript de antes ... */
+</script>

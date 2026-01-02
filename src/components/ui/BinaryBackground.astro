@@ -1,0 +1,112 @@
+<canvas id="binary-canvas" class="fixed inset-0 z-[-1] pointer-events-none"></canvas>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('binary-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Ajustar tamaño
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // Configuración SIMPLE
+  const cellSize = 28; // Tamaño de cada celda
+  const fontSize = 20; // Tamaño de fuente
+  const chars = ['0', '1'];
+  
+  // Crear grid simple
+  const cols = Math.ceil(canvas.width / cellSize);
+  const rows = Math.ceil(canvas.height / cellSize);
+  const grid = [];
+  
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      grid.push({
+        x: x * cellSize,
+        y: y * cellSize,
+        char: chars[Math.floor(Math.random() * chars.length)],
+        opacity: 0.2 + Math.random() * 0.4 // 0.2 a 0.6 - MÁS VISIBLE
+      });
+    }
+  }
+  
+  // Mouse tracking
+  let mouseX = 0;
+  let mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+  
+  // Función de dibujo
+  function draw() {
+    // Limpiar canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Configurar fuente
+    ctx.font = `${fontSize}px monospace`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    // Dibujar cada celda
+    grid.forEach(cell => {
+      // Efecto mouse simple
+      const dx = mouseX - cell.x;
+      const dy = mouseY - cell.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      let opacity = cell.opacity;
+      
+      // Aumentar opacidad cerca del mouse
+      if (distance < 100) {
+        opacity = Math.min(0.9, opacity + 0.3);
+        
+        // Cambiar carácter ocasionalmente
+        if (Math.random() < 0.05) {
+          cell.char = chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      
+      // Color VISIBLE - gris claro
+      ctx.fillStyle = `rgba(220, 220, 220, ${opacity})`;
+      
+      // Dibujar carácter
+      ctx.fillText(cell.char, cell.x, cell.y);
+      
+      // Brillo sutil
+      if (opacity > 0.5) {
+        ctx.save();
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = 'white';
+        ctx.fillText(cell.char, cell.x + 1, cell.y + 1);
+        ctx.restore();
+      }
+    });
+    
+    // Cambios aleatorios periódicos
+    if (Math.random() < 0.02) {
+      const randomCell = grid[Math.floor(Math.random() * grid.length)];
+      randomCell.char = chars[Math.floor(Math.random() * chars.length)];
+    }
+    
+    // Siguiente frame
+    requestAnimationFrame(draw);
+  }
+  
+  // Redimensionar
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+  
+  // Iniciar
+  draw();
+});
+</script>
+
+<style>
+#binary-canvas {
+  /* Asegurar que esté detrás */
+  z-index: -1;
+}
+</style>

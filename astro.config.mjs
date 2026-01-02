@@ -9,6 +9,14 @@ import alpinejs from '@astrojs/alpinejs';
 
 // https://astro.build/config
 export default defineConfig({
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false, // true = /es/home, false = /home para español
+    }
+  }, 
+
   integrations: [mdx(), alpinejs()],
 
   vite: {

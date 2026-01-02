@@ -1,0 +1,216 @@
+---
+---
+
+<div id="blendCursor" class="fixed pointer-events-none z-9999 rounded-full opacity-0 transition-all duration-200 bg-white mix-blend-difference scale-100"></div>
+
+<script>
+  if (typeof window !== 'undefined') {
+    
+    const CONFIG = {
+      size: 12,
+      offsetX: 0,
+      offsetY: 0,
+      smoothness: 1.5,
+      hideOnMobile: true,
+      hoverScale: 1.5,
+      hoverTransition: '0.2s ease',
+      hoverSelectors: [ 'a', 'button', 'input', 'textarea', 'select', '[role="button"]', '[tabindex]', '.interactive', '.cursor-hover', '[data-hover-scale]']
+    };
+    
+    let cursor: HTMLElement | null = null;
+    let isHovering = false;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let cursorVisible = true; 
+    
+    let centerOffset = CONFIG.size / 2;
+    let hoverOffset = (CONFIG.size * CONFIG.hoverScale) / 2;
+
+    function initCursor() {
+      cursor = document.getElementById('blendCursor');
+      if (!cursor) {
+        console.error('❌ No se encontró el elemento #blendCursor');
+        return;
+      }
+      cursor.style.setProperty('width', `${CONFIG.size}px`, 'important');
+      cursor.style.setProperty('height', `${CONFIG.size}px`, 'important');
+      
+      // Posición inicial
+      targetX = window.innerWidth / 2;
+      targetY = window.innerHeight / 2;
+      currentX = targetX;
+      currentY = targetY;
+      
+      updateCursorPosition();
+      cursor.style.opacity = '0';
+      cursorVisible = true;
+      
+      document.addEventListener('mousemove', handleMouseMove); // Cuando el cursor se mueve en la web
+      document.addEventListener('mouseleave', handleMouseLeave); // Cuando el cursor sale de la web
+      document.addEventListener('mouseenter', handleMouseEnter); // CUando el cursor entra de nuevo en la web
+      
+      animateCursor();
+    }
+    
+    function handleMouseMove(e: MouseEvent) {
+      if (!cursorVisible) return;
+      
+      targetX = e.clientX;
+      targetY = e.clientY;
+      cursor.style.opacity = '1';
+      detectHoverElement(e.clientX, e.clientY);
+    }
+    
+    function detectHoverElement(x: number, y: number) {
+      if (!cursorVisible) return;
+      
+      const element = document.elementFromPoint(x, y);
+      let shouldScale = false;
+      
+      if (element) {
+        let currentElement: Element | null = element;
+        while (currentElement && currentElement !== document.body) {
+          const tagName = currentElement.tagName.toLowerCase();
+          const hasHoverClass = currentElement.classList.contains('interactive') || 
+                               currentElement.classList.contains('cursor-hover');
+          const hasHoverAttr = currentElement.hasAttribute('data-hover-scale');
+          const role = currentElement.getAttribute('role');
+          const isInteractiveRole = role === 'button' || role === 'link';
+          const isFocusable = currentElement.hasAttribute('tabindex') || 
+                            (currentElement as HTMLElement).tabIndex >= 0;
+          
+          if (CONFIG.hoverSelectors.includes(tagName) || 
+              hasHoverClass || 
+              hasHoverAttr || 
+              isInteractiveRole || 
+              isFocusable) {
+            shouldScale = true;
+            break;
+          }
+          
+          currentElement = currentElement.parentElement;
+        }
+      }
+      
+      if (shouldScale && !isHovering) {
+        applyHoverScale();
+      } else if (!shouldScale && isHovering) {
+        removeHoverScale();
+      }
+    }
+    
+    function applyHoverScale() {
+      if (!cursor || !cursorVisible) return;
+      
+      isHovering = true;
+      cursor.style.transition = `all ${CONFIG.hoverTransition}, opacity 0.3s ease`;
+      cursor.style.transform = `scale(${CONFIG.hoverScale})`;
+
+      cursor.style.setProperty('width', `${CONFIG.size * CONFIG.hoverScale}px`, 'important');
+      cursor.style.setProperty('height', `${CONFIG.size * CONFIG.hoverScale}px`, 'important');
+      
+      const newOffset = (CONFIG.size * CONFIG.hoverScale) / 2;
+      cursor.style.left = `${currentX - newOffset + CONFIG.offsetX}px`;
+      cursor.style.top = `${currentY - newOffset + CONFIG.offsetY}px`;
+    }
+    
+    function removeHoverScale() {
+      if (!cursor) return;
+      
+      isHovering = false;
+      cursor.style.transition = `all ${CONFIG.hoverTransition}, opacity 0.3s ease`;
+      cursor.style.transform = 'scale(1)';
+      
+      cursor.style.setProperty('width', `${CONFIG.size}px`, 'important');
+      cursor.style.setProperty('height', `${CONFIG.size}px`, 'important');
+      cursor.style.left = `${currentX - centerOffset + CONFIG.offsetX}px`;
+      cursor.style.top = `${currentY - centerOffset + CONFIG.offsetY}px`;
+    }
+    
+    function handleMouseLeave() {
+      if (cursor) {
+        cursor.style.opacity = '0';
+        removeHoverScale();
+      }
+    }
+    
+    function handleMouseEnter() {
+      if (cursor && cursorVisible && (targetX > 0 || targetY > 0)) {
+        cursor.style.opacity = '1';
+      }
+    }
+    
+    function updateCursorPosition() {
+      const offset = isHovering ? hoverOffset : centerOffset;
+      if (cursor && cursorVisible) {
+        cursor.style.left = `${currentX - offset + CONFIG.offsetX}px`;
+        cursor.style.top = `${currentY - offset + CONFIG.offsetY}px`;
+      }
+    }
+    
+    function animateCursor() {
+      if (cursorVisible) {
+        currentX += (targetX - currentX) * CONFIG.smoothness;
+        currentY += (targetY - currentY) * CONFIG.smoothness;
+        
+        if (cursor) {
+          updateCursorPosition();
+        }
+      }
+      
+      requestAnimationFrame(animateCursor);// animacion de movimiento continua
+    }
+    
+    // ========== INICIALIZACIÓN ==========
+    if (document.readyState === 'complete') {
+      initCursor();
+    } else {
+      document.addEventListener('DOMContentLoaded', initCursor);
+    }
+    
+    // Para Astro
+    document.addEventListener('astro:page-load', initCursor);
+  }
+</script>
+
+<style>
+  #blendCursor {
+    mix-blend-mode: difference !important;
+    background-blend-mode: difference !important;
+    z-index: 2147483647 !important;
+    will-change: transform, left, top, width, height;
+    transition: 
+      transform 0.2s ease,
+      width 0.2s ease,
+      height 0.2s ease,
+      left 0.1s linear,
+      top 0.1s linear,
+      opacity 0.3s ease !important;
+  }
+  
+  /* ========== PARA OCULTAR EL CURSOR NATIVO ========== */
+  html, body, * {
+    cursor: none !important;
+  }
+  
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 1024px), (hover: none) {
+    #blendCursor {
+      display: none !important;
+    }
+    
+    /* Restaurar cursor nativo en móviles */
+    html, body, * {
+      cursor: auto !important;
+    }
+  }
+  
+  /* ========== ACCESIBILIDAD ========== */
+  @media (prefers-reduced-motion: reduce) {
+    #blendCursor {
+      transition: opacity 0.1s ease !important;
+    }
+  }
+</style>

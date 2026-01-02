@@ -1,10 +1,36 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
+import ContainerTitle from '../components/ui/ContainerTitle.astro';
+import HeroSection from '../components/landing/HeroSection.astro';
+import Container from '../components/ui/Container.astro';
+import AboutMeSection from '../components/landing/AboutMeSection.astro';
+import Timeline from '../components/landing/Timeline.astro';
+import ScrambleBackground from '../components/ScrambleBackground.astro';
+import BinaryBackground from '../components/ui/BinaryBackground.astro';
 ---
 
 <Layout>
-	<!-- <div class="bg-red-300 w-9 h-9 "></div> -->
-	<Welcome />
+	<Container id="hero-section" className="flex flex-col items-start justify-center">
+		<HeroSection/>
+		<!-- <ScrambleBackground /> -->
+		 <BinaryBackground/>
+	</Container>
+	<ContainerTitle title="Sobre mi"/>
+	<Container>
+		<AboutMeSection/>
+	</Container>
+	<ContainerTitle title="Formación académica"/>
+	<Container>
+		<Timeline/>
+	</Container>
+	<ContainerTitle title="Experiencia laboral"/>
+	<Container>
+		<Timeline/>
+	</Container>
+	<ContainerTitle title="Últimos proyectos"/>
+	<Container>
+	</Container>
+	<ContainerTitle title="Contacto"/>
+	<Container>
+	</Container>
 </Layout>

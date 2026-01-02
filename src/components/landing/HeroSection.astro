@@ -1,0 +1,57 @@
+---
+import DownloadIcon from "../ui/DownloadIcon.astro";
+import LinkButton from "../ui/LinkButton.astro";
+import { t } from '../i18n/i18n.astro';
+import ColorfulText from '../ColorfulText.astro'
+---
+
+<div class="flex flex-col-reverse xl:flex-row gap-1 w-full mx-auto max-w-5xl">
+    <div class="w-full h-full flex flex-col justify-center items-center">
+        <!-- <h1 id="fullName" class="font-bold text-xl">Gerardo Gallegos Jr</h1> -->
+        <span class="text-[1.5rem] text-center">{t('hero_section.greetings')}</span>
+        <!-- <h1 class="text-start title mb-2">Gerardo <span class="text-gradient">Gallegos Jr</span></h1> -->
+        <h1 class="text-center text-[2.5rem] mb-4">
+            {t('hero_section.title')}
+        </h1>
+        <p class="text-black/60 font-light text-center ">{t('hero_section.description')}</p>
+        <div class="mt-4 md:mt-8 flex gap-2 flex-row items-center justify-start">
+            <LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
+                {t('hero_section.download_cv')}
+                <DownloadIcon/>
+            </LinkButton>
+
+            <LinkButton target="_blank" width="[14rem]" id="linkedinButton" href="https://www.linkedin.com/in/gerardo-gallegos-jr/">
+                {t('hero_section.linkedin')} 
+                <span class="material-symbols-rounded">
+                    send
+                </span>
+            </LinkButton>
+        </div>
+    </div>
+    <!-- <div class="w-full h-full flex items-center justify-center !px-4 !py-4 md:!py-0">
+            <div class="relative flex items-center justify-center md:h-[80%] max-w-screen-xl">
+                <Image src={Background} alt="Imágen de Ciudad Cyberpunk" class="z-5 absolute rounded-full !mb-[4rem]"/>
+                <Image src={Avatar} alt="Avatar de Gerardo" class="z-10 h-[38vh] xl:h-fit image-mask !mt-[4rem]"/>
+                
+            </div>
+    </div> -->
+</div>
+
+<script>
+    import gsap from "gsap";
+    import SplitText from "gsap/src/SplitText";
+
+    const tl = gsap.timeline();
+    const split = new SplitText("#fullName", {type:"words,chars"});
+    console.log('split', split);
+    
+    const { words } = split;
+    tl.to(words, {
+        duration: 7,
+        ease: "power3.out",
+        color: "#ff0000",
+        stagger: {
+            each: 0.1,
+        }
+    })
+</script>

@@ -1,0 +1,26 @@
+---
+import es from '../../locales/es.json';
+import en from '../../locales/en.json';
+
+// Exportar la función que usa translations
+export const t = (key: string) => {
+    const translations = { es, en, };
+    const keys = key.split('.');
+    
+    // Usar currentLocale de Astro
+    const currentLocale = Astro.currentLocale || 'es';
+    let value = translations[currentLocale];
+    
+    for (const k of keys) {
+        value = value?.[k];
+        if (value === undefined) {
+        console.warn(`Translation key "${key}" not found for locale "${currentLocale}"`);
+        return key;
+        }
+    }
+    
+    return value;
+};
+---
+
+<!-- Este componente no renderiza nada visualmente -->

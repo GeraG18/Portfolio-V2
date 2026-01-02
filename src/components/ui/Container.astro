@@ -1,0 +1,11 @@
+---
+const { className, id } = Astro.props
+---
+
+<section id={id}
+  class={"relative top-0 w-full transition duration-300 min-h-screen px-4 "}
+>
+    <div class={"px-2.5 pt-20 w-full min-h-screen lg:mx-auto *max-w-5xl border-x border-x-gray-200 overflow-y-auto after:content-[''] after:absolute after:bottom-4 after:left-0 after:bg-gray-200 after:w-full after:h-px "+ className}>
+      <slot />
+    </div>
+</section>

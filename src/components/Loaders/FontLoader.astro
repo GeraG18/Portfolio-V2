@@ -1,0 +1,24 @@
+---
+// src/components/FontLoader.astro
+// Importa directamente desde npm
+import webfontloader from 'webfontloader';
+---
+
+<script define:vars={{ WebFont: webfontloader }}>
+  // Inicializa cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      WebFont.load({
+        google: {
+          families: ['Exo', 'Kode Mono', 'Quicksand', 'Libre Barcode 128 Text']
+        }
+      });
+    });
+  } else {
+    WebFont.load({
+      google: {
+        families: ['Exo', 'Kode Mono', 'Quicksand', 'Libre Barcode 128 Text']
+      }
+    });
+  }
+</script>

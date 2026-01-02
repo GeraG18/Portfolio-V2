@@ -1,0 +1,37 @@
+---
+// src/pages/projects/index.astro
+import { getLocalizedProjects } from '../../utils/projects';
+
+const currentLocale = Astro.currentLocale || 'es';
+const projects = await getLocalizedProjects(currentLocale);
+---
+
+<h1>Proyectos ({projects.length})</h1>
+
+{projects.length > 0 ? (
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    {projects.map(project => {
+      const projectName = project.id.split('/')[0];
+      return (
+        <article class="border border-gray-200 p-4 rounded-md">
+          <h2>{project.data.title}</h2>
+          {project.data.description && (
+            <p>{project.data.description}</p>
+          )}
+          {project.data.technologies.length > 0 && (
+            <div class="technologies">
+              {project.data.technologies.slice(0, 3).map(tech => (
+                <span class="tech-tag">{tech}</span>
+              ))}
+            </div>
+          )}
+          <a href={`/projects/${projectName}`} class="btn">
+            Ver detalles
+          </a>
+        </article>
+      );
+    })}
+  </div>
+) : (
+  <p>No hay proyectos disponibles en {currentLocale === 'es' ? 'español' : 'inglés'}.</p>
+)}

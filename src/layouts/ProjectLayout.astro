@@ -1,0 +1,64 @@
+---
+// src/layouts/ProjectLayout.astro
+// Layout simple para páginas de proyecto
+const { project } = Astro.props;
+---
+
+<!doctype html>
+<html lang={project?.lang || 'es'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <slot name="head" />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    
+    <!-- Scripts básicos -->
+    <script>
+      // Solo scripts esenciales
+      document.addEventListener('DOMContentLoaded', function() {
+        // Smooth scroll para anclas internas
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              window.scrollTo({
+                top: target.offsetTop - 80,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  /* Estilos básicos */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f9fafb;
+  }
+  
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+</style>
