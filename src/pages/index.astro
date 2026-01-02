@@ -5,12 +5,12 @@ import HeroSection from '../components/landing/HeroSection.astro';
 import Container from '../components/ui/Container.astro';
 import AboutMeSection from '../components/landing/AboutMeSection.astro';
 import Timeline from '../components/landing/Timeline.astro';
-import ScrambleBackground from '../components/ScrambleBackground.astro';
 import BinaryBackground from '../components/ui/BinaryBackground.astro';
+import ProjectsPreviewContainer from '../components/landing/ProjectsPreviewContainer.astro';
 ---
 
 <Layout>
-	<Container id="hero-section" className="flex flex-col items-start justify-center">
+	<Container id="hero-section" className="flex flex-col items-start justify-center min-h-3/4 pt-20">
 		<HeroSection/>
 		<!-- <ScrambleBackground /> -->
 		 <BinaryBackground/>
@@ -19,18 +19,22 @@ import BinaryBackground from '../components/ui/BinaryBackground.astro';
 	<Container>
 		<AboutMeSection/>
 	</Container>
-	<ContainerTitle title="Formación académica"/>
+	<!-- <ContainerTitle title="Formación académica"/>
 	<Container>
 		<Timeline/>
-	</Container>
+	</Container> -->
 	<ContainerTitle title="Experiencia laboral"/>
 	<Container>
 		<Timeline/>
 	</Container>
 	<ContainerTitle title="Últimos proyectos"/>
 	<Container>
+		<ProjectsPreviewContainer/>
 	</Container>
-	<ContainerTitle title="Contacto"/>
+	<Container className="h-fit py-4 pb-12">
+		Loosely designed in Figma and coded in Visual Studio Code by yours truly. Built with Next.js and Tailwind CSS, deployed with Vercel. All text is set in the Inter typeface.
+	</Container>
+	<!-- <ContainerTitle title="Contacto"/>
 	<Container>
-	</Container>
+	</Container> -->
 </Layout>

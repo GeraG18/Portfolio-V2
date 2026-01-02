@@ -1,0 +1,54 @@
+---
+// src/pages/projects/index.astro
+import { getLocalizedProjects } from '../../utils/projects';
+import LinkButton from '../ui/LinkButton.astro';
+
+const currentLocale = Astro.currentLocale || 'es';
+const projects = await getLocalizedProjects(currentLocale);
+---
+
+<div class="h-fit py-4 pb-8 flex flex-col gap-4">
+  {projects.length > 0 ? (
+    <div class="flex flex-col gap-2 group/list">
+      {projects.map(project => {
+        const projectName = project.id.split('/')[0];
+        return (
+          <a href={`/projects/${projectName}`} class="group/item *border *border-gray-200 p-4 flex flex-row gap-2 lg:group-hover/list:opacity-50 hover:lg:bg-(--text-grayRGBA) lg:hover:opacity-100">
+            <div class="flex-none aspect-video relative h-20  border border-gray-200 overflow-hidden flex items-center justify-center">
+                {
+                project.data.coverImage ? 
+                <img src={project.data.coverImage} alt={project.data.coverAlt} class="absolute grayscale inset-0 h-full w-full object-cover group-hover/item:scale-110 group-hover/item:grayscale-0 transition-transform duration-500 ease-in-out border-none"/>
+                : 
+                <div class="absolute bg-gray-200 w-full h-full text-[--text] flex flex-col items-center justify-center">
+                    <span class="material-symbols-rounded text-2xl">
+                        image
+                    </span>
+                    <span>Sin imagen</span>
+                </div>
+                }
+            </div>
+            <div>
+              <h2>{project.data.title}</h2>
+              {project.data.description && (
+                <p>{project.data.description}</p>
+              )}
+              {project.data.technologies.length > 0 && (
+                <div class="w-full flex gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+                  {project.data.technologies.map((tech, index) => (
+                      <span class="capitalize px-2 border border-[--accent-darker] rounded-full text-[--accent-darker] flex-none flex items-center justify-center gap-1"> 
+                          <i class={"icon icon-"+tech}></i>
+                          {tech.replace('-',' ')}
+                      </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </a>
+        );
+      })}
+    </div>
+    <LinkButton href="/projects">Ver proyectos</LinkButton>
+  ) : (
+    <p>No hay proyectos disponibles en {currentLocale === 'es' ? 'español' : 'inglés'}.</p>
+  )}
+</div>

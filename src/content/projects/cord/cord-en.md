@@ -3,13 +3,13 @@
 title: "CORD System"
 description: "Plataforma de gestión de recursos corporativos"
 lang: en
-technologies: ["React", "Node.js", "PostgreSQL", "Docker"]
+technologies: ["ionic", "angular", "tailwind", "sass", "figma", "google-cloud", "apple", "android"]
 urls:
   - name: "Repositorio"
     url: "https://github.com/usuario/cord"
   - name: "Demo"
     url: "https://demo.cord.com"
-coverImage: "/images/projects/cord-cover.jpg"
+coverImage: "./cord-cover.svg"
 coverAlt: "Interfaz del sistema CORD"
 date:
   start: "2023-03-15"
