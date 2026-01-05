@@ -8,12 +8,25 @@ import ColorfulText from '../ColorfulText.astro'
 <div class="flex flex-col-reverse xl:flex-row gap-1 w-full mx-auto max-w-5xl">
     <div class="w-full h-full flex flex-col justify-center items-center">
         <!-- <h1 id="fullName" class="font-bold text-xl">Gerardo Gallegos Jr</h1> -->
-        <span class="text-[1.5rem] text-center">{t('hero_section.greetings')}</span>
-        <!-- <h1 class="text-start title mb-2">Gerardo <span class="text-gradient">Gallegos Jr</span></h1> -->
-        <h1 class="text-center text-[2.5rem] mb-4">
-            {t('hero_section.title')}
+        <h1 class="text-center text-[2.5rem] mb-4 font-['Switzer-Light']">
+            {t('hero_section.greetings')}
         </h1>
-        <p class="text-black/60 font-light text-center ">{t('hero_section.description')}</p>
+        <span class="text-center text-[2.5rem] font-['Switzer-Medium'] w-full lg:w-3/5 h-16 border border-(--accent) relative before:content-['role-span'] before:absolute before:text-xs before:-left-px before:-top-5 before:bg-(--accent) before:py-0.5 before:px-1  before:text-(--background) mt-5">
+            {t('hero_section.title')}
+        </span>
+
+        <ul class="v-slides border border-gray-200 w-3/5 h-16 text-[2.5rem] overflow-hidden text-center">
+            <li class="v-slide">Websites</li>
+            <li class="v-slide">Plugins</li>
+            <li class="v-slide">Web Apps</li>
+            <li class="v-slide">Portals</li>
+            <li class="v-slide">Communities</li>
+            <li class="v-slide">Digital Marketing</li>
+            <li class="v-slide">Websites</li>
+        </ul>
+
+        <p class="text-black/60 font-['Switzer-Regular'] text-center ">{t('hero_section.description')}</p>
+
         <div class="mt-4 md:mt-8 flex gap-2 flex-row items-center justify-start">
             <LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
                 {t('hero_section.download_cv')}
@@ -41,17 +54,61 @@ import ColorfulText from '../ColorfulText.astro'
     import gsap from "gsap";
     import SplitText from "gsap/src/SplitText";
 
-    const tl = gsap.timeline();
-    const split = new SplitText("#fullName", {type:"words,chars"});
-    console.log('split', split);
+    // const tl = gsap.timeline();
+    // const split = new SplitText("#fullName", {type:"words,chars"});
+    // console.log('split', split);
     
-    const { words } = split;
-    tl.to(words, {
-        duration: 7,
-        ease: "power3.out",
-        color: "#ff0000",
-        stagger: {
-            each: 0.1,
+    // const { words } = split;
+    // tl.to(words, {
+    //     duration: 7,
+    //     ease: "power3.out",
+    //     color: "#ff0000",
+    //     stagger: {
+    //         each: 0.1,
+    //     }
+    // })
+
+    var vsOpts = {
+        slides: document.querySelectorAll('.v-slide'),
+        list: document.querySelector('.v-slides'),
+        duration: 0.3,
+        lineHeight: 64
+    }
+
+    var vSlide = gsap.timeline({
+        paused: true,
+        repeat: -1
+    });
+
+    vsOpts.slides.forEach(function(slide, i) {
+        // Create a label
+        let label = "slide" + i;
+        vSlide.add(label);
+        
+        // Move the whole word
+        if(i > 0) {
+            vSlide.to(vsOpts.list, {
+            duration: vsOpts.duration,
+            y: i * -1 * vsOpts.lineHeight
+            }, label);
+
+            // Move each letter
+            let letters = new SplitText(slide, {type:"chars"}).chars;
+            vSlide.from(letters, {
+            duration: vsOpts.duration,
+            y: 64,
+            stagger: vsOpts.duration / 10
+            }, label);
+            
+            // Add some blank space before the next animation
+            vSlide.to(letters, {
+            duration: vsOpts.duration,
+            y: -64,
+            stagger: vsOpts.duration / 10
+            }, "+=1");
         }
     })
+    vSlide.play();
+
+   
 </script>

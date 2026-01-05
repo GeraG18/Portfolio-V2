@@ -6,8 +6,8 @@
     "send_mail": "Enviar correo"
   },
   "hero_section": {
-    "greetings": "Hola!",
-    "title": "Soy Gerardo, soy Ingeniero en Software",
+    "greetings": "Hola! Soy Gerardo",
+    "title": "Ingeniero en Software",
     "description": "Desarrollador con el objetivo de construir innovaciones tecnológicas, estar en mejora constante y resolver desafios.",
     "download_cv":"Descargar CV",
     "linkedin": "LinkedIn"
