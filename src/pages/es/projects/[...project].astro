@@ -191,12 +191,15 @@ let seo: SEOProps = {
 <!-- El resto del código HTML/JSX permanece igual -->
 <Layout seo={seo}>
   <Container className="flex flex-col items-start justify-center pt-20"></Container>
-  <a href={localizePath("/projects")} class="flex flex-row gap-2 items-center justify-center">
-    <span class="material-symbols-rounded">
-      chevron_left
-    </span>
-    {t('last_projects.title')}
-  </a>
+  <Container className="min-h-14 flex flex-row items-start justify-start">
+    <a href={localizePath("/projects")} class="flex flex-row gap-2 items-center justify-center w-fit text-gray-400">
+      <span class="material-symbols-rounded">
+        chevron_left
+      </span>
+      {t('last_projects.title')}
+    </a>
+
+  </Container>
   <ContainerTitle title={projectData.title} subtitle="main-title"/>
   <Container className="w-full flex flex-col-reverse lg:grid lg:grid-cols-5 gap-12 relative py-2">
     <div class="col-span-3 w-full h-fit max-w-xl text-base/7 text-gray-500 pb-12 [&_ul]:list-disc [&_ul]:pl-6 [&_h1,h2,h3]:w-full [&_h1,h2,h3]:text-lg [&_h1,h2,h3]:font-bold [&_h1,h2,h3]:text-black">
