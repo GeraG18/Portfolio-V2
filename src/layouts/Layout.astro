@@ -1,12 +1,21 @@
 ---
 import NavigationBar from '../components/NavigationBar.astro';
 import CursorDecorator from '../components/ui/CursorDecorator.astro';
-import '../styles/global.css'
+import '../styles/global.css';
+import i18next, { t } from "i18next";
+import { HeadHrefLangs } from "astro-i18next/components";
+import { SEO, type Props as SEOProps } from 'astro-seo';
 
+interface Props {
+	// title: string;
+	seo?: SEOProps;
+}
+
+const { seo } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={i18next.language}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -16,7 +25,12 @@ import '../styles/global.css'
 		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<SEO
+			{...seo}
+			title={seo?.title ?? t('portfolio.title')}
+			description={seo?.description ?? t('portfolio.description')}
+	  	/>
+		<HeadHrefLangs />
 	</head>
 	<body>
 		<main class="relative">

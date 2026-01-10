@@ -1,9 +1,45 @@
 ---
-import ProjectsDemo from '../../components/test/projects-demo.astro';
-import Layout from '../../layouts/Layout.astro';
+import { changeLanguage, t } from "i18next";
+import Layout from "../../layouts/Layout.astro";
+import ProjectsListContainer from "../../components/projects/ProjectsListContainer.astro";
+import Container from "../../components/ui/Container.astro";
+import type { SEOProps } from "astro-seo";
+import ContainerTitle from "../../components/ui/ContainerTitle.astro";
+
+changeLanguage("en");
+
+let seo: SEOProps = {
+    title: `${t("last_projects.title")} | Gerardo Gallegos Jr`,
+    description: t("last_projects.view_all"),
+    openGraph: {
+        basic: {
+            title: `${t("last_projects.title")} | Gerardo Gallegos Jr`,
+            type: "website",
+            image: "" //agregar imagen aqui y en el inicio
+        }
+    },
+    extend: {
+        // link: [{ rel: "icon", href: "/favicon.ico" }],
+        meta: [
+            // {
+            // name: "twitter:image",
+            // content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+            // },
+            // { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+            // { name: "twitter:description", content: "Agent" },
+            { name: "description", content: t("last_projects.view_all") },
+        ],
+    }
+};
 ---
 
 <Layout>
-	<!-- <div class="bg-red-300 w-9 h-9 "></div> -->
-	<ProjectsDemo />
+	<div class="pt-16">
+
+		<ContainerTitle title={t('last_projects.title')} subtitle="section-1"/>
+		<Container id="all-projects-section" className="flex flex-col items-start justify-center min-h-screen">
+			<ProjectsListContainer/>
+		</Container>
+	</div>
+	<!-- <ProjectsGrid /> -->
 </Layout>

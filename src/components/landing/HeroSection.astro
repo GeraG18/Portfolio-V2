@@ -1,33 +1,24 @@
 ---
 import DownloadIcon from "../ui/DownloadIcon.astro";
 import LinkButton from "../ui/LinkButton.astro";
-import { t } from '../i18n/i18n.astro';
-import ColorfulText from '../ColorfulText.astro'
+import i18next, { t } from "i18next";
+// import { t } from 'ez-i18n:runtime';
+// console.log('info', Astro.locals);
+
 ---
 
-<div class="flex flex-col-reverse xl:flex-row gap-1 w-full mx-auto max-w-5xl">
-    <div class="w-full h-full flex flex-col justify-center items-center">
+<div class="flex flex-col-reverse xl:flex-row gap-1 w-full *max-w-5xl">
+    <div class="w-full h-full flex flex-col gap-8 justify-center items-start">
         <!-- <h1 id="fullName" class="font-bold text-xl">Gerardo Gallegos Jr</h1> -->
-        <h1 class="text-center text-[2.5rem] mb-4 font-['Switzer-Light']">
+        <h1 id="hero-name" class="px-2 w-full text-4xl tracking-tighter text-balance max-lg:font-medium max-sm:px-4 sm:text-5xl lg:text-6xl xl:text-8xl font-['Switzer-Light']">
             {t('hero_section.greetings')}
         </h1>
-        <span class="text-center text-[2.5rem] font-['Switzer-Medium'] w-full lg:w-3/5 h-16 border border-(--accent) relative before:content-['role-span'] before:absolute before:text-xs before:-left-px before:-top-5 before:bg-(--accent) before:py-0.5 before:px-1  before:text-(--background) mt-5">
+        <!-- <span class="text-center text-[2.5rem] font-['Switzer-Medium'] w-full lg:w-3/5 h-16 border border-(--accent) relative before:content-['role-span'] before:absolute before:text-xs before:-left-px before:-top-5 before:bg-(--accent) before:py-0.5 before:px-1  before:text-(--background) mt-5">
             {t('hero_section.title')}
-        </span>
+        </span> -->
 
-        <ul class="v-slides border border-gray-200 w-3/5 h-16 text-[2.5rem] overflow-hidden text-center">
-            <li class="v-slide">Websites</li>
-            <li class="v-slide">Plugins</li>
-            <li class="v-slide">Web Apps</li>
-            <li class="v-slide">Portals</li>
-            <li class="v-slide">Communities</li>
-            <li class="v-slide">Digital Marketing</li>
-            <li class="v-slide">Websites</li>
-        </ul>
-
-        <p class="text-black/60 font-['Switzer-Regular'] text-center ">{t('hero_section.description')}</p>
-
-        <div class="mt-4 md:mt-8 flex gap-2 flex-row items-center justify-start">
+        <p class="max-w-(--breakpoint-md) mx-4 px-2 text-base/7 text-gray-500 border border-blue-500/80 relative before:content-['description-span'] before:absolute before:text-xs/6 before:-left-px before:-top-7 before:bg-blue-500/80 before:py-0.5 before:px-1 before:text-(--background) before:font-mono before:whitespace-pre">{t('hero_section.description')}</p>
+        <div class="px-4 flex gap-2 flex-row items-center justify-start">
             <LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
                 {t('hero_section.download_cv')}
                 <DownloadIcon/>
@@ -54,61 +45,61 @@ import ColorfulText from '../ColorfulText.astro'
     import gsap from "gsap";
     import SplitText from "gsap/src/SplitText";
 
-    // const tl = gsap.timeline();
-    // const split = new SplitText("#fullName", {type:"words,chars"});
-    // console.log('split', split);
+    const tl = gsap.timeline();
+    const split = new SplitText("#hero-name", {type:"words", wordsClass: "word-animated"});
+    console.log('split', split);
     
-    // const { words } = split;
-    // tl.to(words, {
-    //     duration: 7,
+    const { words } = split;
+  
+    // Animación limpia y rápida
+    // tl.from(words, {
+    //     duration: 1,
+    //     y: 50,
+    //     opacity: 0,
+    //     rotateX: -90,
+    //     transformOrigin: "0% 50% -50",
+    //     ease: "back.out(1.2)",
+    //     stagger: 0.1
+    // });
+
+    // Animación tipo flip
+    // gsap.from(split.words, {
+    //     duration: 0.8,
+    //     rotationY: 90,
+    //     opacity: 0,
+    //     transformOrigin: "0% 50%",
     //     ease: "power3.out",
-    //     color: "#ff0000",
     //     stagger: {
-    //         each: 0.1,
+    //     each: 0.15,
+    //     from: "start"
     //     }
-    // })
+    // });
 
-    var vsOpts = {
-        slides: document.querySelectorAll('.v-slide'),
-        list: document.querySelector('.v-slides'),
-        duration: 0.3,
-        lineHeight: 64
-    }
-
-    var vSlide = gsap.timeline({
-        paused: true,
-        repeat: -1
+    // Configuración inicial - TODAS las palabras
+    gsap.set(words, {
+        opacity: 0,
+        scale: 0,
+        y: 30
     });
-
-    vsOpts.slides.forEach(function(slide, i) {
-        // Create a label
-        let label = "slide" + i;
-        vSlide.add(label);
-        
-        // Move the whole word
-        if(i > 0) {
-            vSlide.to(vsOpts.list, {
-            duration: vsOpts.duration,
-            y: i * -1 * vsOpts.lineHeight
-            }, label);
-
-            // Move each letter
-            let letters = new SplitText(slide, {type:"chars"}).chars;
-            vSlide.from(letters, {
-            duration: vsOpts.duration,
-            y: 64,
-            stagger: vsOpts.duration / 10
-            }, label);
-            
-            // Add some blank space before the next animation
-            vSlide.to(letters, {
-            duration: vsOpts.duration,
-            y: -64,
-            stagger: vsOpts.duration / 10
-            }, "+=1");
-        }
-    })
-    vSlide.play();
-
+    
+    // Aplicar gradiente SOLO a la última palabra
+    const lastWord = words[words.length - 1];
+    lastWord.classList.add(
+        'bg-gradient-to-r',
+        'from-blue-500/80',
+        'to-blue-500',
+        'bg-clip-text',
+        'text-transparent'
+    );
+    
+    // Animación
+    gsap.to(words, {
+        duration: 0.7,
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        ease: "elastic.out(1, 0.5)",
+        stagger: 0.12
+    });
    
 </script>

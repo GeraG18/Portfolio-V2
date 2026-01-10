@@ -1,22 +1,25 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { type Props as SEOProps } from 'astro-seo';
+import { changeLanguage } from "i18next";
+import Layout from "../layouts/Layout.astro";
+import { type Props as SEOProps } from "astro-seo";
+
+changeLanguage("en");
 
 let seo: SEOProps = {
-	title:`Error 404 | Gerardo G.`,
-	description: `La ruta a la que intentaste acceder no existe :(`,
-	openGraph:{
-		basic: {
-			title: `Error 404 | Gerardo G.`,
-			type: "website",
-			image: '/SEO.svg',
-		}
-	},
-	extend:{
-		meta: [
-			{ name: "description", content: `La ruta a la que intentaste acceder no existe :(` },
-		],
-	}
+    title: `Error 404 | Gerardo G.`,
+    description: `La ruta a la que intentaste acceder no existe :(`,
+    openGraph: {
+        basic: {
+            title: `Error 404 | Gerardo G.`,
+            type: "website",
+            image: "/SEO.svg",
+        }
+    },
+    extend: {
+        meta: [
+            { name: "description", content: `La ruta a la que intentaste acceder no existe :(` },
+        ],
+    }
 };
 ---
 

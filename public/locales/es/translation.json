@@ -1,0 +1,64 @@
+{
+  "portfolio": {
+    "title": "Portfolio | Gerardo Gallegos Jr",
+    "description": "Desarrollador con el objetivo de construir innovaciones tecnológicas, mejorando constantemente y resolviendo desafíos."
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "send_mail": "Enviar correo"
+  },
+  "hero_section": {
+    "greetings": "Hola! Mi nombre es Gerardo",
+    "title": "Ingeniero en Software",
+    "description": "Desarrollador con el objetivo de construir innovaciones tecnológicas, estar en mejora constante y resolver desafios.",
+    "download_cv":"Descargar CV",
+    "linkedin": "LinkedIn"
+  },
+  "about_me": {
+    "title": "Sobre mí",
+    "paragraph_1": "Hola! Soy Gerardo. Tengo una Maestría en Ingeniería de Software y una Licenciatura en Ingeniería en Sistemas Computacionales con especialización en Desarrollo de Software. He desarrollado las habilidades para ser un mejor profesional y para producir y desarrollar software de la más alta calidad, asumiendo nuevos desafíos cada día.",
+    "paragraph_2": "Mi objetivo es el mejorar de forma constante, aprender de todos mis errores y siempre resolver los desafíos complejos que requieren una solución complicada de entender. Siempre me ha apasionado el aprendizaje continuo del desarrollo de Software.",
+    "paragraph_3": "Tecnologías y herramientas:"
+  },
+  "projects": {
+    "no_image": "Sin imagen",
+    "project_status": "Estado del proyecto",
+    "used_technologies": "Tecnologías utilizadas",
+    "roles": "Roles",
+    "urls": "Enlaces",
+    "date": "Fecha",
+    "start_date": "Fecha de inicio",
+    "end_date": "Fecha de finalización"
+  },
+  "work_experience": {
+    "title": "Experiencia laboral",
+    "cii_description": "En Córdova Industrial estube trabajando en la implementación del proyecto freelance llamado InteliHogar que es de casas inteligentes, en el cual aporté la codificación del perfil en la tienda online para su accionamiento, realicé la lógica de la gestión de planes de suscripción para contar con ventajas en el hogar inteligente, hice el rediseño de la aplicación del proyecto trabajada en Ionic para hacerla más intuitiva y que contase con un seguimiento de pantallas más natural, contribuí a la fabricación de una alarma inteligente y una aplicación de monitoreo para el personal de monitoreo de hogares, también estuve encargado de la implementación de SEO y SSR en la página hecha en Angular, también trabajé en su traducción para su marca en el público estadounidense (InteliHom, ya descontinuado). Otro de los proyectos trabajados fue Enegrin, Cord y JMAS (Junta Municipal de Agua y Saneamiento) que los proyectos eran haciendo uso de control remoto de PLCs, gestionando el control remoto por medio de unas aplicaciones que hacían de puente para activar y desactivar opciones de dichos PLCs, se usaron las tecnologías Ionic, Node Red y Raspberry Pi, en dichos proyectos influí en gran parte en el diseño de interfaz realizado en Figma.",
+    "ht_description": "En Horizon Trailers estuve trabajando en los proyectos Horizon Trailers, Loadboss, Bedboss, Ranchboss y una aplicación de la cual no puedo hacer mención de momento porque sigue en desarrollo, en dichos proyectos estuve trabajando directamente con el diseño de las páginas web en Figma, hice el desarrollo de dichas páginas en Next.js y React, haciendo una implementación de SEO, SSR de una manera eficiente. Además en dichas páginas estuve trabajando en el rendimiento y en la accesibilidad, mejorando su eficiencia y carga en un 80%, haciendo que no haya demoras mayores a 1.5 segundos en sus primeras cargas (aunque aquí influyen otros factores como lo son los requisitos del bucket de Google Cloud), además he estado trabajando en la seguridad de las mismas revisando de forma periódica las versiones de Next.js y actualizando cuando es necesario, además de hacer revisiones sobre la encriptación de datos que se llegan a manejar por detrás de la página."
+  },
+  "last_projects": {
+    "title": "Últimos proyectos",
+    "view_all": "Ver todos los proyectos"
+  },
+  "footer_text": "Diseñado libremente en <0>Figma</0> y programado en <1>TRAE</1> por mí. Construido con <2>Astro.js</2> y <3>Tailwind CSS</3>, desplegado en <4>Vercel</4>. Todos los textos utilizan la tipografía Switzer.",
+  "months": {
+    "jan": "Enero",
+    "feb": "Febrero",
+    "mar": "Marzo",
+    "apr": "Abril",
+    "may": "Mayo",
+    "jun": "Junio",
+    "jul": "Julio",
+    "aug": "Agosto",
+    "sep": "Septiembre",
+    "oct": "Octubre",
+    "nov": "Noviembre",
+    "dec": "Diciembre",
+    "present": "Actualidad"
+  },
+  "languages": {
+    "en": "Inglés",
+    "es": "Español"
+  }
+}

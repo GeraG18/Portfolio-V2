@@ -1,0 +1,42 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ContainerTitle from "../../components/ui/ContainerTitle.astro";
+import HeroSection from "../../components/landing/HeroSection.astro";
+import Container from "../../components/ui/Container.astro";
+import AboutMeSection from "../../components/landing/AboutMeSection.astro";
+import ProjectsPreviewContainer from "../../components/landing/ProjectsPreviewContainer.astro";
+import WorkExperienceTimeline from "../../components/landing/WorkExperienceTimeline.astro";
+import i18next, { t, changeLanguage } from "i18next";
+import { Trans } from "astro-i18next/components";
+
+changeLanguage("es");
+---
+
+<Layout>
+	<Container id="hero-section" className="flex flex-col items-start justify-center min-h-screen pt-20">
+		<HeroSection/>
+		<!-- <ScrambleBackground /> -->
+		 <!-- <BinaryBackground/> -->
+	</Container>
+	<ContainerTitle title={t('about_me.title')} subtitle="section-1"/>
+	<Container>
+		<AboutMeSection/>
+	</Container>
+	<!-- <ContainerTitle title="Formación académica"/>
+	<Container>
+		<Timeline/>
+	</Container> -->
+	<ContainerTitle title={t('work_experience.title')} subtitle="section-2"/>
+	<Container>
+		<WorkExperienceTimeline/>
+	</Container>
+	<ContainerTitle title={t('last_projects.title')} subtitle="section-3"/>
+	<Container>
+		<ProjectsPreviewContainer/>
+	</Container>
+	<Container className="h-fit py-4 pb-12 text-base/7 text-gray-500 [&_a]:underline [&_a:hover]:text-blue-500">
+		<Trans i18nKey="footer_text">
+			Loosely designed in <a href="https://www.figma.com" title="Figma website">Figma</a> and coded in <a href="https://trae.ai" title="TRAE website">TRAE</a> by yours truly. Built with <a href="https://astro.build" title="Astro website">Astro.js</a> and <a href="https://tailwindcss.com" title="Tailwind CSS website">Tailwind CSS</a>, deployed with <a href="https://vercel.com" title="Vercel website">Vercel</a>. All text is set in the Switzer typeface.
+		</Trans>
+	</Container>
+</Layout>

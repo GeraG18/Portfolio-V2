@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?2dlibr');
-  src:  url('fonts/icomoon.eot?2dlibr#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?2dlibr') format('truetype'),
-    url('fonts/icomoon.woff?2dlibr') format('woff'),
-    url('fonts/icomoon.svg?2dlibr#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?fakjln');
+  src:  url('fonts/icomoon.eot?fakjln#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?fakjln') format('truetype'),
+    url('fonts/icomoon.woff?fakjln') format('woff'),
+    url('fonts/icomoon.svg?fakjln#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-zustand:before {
+  content: "\e91c";
+}
+.icon-gimp:before {
+  content: "\e91d";
+}
+.icon-android-studio:before {
+  content: "\e91e";
+}
+.icon-express-js:before {
+  content: "\e91f";
+}
+.icon-vscode:before {
+  content: "\e920";
+}
+.icon-xcode:before {
+  content: "\e921";
+}
+.icon-photoshop:before {
+  content: "\e922";
+}
+.icon-github:before {
+  content: "\e923";
+}
 .icon-stripe:before {
   content: "\e918";
 }
@@ -102,6 +126,12 @@
 }
 .icon-tailwind:before {
   content: "\e90d";
+}
+.icon-raspberry-pi:before {
+  content: "\e924";
+}
+.icon-next-js:before {
+  content: "\e91b";
 }
 .icon-pacman:before {
   content: "\e916";

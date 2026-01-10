@@ -1,330 +1,279 @@
 ---
-// src/pages/projects/[...project].astro
-import Container from '../../components/UI/Container.astro';
-import BaseLayout from '../../layouts/Layout.astro';
-import ProjectLayout from '../../layouts/ProjectLayout.astro';
-import { getCollection } from 'astro:content';
+import Container from "../../components/ui/Container.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import ContainerTitle from "../../components/ui/ContainerTitle.astro";
+import LinkButton from "../../components/ui/LinkButton.astro";
+import i18next, { t, changeLanguage } from "i18next";
+import type { SEOProps } from "astro-seo";
+import { localizePath } from "astro-i18next";
 
-// 1. EXPORTAR getStaticPaths() - ¡ESTO ES OBLIGATORIO!
+changeLanguage("en");
+
 export async function getStaticPaths() {
-  console.log('🔧 Generando rutas estáticas para proyectos...');
-  
-  try {
-    // Obtener todos los proyectos
-    const allProjects = await getCollection('projects' as any);
-    
-    if (!allProjects || allProjects.length === 0) {
-      console.log('⚠️ No se encontraron proyectos para generar rutas');
-      return [];
-    }
-    
-    // Función para extraer idioma del ID
-    function getLocaleFromId(id: string): 'es' | 'en' {
-      const filename = id.split('/')[1] || '';
-      if (filename.includes('-en')) return 'en';
-      if (filename.includes('-es')) return 'es';
-      return 'es';
-    }
-    
-    // Crear rutas para cada proyecto en cada idioma
-    const paths: Array<{ params: { project: string }, props?: any }> = [];
-    const processedProjects = new Set();
-    
-    (allProjects as any[]).forEach(item => {
-      try {
-        // Extraer nombre del proyecto (carpeta)
-        const projectName = item.id.split('/')[0];
-        const projectKey = `${projectName}`;
-        
-        // Solo procesar cada proyecto una vez
-        if (processedProjects.has(projectKey)) {
-          return;
+    try {
+        // Obtener todos los proyectos
+        const allProjects = await getCollection("projects" as any);
+        if (!allProjects || allProjects.length === 0) {
+            return [];
         }
-        processedProjects.add(projectKey);
-        
-        console.log(`   📍 Generando ruta para: ${projectName}`);
-        
-        // Crear entrada para español e inglés
-        paths.push({
-          params: { project: projectName },
-          props: { 
-            projectName,
-            defaultLocale: 'es'
-          }
+        // Crear rutas para cada proyecto en cada idioma
+        const paths: Array<{
+            params: {
+                project: string;
+            };
+            props?: any;
+        }> = [];
+        const processedProjects = new Set();
+        (allProjects as any[]).forEach(item => {
+            try {
+                // Extraer nombre del proyecto (carpeta)
+                const projectName = item.id.split("/")[0];
+                const projectKey = `${projectName}`;
+                // Solo procesar cada proyecto una vez
+                if (processedProjects.has(projectKey)) {
+                    return;
+                }
+                processedProjects.add(projectKey);
+                // Crear entrada para español e inglés
+                paths.push({
+                    params: { project: projectName },
+                    props: {
+                        projectName,
+                        defaultLocale: "es"
+                    }
+                });
+            }
+            catch (error) {
+                console.error(`Error procesando proyecto ${item.id}:`, error);
+            }
         });
-        
-      } catch (error) {
-        console.error(`Error procesando proyecto ${item.id}:`, error);
-      }
-    });
-    
-    console.log(`✅ Rutas generadas: ${paths.length} proyectos`);
-    return paths;
-    
-  } catch (error) {
-    console.error('❌ Error en getStaticPaths:', error);
-    return [];
-  }
+        console.log(`✅ Rutas generadas: ${paths.length} proyectos`);
+        return paths;
+    }
+    catch (error) {
+        console.error("\u274C Error en getStaticPaths:", error);
+        return [];
+    }
 }
-
 // 2. Obtener parámetro de la ruta (esto viene de getStaticPaths)
 const { project } = Astro.params;
-const currentLocale = Astro.currentLocale || 'es';
-
-// 3. Si no hay parámetro, redirigir a la lista
+const currentLocale = i18next.language || "es";
 if (!project) {
-  return Astro.redirect('/projects');
+    return Astro.redirect("/projects");
 }
-
 // 4. Obtener todos los proyectos (Astro pasa esto automáticamente desde getStaticPaths)
-const allProjects = await getCollection('projects' as any);
-
+const allProjects = await getCollection("projects" as any);
 // 5. Función para extraer idioma del ID
-function getLocaleFromId(id: string): 'es' | 'en' {
-  const filename = id.split('/')[1] || '';
-  if (filename.includes('-en')) return 'en';
-  if (filename.includes('-es')) return 'es';
-  return 'es';
+function getLocaleFromId(id: string): "es" | "en" {
+    const filename = id.split("/")[1] || "";
+    if (filename.includes("-en"))
+        return "en";
+    if (filename.includes("-es"))
+        return "es";
+    return "es";
 }
-
 // 6. Buscar el proyecto por nombre e idioma
 let foundProject = null;
 let projectData = null;
-
 // Debug: mostrar qué estamos buscando
 console.log(`🔍 Buscando proyecto: ${project} (locale: ${currentLocale})`);
 console.log(`📁 Total proyectos disponibles: ${(allProjects as any[]).length}`);
-
 // Mostrar todos los proyectos disponibles para debug
 (allProjects as any[]).forEach((item, index) => {
-  const projectName = item.id.split('/')[0];
-  const projectLocale = item.data.lang || getLocaleFromId(item.id);
-  console.log(`   ${index + 1}. ${item.id} -> nombre: ${projectName}, locale: ${projectLocale}`);
+    const projectName = item.id.split("/")[0];
+    const projectLocale = item.data.lang || getLocaleFromId(item.id);
+    console.log(`   ${index + 1}. ${item.id} -> nombre: ${projectName}, locale: ${projectLocale}`);
 });
-
 for (const item of (allProjects as any[])) {
-  // Extraer nombre del proyecto del ID
-  const projectName = item.id.split('/')[0];
-  
-  // Determinar idioma
-  const projectLocale = item.data.lang || getLocaleFromId(item.id);
-  
-  // Verificar coincidencia
-  if (projectName === project && projectLocale === currentLocale) {
-    foundProject = item;
-    console.log(`✅ Proyecto encontrado: ${item.id}`);
-    break;
-  }
+    // Extraer nombre del proyecto del ID
+    const projectName = item.id.split("/")[0];
+    // Determinar idioma
+    const projectLocale = item.data.lang || getLocaleFromId(item.id);
+    // Verificar coincidencia
+    if (projectName === project && projectLocale === currentLocale) {
+        foundProject = item;
+        console.log(`✅ Proyecto encontrado: ${item.id}`);
+        break;
+    }
 }
-
 // 7. Si no se encuentra, mostrar 404
 if (!foundProject) {
-  console.log(`❌ Proyecto no encontrado: ${project} (${currentLocale})`);
-  
-  // Intentar encontrar cualquier versión del proyecto para sugerencia
-  const alternativeVersions = (allProjects as any[]).filter(item => {
-    const projectName = item.id.split('/')[0];
-    return projectName === project;
-  });
-  
-  if (alternativeVersions.length > 0) {
-    console.log(`💡 Versiones alternativas encontradas:`);
-    alternativeVersions.forEach(v => {
-      const lang = v.data.lang || getLocaleFromId(v.id);
-      console.log(`   - ${lang}: ${v.id}`);
+    console.log(`❌ Proyecto no encontrado: ${project} (${currentLocale})`);
+    // Intentar encontrar cualquier versión del proyecto para sugerencia
+    const alternativeVersions = (allProjects as any[]).filter(item => {
+        const projectName = item.id.split("/")[0];
+        return projectName === project;
     });
-  }
-  
-  return notFound();
+    if (alternativeVersions.length > 0) {
+        console.log(`💡 Versiones alternativas encontradas:`);
+        alternativeVersions.forEach(v => {
+            const lang = v.data.lang || getLocaleFromId(v.id);
+            console.log(`   - ${lang}: ${v.id}`);
+        });
+    }
+    return notFound();
 }
-
 // 8. Renderizar contenido markdown
 let Content = null;
 let headings = [];
-
 try {
-  const rendered = await foundProject.render();
-  Content = rendered.Content;
-  headings = rendered.headings || [];
-  console.log(`📝 Contenido renderizado exitosamente`);
-} catch (error) {
-  console.error('❌ Error rendering project:', error);
+    const rendered = await foundProject.render();
+    Content = rendered.Content;
+    headings = rendered.headings || [];
+    console.log(`📝 Contenido renderizado exitosamente`);
 }
-
+catch (error) {
+    console.error("\u274C Error rendering project:", error);
+}
 // 9. Obtener todas las versiones del mismo proyecto para selector de idioma
 const projectVersions = (allProjects as any[])
-  .filter(item => {
-    const projectName = item.id.split('/')[0];
+    .filter(item => {
+    const projectName = item.id.split("/")[0];
     return projectName === project;
-  })
-  .map(item => ({
+})
+    .map(item => ({
     lang: item.data.lang || getLocaleFromId(item.id),
     url: `/projects/${project}` // Astro maneja el prefijo de idioma automáticamente
-  }));
-
-console.log(`🌐 Versiones disponibles: ${projectVersions.map(v => v.lang).join(', ')}`);
-
+}));
+console.log(`🌐 Versiones disponibles: ${projectVersions.map(v => v.lang).join(", ")}`);
 // 10. Extraer datos del proyecto
 projectData = {
-  id: foundProject.id,
-  slug: project,
-  title: foundProject.data.title || 'Sin título',
-  description: foundProject.data.description || '',
-  lang: foundProject.data.lang || getLocaleFromId(foundProject.id),
-  technologies: foundProject.data.technologies || [],
-  urls: foundProject.data.urls || [],
-  coverImage: foundProject.data.coverImage,
-  coverAlt: foundProject.data.coverAlt || foundProject.data.title,
-  date: foundProject.data.date || {},
-  role: foundProject.data.role,
-  status: foundProject.data.status || 'finished',
-  featured: Boolean(foundProject.data.featured),
-  client: foundProject.data.client,
-  category: foundProject.data.category,
-  duration: foundProject.data.duration,
+    id: foundProject.id,
+    slug: project,
+    title: foundProject.data.title || "Sin t\u00EDtulo",
+    description: foundProject.data.description || "",
+    lang: foundProject.data.lang || getLocaleFromId(foundProject.id),
+    technologies: foundProject.data.technologies || [],
+    urls: foundProject.data.urls || [],
+    coverImage: foundProject.data.coverImage,
+    coverAlt: foundProject.data.coverAlt || foundProject.data.title,
+    date: foundProject.data.date || {},
+    role: foundProject.data.role,
+    status: foundProject.data.status || "finished",
+    featured: Boolean(foundProject.data.featured),
+    client: foundProject.data.client,
+    category: foundProject.data.category,
+    duration: foundProject.data.duration,
 };
-
 // 11. Metadatos para SEO
 const metaTitle = `${projectData.title} | Proyectos`;
 const metaDescription = projectData.description || `Detalles del proyecto ${projectData.title}`;
-const metaImage = projectData.coverImage || '/images/default-project.jpg';
-
+const metaImage = projectData.coverImage || "/images/default-project.jpg";
 // 12. Generar URL canónica
 const canonicalUrl = new URL(Astro.url);
 canonicalUrl.pathname = `/projects/${project}`;
+let seo: SEOProps = {
+    title: `${projectData.title} | Gerardo Gallegos Jr`,
+    description: projectData.description,
+    openGraph: {
+        basic: {
+            title: `${projectData.title} | Gerardo Gallegos Jr`,
+            type: "website",
+            image: projectData.coverImage,
+        }
+    },
+    extend: {
+        // link: [{ rel: "icon", href: "/favicon.ico" }],
+        meta: [
+            // {
+            // name: "twitter:image",
+            // content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+            // },
+            // { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+            // { name: "twitter:description", content: "Agent" },
+            { name: "description", content: projectData.description },
+        ],
+    }
+};
 ---
 
 <!-- El resto del código HTML/JSX permanece igual -->
-<BaseLayout 
-  title={metaTitle}
-  description={metaDescription}
-  image={metaImage}
-  canonical={canonicalUrl.toString()}
->
-  <Container>
-    <article class="project-detail">
-    <header class="project-header">
-      <h1 class="project-title">{projectData.title}</h1>
-      
-      {projectData.description && (
-        <p class="project-description">{projectData.description}</p>
-      )}
-      
-      <div class="project-meta">
-        <div class="meta-grid">
-          {projectData.date?.start && (
-            <div class="meta-item">
-              <span class="meta-label">Fecha inicio:</span>
-              <span class="meta-value">
-                {new Date(projectData.date.start).toLocaleDateString(currentLocale)}
-              </span>
-            </div>
-          )}
-          
-          {projectData.date?.end && (
-            <div class="meta-item">
-              <span class="meta-label">Fecha fin:</span>
-              <span class="meta-value">
-                {new Date(projectData.date.end).toLocaleDateString(currentLocale)}
-              </span>
-            </div>
-          )}
-          
-          {projectData.role && (
-            <div class="meta-item">
-              <span class="meta-label">Rol:</span>
-              <span class="meta-value">{projectData.role}</span>
-            </div>
-          )}
-          
-          {projectData.client && (
-            <div class="meta-item">
-              <span class="meta-label">Cliente:</span>
-              <span class="meta-value">{projectData.client}</span>
-            </div>
-          )}
-          
-          {projectData.status && (
-            <div class="meta-item">
-              <span class="meta-label">Estado:</span>
-              <span class={`meta-value status-${projectData.status}`}>
-                {projectData.status}
-              </span>
-            </div>
-          )}
+<Layout seo={seo}>
+  <Container className="flex flex-col items-start justify-center pt-20"></Container>
+  <Container className="min-h-14 flex flex-row items-start justify-start">
+    <a href={localizePath("/projects")} class="flex flex-row gap-2 items-center justify-center w-fit text-gray-400">
+      <span class="material-symbols-rounded">
+        chevron_left
+      </span>
+      {t('last_projects.title')}
+    </a>
+
+  </Container>
+  <ContainerTitle title={projectData.title} subtitle="main-title"/>
+  <Container className="w-full flex flex-col-reverse lg:grid lg:grid-cols-5 gap-12 relative py-2">
+    <div class="col-span-3 w-full h-fit max-w-xl text-base/7 text-gray-500 pb-12 [&_ul]:list-disc [&_ul]:pl-6 [&_h1,h2,h3]:w-full [&_h1,h2,h3]:text-lg [&_h1,h2,h3]:font-bold [&_h1,h2,h3]:text-black">
+      <Content/>
+    </div>
+    <div class="col-span-2 w-full h-fit flex gap-2 flex-col items-center justify-start friendly-sticky top-0 text-base/7 text-gray-500 pb-12">
+      <div class="aspect-video relative w-full border border-[--text-grayRGBA] overflow-hidden group flex items-center justify-center">
+        {
+        projectData.coverImage ? 
+        <img src={projectData.coverImage} alt={projectData.coverAlt} class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out border-none"/>
+        : 
+        <div class="absolute bg-gray-200 w-full h-full text-[--text] text-lg flex flex-col items-center justify-center">
+          <span class="material-symbols-rounded text-2xl">
+            image
+          </span>
+          <span>{t('projects.no_image')}</span>
         </div>
+        }
       </div>
       
-      {projectData.technologies.length > 0 && (
-        <div class="technologies-container">
-          <h3>Tecnologías utilizadas</h3>
-          <div class="technologies-list">
-            {projectData.technologies.map(tech => (
-              <span class="technology-badge">{tech}</span>
+      <span class="w-full text-lg font-bold text-black">{t('projects.project_status')}</span>
+      {/* published, in-progress, hold, inactive */}
+      <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+        <span class="capitalize text-xs/6 font-mono px-2 bg-blue-500/70 text-white rounded-full flex-none flex items-center justify-center gap-1"> 
+          {projectData.status}
+        </span>
+      </div>
+      <span class="w-full text-lg font-bold text-black">{t('projects.used_technologies')}</span>
+      <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+        {projectData.technologies.length > 0 && (
+          <div class="w-full flex flex-row flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+            {projectData.technologies.map((tech, index) => (
+              <span class="capitalize text-xs/6 font-mono px-2 bg-blue-500/70 text-white rounded-full flex-none flex items-center justify-center gap-1"> 
+                  <i class={"icon icon-"+tech}></i>
+                  {tech.replace('-',' ')}
+              </span>
             ))}
           </div>
+        )}
+      </div>
+      <span class="w-full text-lg font-bold text-black">{t('projects.roles')}</span>
+      <p class="w-full text-lg">{projectData.role}</p>
+      <span class="w-full text-lg font-bold text-black">{t('projects.urls')}</span>
+      <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+        {projectData.urls.length === 0 ? <span class="text-lg w-full text-[--text-gray]">No hay links</span> : ''}
+        {(projectData.urls).map(({name, url}:{name: string, url:string}) => (
+        <LinkButton target="_blank" width="[14rem]" extraClasses="!text-base !py-1" id="linkedinButton" href={url}>
+          {name} 
+          <span class="material-symbols-rounded">
+            captive_portal
+          </span>
+        </LinkButton>
+        ))}
+      </div>
+      <span class="w-full text-lg font-bold text-black">{t('projects.date')}</span>
+      <div class="w-full text-lg">
+        <div class="meta-item">
+          <span class="meta-value">
+            {projectData.date?.start && (
+              projectData.date.start === t('months.present').toLowerCase() ?
+              t('months.present')
+              :
+              new Date(projectData.date.start).toLocaleDateString(currentLocale)
+            )}
+            {projectData.date?.end && (' - ')}
+            {projectData.date?.end && (
+              projectData.date.end === t('months.present').toLowerCase() ?
+              t('months.present')
+              :
+              new Date(projectData.date.end).toLocaleDateString(currentLocale)
+            )}
+          </span>
         </div>
-      )}
-    </header>
-    
-    {projectData.coverImage && (
-      <img 
-        src={projectData.coverImage} 
-        alt={projectData.coverAlt || projectData.title}
-        width="1200"
-        height="675"
-        class="project-cover"
-        loading="lazy"
-      />
-    )}
-    
-    <div class="project-content prose">
-      <Content />
+      </div>
     </div>
-    
-    {projectData.urls.length > 0 && (
-      <div class="project-links">
-        <h3>Enlaces relacionados</h3>
-        <div class="links-grid">
-          {projectData.urls.map(link => (
-            <a 
-              href={link.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="link-button"
-            >
-              {link.name} →
-            </a>
-          ))}
-        </div>
-      </div>
-    )}
-    
-    {/* Selector de idioma */}
-    <!-- {Object.keys(languageUrls).length > 1 && (
-      <div class="language-switcher">
-        <span class="switcher-label">Ver en:</span>
-        <div class="switcher-buttons">
-          {Object.entries(languageUrls).map(([lang, url]) => (
-            <a 
-              href={url}
-              class={`switcher-button ${lang === currentLocale ? 'active' : ''}`}
-              hreflang={lang}
-            >
-              {lang === 'es' ? 'Español' : 'English'}
-            </a>
-          ))}
-        </div>
-      </div>
-    )} -->
-  </article>
   </Container>
-</BaseLayout>
-
-<style>
-/* ... todos los estilos de antes ... */
-</style>
-
-<script>
-/* ... todo el JavaScript de antes ... */
-</script>
+</Layout>

@@ -1,24 +1,66 @@
 ---
+import i18next, { t } from "i18next";
+import SystemWindow from "../ui/SystemWindow.astro";
 ---
 
-<div class="flex flex-col items-center justify-center mx-auto max-w-5xl">
-    <div class="w-full h-fit flex flex-col justify-start px-4 py-8 md:py-12 items-center">
-        <div class="w-full flex flex-col items-center justify-center gap-4">
-            <p class="w-full">
-                Hola! Soy Gerardo Gallegos Jr. 
-                Ingeniero en Sistemas Computacionales enfocado en el desarrollo de Software como Full Stack Developer y actualmente estudiando una maestría 
-                en Ingeniería de Software para ser un mejor profesionista y brindar software de mayor calidad.
+<div class="flex flex-col items-center justify-center mx-auto">
+    <div class="w-full h-fit flex flex-col md:flex-row justify-start px-4 py-8 md:py-12 items-center">
+        <div class="w-full flex flex-col items-start justify-center gap-4">
+            <p class="max-w-xl text-base/7 text-gray-500">
+                {t('about_me.paragraph_1')}
             </p>
-            <p class="w-full">
-                Actualmente tengo el privilegio de hacer software con las últimas tecnologías en cuanto a desarrollo web e interfaces accesibles con un enfoque moderno 
-                para los clientes de una <a class="custom-link" target="_blank" rel="noopener noreferrer" href="https://cordovaindustrial.com/">empresa de automatización industrial</a>, 
-                para marcas que venden <a class="custom-link" target="_blank" rel="noopener noreferrer" href="https://intelihogar.com/">casas inteligentes</a> y que brindan el servicio de
-                <a class="custom-link" target="_blank" rel="noopener noreferrer" href="https://enegrin.com/">energias limpias</a>. 
-            </p>
-            <p class="w-full">
-                Mi objetivo es el mejorar de forma constante, aprender de todos mis errores y siempre resolver los desafíos complejos que requieren una solución complicada de entender. 
-                Siempre me ha apasionado el aprendizaje continuo del desarrollo de Software.
+            <p class="max-w-xl text-base/7 text-gray-500">
+                {t('about_me.paragraph_2')}
             </p>
         </div>
+        
+        <SystemWindow className="w-full md:w-3/4" contentClassName="text-gray-500 text-base/7 grid grid-cols-1 grid-rows-[auto_1fr] gap-2">
+            <p class="w-full h-fit">
+                {t('about_me.paragraph_3')}
+            </p>
+            <div class="grid grid-cols-7 md:grid-cols-14 gap-4 h-fit w-full">
+                <i class={"icon icon-figma text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-stripe text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-twilio text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-node-js text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-aws text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-mysql text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-maria-db text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-notion text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-google-cloud text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-firestore text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-php text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-firebase text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-gitlab text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-typescript text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-android text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-apple text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-angular text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-astro text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-ember text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-html text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-ionic text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-javascript text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-node-red text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-react text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-sass text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-tailwind text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-trello text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-wordpress text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-css text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-git text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-raspberry-pi text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-next-js text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-github text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-photoshop text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-xcode text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-vscode text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-express-js text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-android-studio text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-gimp text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+                <i class={"icon icon-zustand text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
+
+            </div>
+        </SystemWindow>
     </div>
 </div>

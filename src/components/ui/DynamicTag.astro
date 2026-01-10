@@ -1,0 +1,8 @@
+---
+const { tag: Tag, href, children, ...props } = Astro.props;
+const tagProps = Tag === 'a' && href ? { href } : {};
+---
+
+<Tag {...tagProps} {...props}>
+  <slot />
+</Tag>

@@ -1,0 +1,77 @@
+---
+import i18next, { t } from "i18next";
+import DynamicTag from "../ui/DynamicTag.astro";
+
+const workExperience = [
+    // {
+    //     date: {
+    //         start: `${t('months.feb')} 2022`,
+    //         end: `${t('months.sep')} 2024`
+    //     },
+    //     role:"Freelance Full Stack Developer",
+    //     company: "Jessica Varela Salon",
+    //     companyLink: "https://www.facebook.com/share/1MsgAit46q/?mibextid=LQQJ4d",
+    //     description: "",
+    //     technologies: [
+    //         "react", "next-js"
+    //     ]
+    // },
+    {
+        date: {
+            start: `${t('months.feb')} 2022`,
+            end: `${t('months.sep')} 2024`
+        },
+        role:"Software Engineer, Full Stack Developer",
+        company: "Córdova Industrial Integradores",
+        companyLink: "https://cordovaindustrial.com",
+        description: t("work_experience.cii_description"),//TODO: Agregar descripciones en traducciones
+        technologies: [
+            "angular", "ionic", "node-red", "twilio", "stripe", "raspberry-pi", "typescript", "javascript", "tailwind", "trello", "wordpress", "xcode", "android-studio", "git", "gitlab", "firebase", "google-cloud", "figma",
+        ]
+    },
+    {
+        date: {
+            start: `${t('months.sep')} 2024`,
+            end: `${t('months.present')}`
+        },
+        role:"Software Engineer, Full Stack Developer",
+        company: "Horizon Trailers",
+        companyLink: "https://horizontrailers.com",
+        description: t("work_experience.ht_description"),
+        technologies: [
+            "react", "next-js", "stripe", "typescript", "javascript", "tailwind", "jira", "git", "gitlab", "firebase", "google-cloud", "raspberry-pi", "figma", "photoshop"
+        ]
+    },
+];
+---
+<div class="group/list h-fit py-4 pb-8">
+    {
+      workExperience.map(({role, company, companyLink, date, technologies, description}) => (
+        <DynamicTag tag={companyLink ? 'a' : 'div'} href={companyLink} target="_blank" class="relative block pl-8 sm:pl-12 pr-2 py-6 group *lg:hover:opacity-100 *lg:group-hover/list:opacity-50 motion-reduce:transition-none border border-transparent hover:lg:bg-(--text-grayRGBA) rounded-md group/item">
+             <div class="flex flex-col items-start mb-1 group-last:before:hidden before:absolute before:left-2 sm:before:left-0 before:h-full before:px-px before:bg-(--text-gray) sm:before:ml-6 before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 sm:after:left-0 after:w-2 after:h-2 after:bg-(--background) after:border-[3px] after:box-content after:border-(--accent-text) after:rounded-full sm:after:ml-6 after:-translate-x-1/2 after:translate-y-1.5">
+                <span class="flex-none text-start font-mono text-xs/6 text-gray-500 p-0 w-fit">
+                    {date.start || '-'} {date.end !== '' ? '-' : ''} {date.end}
+                </span>
+                <div class="w-full text-lg font-bold group-hover/item:text-blue-500/80">
+                    {role} • {company}
+                    {
+                        companyLink &&
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path></svg>
+                    }
+                </div>
+                <div class="text-gray-500 text-sm py-2" set:html={description}>
+                </div>
+                <div class="w-full flex flex-row flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+                    {technologies.map((tech, index) => (
+                        <span class="capitalize text-xs/6 font-mono px-2 bg-blue-500/70 text-white rounded-full flex-none flex items-center justify-center gap-1"> 
+                            <i class={"icon icon-"+tech}></i>
+                            {tech.replace('-',' ')}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        </DynamicTag>
+    ))}
+
+</div>
+

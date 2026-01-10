@@ -1,30 +1,36 @@
 ---
-import { t } from '../components/i18n/i18n.astro';
+// ✅ USAR Astro.locals EN LUGAR de 'ez-i18n:runtime'
+import LanguageSwitcher from './ui/LanguageSwitcher.astro';
 import LinkButton from './ui/LinkButton.astro';
 import LogoIcon from './ui/LogoIcon.astro';
+import { localizePath } from "astro-i18next";
+import i18next, { t } from "i18next";
 ---
 
 <header class="fixed top-0 w-full transition duration-300 h-16 z-50 border-b border-b-gray-200 px-4" x-data="{ scrolled: false }"
-  x-init="window.onscroll = () => { scrolled = (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) }" :class="{ 'bg-white/60 backdrop-blur-sm': scrolled, 'bg-transparent': !scrolled }"
+  x-init="window.onscroll = () => { scrolled = (document.body.scrollTop > 42 || document.documentElement.scrollTop > 42) }" :class="{ 'bg-white/70 backdrop-blur-sm': scrolled, 'bg-transparent': !scrolled }"
 >
     <nav class="px-2.5 w-full h-full lg:mx-auto *max-w-5xl flex flex-row items-center justify-between" :class="{ 'border-x border-x-transparent': scrolled, ' border-x border-x-gray-200': !scrolled }">
 
-    <div class="flex flex-row gap-2 items-center justify-center">
-      <div class="flex items-center justify-center p-1.5 bg-(--text) rounded-full w-10 h-10">
-        <LogoIcon className="w-3/4 h-3/4 text-white mr-0.5" />
+      <a href={localizePath("/")} class="flex flex-row gap-2 items-center justify-center">
+        <div class="flex items-center justify-center p-1.5 bg-(--text) rounded-full w-10 h-10">
+          <LogoIcon className="w-3/4 h-3/4 text-white mr-0.5" />
+        </div>
+        <div class="flex flex-col items-start justify-center gap-0">
+          <span class="hidden md:block text-start title uppercase leading-4">Gerardo Gallegos Jr</span>
+          <span class="hidden md:block text-start title uppercase leading-4">SOFTWARE DEVELOPER</span>
+        </div>
+      </a>
+    
+      <div class="flex flex-row items-center justify-center gap-2">
+        <LinkButton target="_blank" width="[14rem]" id="send-mail-button" href="mailto:gera.ga.dev@gmail.com">
+          {t('nav.send_mail')} <!-- ✅ Esto ahora SÍ funcionará -->
+          <span class="material-symbols-rounded">
+              send
+          </span>
+        </LinkButton>
+        <LanguageSwitcher/>
       </div>
-      <div class="flex flex-col items-start justify-center gap-0">
-        <span class="hidden md:block text-start title uppercase leading-4">Gerardo Gallegos Jr</span>
-        <span class="hidden md:block text-start title uppercase leading-4">SOFTWARE DEVELOPER</span>
-      </div>
-    </div>
-
-    <LinkButton target="_blank" width="[14rem]" id="send-mail-button" href="mailto:gera.ga.dev@gmail.com">
-      {t('nav.send_mail')}
-      <span class="material-symbols-rounded">
-          send
-      </span>
-    </LinkButton>
     </nav>
 </header>
 

@@ -1,0 +1,64 @@
+{
+  "portfolio": {
+    "title": "Portfolio | Gerardo Gallegos Jr",
+    "description": "Developer with the goal of building technological innovations, constantly improving, and solving challenges."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "send_mail": "Send Mail"
+  },
+  "hero_section": {
+    "greetings": "Hey there! My name is Gerardo",
+    "title": "Software Engineer",
+    "description": "Developer with the goal of building technological innovations, constantly improving, and solving challenges.",
+    "download_cv":"Download CV",
+    "linkedin": "LinkedIn"
+  },
+  "about_me": {
+    "title": "About me",
+    "paragraph_1": "Hi! I'm Gerardo. I have a Master's Degree in Software Engineering and a Bachelor Degree in Computer Systems Engineering focused on Software Development. I have developed the skills to be a better professional and to produce and develop software of the best quality, taking new challenges every day.",
+    "paragraph_2": "My goal is to improve my programming skills, learn from all my errors and resolve complex challenges that always require solutions which are hard to understand. I have always been passionate about continuous learning in software development.",
+    "paragraph_3": "Technologies & Tools:"
+  },
+  "projects": {
+    "no_image": "No image",
+    "project_status": "Project status",
+    "used_technologies": "Used technologies",
+    "roles": "Roles",
+    "urls": "Urls",
+    "date": "Date",
+    "start_date": "Start date",
+    "end_date": "End date"
+  },
+  "work_experience": {
+    "title": "Work experience",
+    "cii_description": "At Córdova Industrial, I worked on implementing the freelance project called InteliHogar for smart homes. My contributions included coding the store profile for device control, implementing subscription plan management logic for smart home benefits, redesigning the Ionic-based application to make it more intuitive with natural screen flow, contributing to the development of a smart alarm system and monitoring application for home monitoring personnel. I was also responsible for implementing SEO and SSR on the Angular-based website and worked on its translation for the American market (InteliHom, now discontinued). Other projects I worked on included Enegrin, Cord, and JMAS (Municipal Water and Sanitation Board), which involved remote PLC control management through bridge applications for activating and deactivating PLC options. Technologies used included Ionic, Node-RED, and Raspberry Pi. In these projects, I played a significant role in the interface design created in Figma.",
+    "ht_description": "At Horizon Trailers, I worked on the Horizon Trailers, Loadboss, Bedboss, Ranchboss projects, and an application that I cannot mention at the moment as it is still under development. In these projects, I was directly involved in designing the web pages in Figma and developing these pages using Next.js and React, implementing SEO and SSR efficiently. Additionally, I worked on the performance and accessibility of these pages, improving their efficiency and load time by 80%, ensuring that there are no delays longer than 1.5 seconds on initial loads (though other factors such as Google Cloud bucket requirements also play a role). I also worked on their security by regularly reviewing Next.js versions and updating when necessary, as well as conducting reviews on data encryption handled behind the pages."
+  },
+  "last_projects": {
+    "title": "Last projects",
+    "view_all": "View full projects archive"
+  },
+  "footer_text": "Loosely designed in <0>Figma</0> and coded in <1>TRAE</1> by yours truly. Built with <2>Astro.js</2> and <3>Tailwind CSS</3>, deployed with <4>Vercel</4>. All text is set in the Switzer typeface.",
+  "months": {
+    "jan": "January",
+    "feb": "February",
+    "mar": "March",
+    "apr": "April",
+    "may": "May",
+    "jun": "June",
+    "jul": "July",
+    "aug": "August",
+    "sep": "September",
+    "oct": "October",
+    "nov": "November",
+    "dec": "December",
+    "present": "Present"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Spanish"
+  }
+}

@@ -10,8 +10,8 @@ interface ProjectData {
   coverImage?: string;
   coverAlt?: string;
   date?: {
-    start?: Date | string;
-    end?: Date | string;
+    start?: string;
+    end?: string;
   };
   role?: string;
   status: 'active' | 'inactive' | 'finished' | 'archived';
@@ -130,47 +130,72 @@ export async function getLocalizedProjects(locale: string = 'es'): Promise<Proje
     console.log(`📁 Total proyectos encontrados: ${allProjects.length}`);
     
     if (allProjects.length === 0) {
-      console.warn('⚠️ No se encontraron proyectos. Verifica:');
-      console.warn('1. Que src/content/config.ts esté correcto');
-      console.warn('2. Que haya archivos .md en src/content/projects/');
-      console.warn('3. Que los archivos tengan frontmatter válido');
+      console.warn('⚠️ No se encontraron proyectos.');
       return [];
     }
-    
-    // Mostrar info de debug para cada proyecto
-    console.log('📄 Proyectos crudos encontrados:');
-    (allProjects as any[]).forEach((item, index) => {
-      console.log(`  ${index + 1}. ID: ${item.id}`);
-      console.log(`     Slug: ${item.slug}`);
-      console.log(`     Data keys: ${Object.keys(item.data || {})}`);
-      console.log(`     Data.lang: ${item.data?.lang}`);
-      console.log(`     Filename: ${item.id.split('/')[1]}`);
-    });
     
     // Convertir y filtrar
     const convertedProjects = (allProjects as any[])
       .map(toProject)
       .filter((project): project is Project => project !== null);
     
-    console.log(`🔄 Proyectos convertidos: ${convertedProjects.length}`);
-    
     const filteredProjects = convertedProjects.filter(project => {
-      const projectLocale = project.data.lang;
-      const matches = projectLocale === locale;
-      console.log(`   - ${project.id}: lang=${projectLocale}, matches=${matches}`);
-      return matches;
+      return project.data.lang === locale;
     });
     
     console.log(`✅ Proyectos filtrados para ${locale}: ${filteredProjects.length}`);
     
+    // Función para obtener fecha de comparación
+    const getSortDate = (project: Project): Date => {
+      // Si el proyecto está activo (present/actualidad), usar la fecha de inicio
+      const endDate = project.data.date?.end?.toLowerCase();
+      const isActive = endDate === 'present' || 
+                       endDate === 'actualidad' || 
+                       endDate === 'current' ||
+                       project.data.status === 'active';
+      
+      if (isActive && project.data.date?.start) {
+        // Para proyectos activos, usar fecha de inicio pero con prioridad máxima
+        // Añadimos un "boost" para que aparezcan primero
+        const startDate = new Date(project.data.date.start);
+        startDate.setFullYear(startDate.getFullYear() + 100); // Boost para proyectos activos
+        return startDate;
+      }
+      
+      // Si tiene fecha de fin, usar esa (proyectos terminados)
+      if (project.data.date?.end && 
+          !['present', 'actualidad', 'current'].includes(project.data.date.end.toLowerCase())) {
+        try {
+          return new Date(project.data.date.end);
+        } catch {
+          // Si falla, usar fecha de inicio
+        }
+      }
+      
+      // Usar fecha de inicio como fallback
+      if (project.data.date?.start) {
+        try {
+          return new Date(project.data.date.start);
+        } catch {
+          return new Date(0);
+        }
+      }
+      
+      // Si no tiene fechas, usar fecha muy antigua
+      return new Date(0);
+    };
+    
     // Ordenar
     return filteredProjects.sort((a, b) => {
+      // 1. Proyectos destacados primero
       if (a.data.featured && !b.data.featured) return -1;
       if (!a.data.featured && b.data.featured) return 1;
       
-      const dateA = a.data.date?.start ? new Date(a.data.date.start).getTime() : 0;
-      const dateB = b.data.date?.start ? new Date(b.data.date.start).getTime() : 0;
-      return dateB - dateA;
+      // 2. Ordenar por fecha (más reciente primero)
+      const dateA = getSortDate(a);
+      const dateB = getSortDate(b);
+      
+      return dateB.getTime() - dateA.getTime();
     });
     
   } catch (error) {
