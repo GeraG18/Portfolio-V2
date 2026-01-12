@@ -1,4 +1,4 @@
-// src/middleware.ts
+
 import type { MiddlewareNext } from 'astro';
 import { paraglideMiddleware } from './paraglide/server.js';
 

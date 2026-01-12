@@ -13,7 +13,7 @@ date:
   end: "present"
 role: "Lead Developer, UI/UX Designer"
 status: "active"
-featured: true
+featured: false
 ownership: "RanchBoss (H7X Group)"
 category: "Specialized E-commerce"
 duration: "In progress"

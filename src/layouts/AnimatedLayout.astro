@@ -5,9 +5,9 @@ import { m } from '../paraglide/messages';
 import { getLocale, localizeHref } from '../paraglide/runtime';
 import { SEO, type Props as SEOProps } from 'astro-seo';
 
-// FORMA CORRECTA: Usar Astro.url
+
 interface Props {
-	// title: string;
+	
 	seo?: SEOProps;
 }
 
@@ -43,7 +43,7 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
   
   {isHomePage && (
     <script>
-      // ESPERAR AL SPLASH SCREEN
+      
       const initAnimations = () => {
         if (typeof gsap === 'undefined') {
           console.error('GSAP no está cargado');
@@ -52,7 +52,7 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
         
         console.log('Iniciando animaciones GSAP...');
         
-        // 1. ANIMAR HERO SECTION PRIMERO
+        
         const heroSection = document.getElementById('hero-section');
         if (heroSection) {
           gsap.fromTo(heroSection, 
@@ -62,12 +62,12 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
               y: 0, 
               duration: 1.2, 
               ease: 'power3.out',
-              clearProps: 'all' // Limpia los estilos inline después
+              clearProps: 'all' 
             }
           );
         }
         
-        // 2. ANIMAR EL RESTO DE SECCIONES CON STAGGER
+        
         const containers = document.querySelectorAll('.Container, .ContainerTitle');
         if (containers.length > 0) {
           gsap.fromTo(containers,
@@ -78,12 +78,12 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
               stagger: 0.15,
               duration: 0.8,
               ease: 'power2.out',
-              delay: 0.3 // Pequeño delay después del hero
+              delay: 0.3 
             }
           );
         }
         
-        // 3. ANIMACIONES ESPECÍFICAS SI NECESITAS
+        
         const heroTitles = document.querySelectorAll('.hero-title, .hero-subtitle');
         if (heroTitles.length > 0) {
           gsap.from(heroTitles, {
@@ -98,13 +98,13 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
         console.log(`Animados ${containers.length} elementos`);
       };
       
-      // OPCIÓN A: Si hay splash, esperar evento
+      
       if (document.getElementById('splash-screen')) {
         window.addEventListener('splashComplete', initAnimations, { once: true });
       } 
-      // OPCIÓN B: Si no hay splash, animar inmediatamente
+      
       else {
-        // Pequeño delay para asegurar que el DOM esté listo
+        
         setTimeout(initAnimations, 100);
       }
     </script>

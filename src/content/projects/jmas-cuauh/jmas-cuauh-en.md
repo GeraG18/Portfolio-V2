@@ -15,7 +15,7 @@ date:
   end: "2023-08-02"
 role: "Developer, UI Designer"
 status: "finished"
-featured: true
+featured: false
 ownership: "Municipal Water and Sanitation Board of Cuauhtémoc (JMAS)"
 category: "Water Resources Management"
 duration: "4 months"

@@ -37,7 +37,7 @@
       cursor.style.setProperty('width', `${CONFIG.size}px`, 'important');
       cursor.style.setProperty('height', `${CONFIG.size}px`, 'important');
       
-      // Posición inicial
+      
       targetX = window.innerWidth / 2;
       targetY = window.innerHeight / 2;
       currentX = targetX;
@@ -47,9 +47,9 @@
       cursor.style.opacity = '0';
       cursorVisible = true;
       
-      document.addEventListener('mousemove', handleMouseMove); // Cuando el cursor se mueve en la web
-      document.addEventListener('mouseleave', handleMouseLeave); // Cuando el cursor sale de la web
-      document.addEventListener('mouseenter', handleMouseEnter); // CUando el cursor entra de nuevo en la web
+      document.addEventListener('mousemove', handleMouseMove); 
+      document.addEventListener('mouseleave', handleMouseLeave); 
+      document.addEventListener('mouseenter', handleMouseEnter); 
       
       animateCursor();
     }
@@ -160,17 +160,17 @@
         }
       }
       
-      requestAnimationFrame(animateCursor);// animacion de movimiento continua
+      requestAnimationFrame(animateCursor);
     }
     
-    // ========== INICIALIZACIÓN ==========
+    
     if (document.readyState === 'complete') {
       initCursor();
     } else {
       document.addEventListener('DOMContentLoaded', initCursor);
     }
     
-    // Para Astro
+    
     document.addEventListener('astro:page-load', initCursor);
   }
 </script>

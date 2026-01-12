@@ -13,7 +13,7 @@ date:
   end: "present"
 role: "Lead Developer, UI/UX Designer"
 status: "active"
-featured: true
+featured: false
 ownership: "LoadBoss (H7X Group)"
 category: "Industrial Website"
 duration: "In progress"

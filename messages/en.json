@@ -30,7 +30,8 @@
     "urls": "Urls",
     "date": "Date",
     "start_date": "Start date",
-    "end_date": "End date"
+    "end_date": "End date",
+    "featured":"Featured"
   },
   "work_experience": {
     "title": "Work experience",

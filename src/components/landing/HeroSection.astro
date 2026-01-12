@@ -2,8 +2,8 @@
 import DownloadIcon from "../ui/DownloadIcon.astro";
 import LinkButton from "../ui/LinkButton.astro";
 import { m } from '../../paraglide/messages';
-// import { t } from 'ez-i18n:runtime';
-// console.log('info', Astro.locals);
+
+
 
 ---
 
@@ -54,38 +54,38 @@ import { m } from '../../paraglide/messages';
     
     const { words } = split;
   
-    // Animación limpia y rápida
-    // tl.from(words, {
-    //     duration: 1,
-    //     y: 50,
-    //     opacity: 0,
-    //     rotateX: -90,
-    //     transformOrigin: "0% 50% -50",
-    //     ease: "back.out(1.2)",
-    //     stagger: 0.1
-    // });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    // Animación tipo flip
-    // gsap.from(split.words, {
-    //     duration: 0.8,
-    //     rotationY: 90,
-    //     opacity: 0,
-    //     transformOrigin: "0% 50%",
-    //     ease: "power3.out",
-    //     stagger: {
-    //     each: 0.15,
-    //     from: "start"
-    //     }
-    // });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    // Configuración inicial - TODAS las palabras
+    
     gsap.set(words, {
         opacity: 0,
         scale: 0,
         y: 30
     });
     
-    // Aplicar gradiente SOLO a la última palabra
+    
     const lastWord = words[words.length - 1];
     lastWord.classList.add(
         'bg-gradient-to-r',
@@ -95,7 +95,7 @@ import { m } from '../../paraglide/messages';
         'text-transparent'
     );
     
-    // Animación
+    
     gsap.to(words, {
         duration: 0.7,
         opacity: 1,

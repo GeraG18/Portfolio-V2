@@ -545,6 +545,29 @@ export { projects_end_date as "projects.end_date" }
 * @returns {LocalizedString}
 */
 /* @__NO_SIDE_EFFECTS__ */
+const projects_featured = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_featured(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("projects_featured", locale)
+	if (locale === "en") return en.projects_featured(inputs)
+	return es.projects_featured(inputs)
+};
+export { projects_featured as "projects.featured" }
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "es" }} options
+* @returns {LocalizedString}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 const work_experience_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.work_experience_title(inputs) 

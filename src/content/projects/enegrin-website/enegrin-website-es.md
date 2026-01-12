@@ -13,7 +13,7 @@ date:
   end: "2024-03-11"
 role: "Developer, UI Designer"
 status: "finished"
-featured: true
+featured: false
 ownership: "Córdova Industrial Integradores"
 category: "Sitio Web Corporativo"
 duration: "7 meses"

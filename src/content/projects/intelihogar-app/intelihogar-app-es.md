@@ -15,7 +15,7 @@ date:
   end: "2023-06-09"
 role: "Developer, UI Designer"
 status: "finished"
-featured: true
+featured: false
 ownership: "Córdova Industrial Integradores"
 category: "IoT - Smart Home"
 duration: "3 meses"

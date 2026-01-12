@@ -30,7 +30,8 @@
     "urls": "Enlaces",
     "date": "Fecha",
     "start_date": "Fecha de inicio",
-    "end_date": "Fecha de finalización"
+    "end_date": "Fecha de finalización",
+    "featured":"Destacado"
   },
   "work_experience": {
     "title": "Experiencia laboral",

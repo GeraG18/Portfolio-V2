@@ -1,6 +1,6 @@
 ---
-// src/layouts/ProjectLayout.astro
-// Layout simple para páginas de proyecto
+
+
 const { project } = Astro.props;
 ---
 
@@ -18,9 +18,9 @@ const { project } = Astro.props;
     
     <!-- Scripts básicos -->
     <script>
-      // Solo scripts esenciales
+      
       document.addEventListener('DOMContentLoaded', function() {
-        // Smooth scroll para anclas internas
+        
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
           anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');

@@ -1,4 +1,4 @@
 @import "tailwindcss";
 @import 'material-symbols';
-/* @import './switzer.css'; */
+@import './switzer.css';
 @import './icomoon/style.css';

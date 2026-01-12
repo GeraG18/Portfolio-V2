@@ -1,4 +1,4 @@
-// src/utils/projects.ts - VERSIÓN CORREGIDA
+
 import { getCollection } from 'astro:content';
 
 interface ProjectData {
@@ -50,10 +50,10 @@ function getLocaleFromId(id: string): string {
   if (parts.length < 2) return 'es';
   
   const filename = parts[1];
-  // CORRECCIÓN: Buscar -es o -en en cualquier parte del filename
+  
   if (filename.includes('-es')) return 'es';
   if (filename.includes('-en')) return 'en';
-  return 'es'; // default
+  return 'es'; 
 }
 
 /**
@@ -74,7 +74,7 @@ function toProject(item: any): Project | null {
       return null;
     }
     
-    // Extraer idioma de manera más robusta
+    
     const id = item.id || '';
     const filename = id.split('/')[1] || '';
     let lang: 'es' | 'en' = 'es';
@@ -125,77 +125,54 @@ export async function getLocalizedProjects(locale: string = 'es'): Promise<Proje
   try {
     console.log(`🔍 Buscando proyectos para locale: ${locale}`);
     
-    // @ts-ignore
-    const allProjects = await getCollection('projects');
-    console.log(`📁 Total proyectos encontrados: ${allProjects.length}`);
     
-    if (allProjects.length === 0) {
+    const allProjects = await getCollection('projects');
+    console.log('allProjects:', allProjects.length);
+    
+    if (!allProjects || allProjects.length === 0) {
       console.warn('⚠️ No se encontraron proyectos.');
       return [];
     }
     
-    // Convertir y filtrar
-    const convertedProjects = (allProjects as any[])
-      .map(toProject)
-      .filter((project): project is Project => project !== null);
     
-    const filteredProjects = convertedProjects.filter(project => {
-      return project.data.lang === locale;
-    });
+    const filteredProjects = (allProjects as any[])
+      .map(toProject)
+      .filter((project): project is Project => {
+        return project !== null && project.data.lang === locale;
+      });
     
     console.log(`✅ Proyectos filtrados para ${locale}: ${filteredProjects.length}`);
+
     
-    // Función para obtener fecha de comparación
-    const getSortDate = (project: Project): Date => {
-      // Si el proyecto está activo (present/actualidad), usar la fecha de inicio
-      const endDate = project.data.date?.end?.toLowerCase();
-      const isActive = endDate === 'present' || 
-                       endDate === 'actualidad' || 
-                       endDate === 'current' ||
-                       project.data.status === 'active';
-      
-      if (isActive && project.data.date?.start) {
-        // Para proyectos activos, usar fecha de inicio pero con prioridad máxima
-        // Añadimos un "boost" para que aparezcan primero
-        const startDate = new Date(project.data.date.start);
-        startDate.setFullYear(startDate.getFullYear() + 100); // Boost para proyectos activos
-        return startDate;
-      }
-      
-      // Si tiene fecha de fin, usar esa (proyectos terminados)
-      if (project.data.date?.end && 
-          !['present', 'actualidad', 'current'].includes(project.data.date.end.toLowerCase())) {
-        try {
-          return new Date(project.data.date.end);
-        } catch {
-          // Si falla, usar fecha de inicio
-        }
-      }
-      
-      // Usar fecha de inicio como fallback
-      if (project.data.date?.start) {
-        try {
-          return new Date(project.data.date.start);
-        } catch {
-          return new Date(0);
-        }
-      }
-      
-      // Si no tiene fechas, usar fecha muy antigua
-      return new Date(0);
+    const checkIfActive = (project: Project): boolean => {
+      const endDate = project.data.date?.end?.toLowerCase() || '';
+      return (
+        project.data.status === 'active' || 
+        ['present', 'actualidad', 'current', 'en progreso'].includes(endDate)
+      );
     };
+
     
-    // Ordenar
     return filteredProjects.sort((a, b) => {
-      // 1. Proyectos destacados primero
+      
       if (a.data.featured && !b.data.featured) return -1;
       if (!a.data.featured && b.data.featured) return 1;
+
       
-      // 2. Ordenar por fecha (más reciente primero)
-      const dateA = getSortDate(a);
-      const dateB = getSortDate(b);
+      const timeA = a.data.date?.start ? new Date(a.data.date.start).getTime() : 0;
+      const timeB = b.data.date?.start ? new Date(b.data.date.start).getTime() : 0;
+
+      if (timeA !== timeB) {
+        return timeB - timeA; 
+      }
       
-      return dateB.getTime() - dateA.getTime();
+      const isAActive = checkIfActive(a);
+      const isBActive = checkIfActive(b);
+
+      if (isAActive && !isBActive) return -1;
+      if (!isAActive && isBActive) return 1;
+
+      return 0; 
     });
     
   } catch (error) {
@@ -214,7 +191,7 @@ export async function getProject(
   try {
     console.log(`🔍 Buscando proyecto: ${projectName}, locale: ${locale || 'cualquiera'}`);
     
-    // @ts-ignore
+    
     const allProjects = await getCollection('projects');
     
     const project = (allProjects as any[]).find(item => {
@@ -249,7 +226,7 @@ export async function getProject(
 export async function getProjectVersions(projectName: string): Promise<Project[]> {
   console.log(`🔍 Buscando versiones de: ${projectName}`);
   
-  // @ts-ignore
+  
   const allProjects = await getCollection('projects');
   
   const versions = (allProjects as any[])
@@ -266,14 +243,14 @@ export async function getProjectVersions(projectName: string): Promise<Project[]
   return versions;
 }
 
-// ... (el resto de las funciones se mantienen igual, pero con console.log para debug)
+
 
 /**
  * DEBUG: Función para ver TODOS los proyectos sin filtrar
  */
 export async function getAllProjectsDebug(): Promise<any[]> {
   try {
-    // @ts-ignore
+    
     const allProjects = await getCollection('projects');
     console.log('=== DEBUG COMPLETO ===');
     console.log(`Total proyectos: ${allProjects.length}`);

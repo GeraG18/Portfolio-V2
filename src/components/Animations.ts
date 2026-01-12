@@ -2,7 +2,7 @@
 import gsap from 'gsap';
 
 export function initPageAnimations() {
-  // Solo ejecutar si no estamos en modo preferencia reducida
+  
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
@@ -11,7 +11,7 @@ export function initPageAnimations() {
     defaults: { ease: 'power3.out' }
   });
   
-  // Ejemplo: animar elementos de la página
+  
   tl.from('header', {
     y: -50,
     opacity: 0,
@@ -32,13 +32,13 @@ export function initPageAnimations() {
   return tl;
 }
 
-// Función para esperar al splash
+
 export function waitForSplash() {
   return new Promise((resolve) => {
     if (document.getElementById('splash-screen')) {
       window.addEventListener('splashComplete', resolve, { once: true });
     } else {
-      // Si no hay splash, iniciar inmediatamente
+      
       resolve(true);
     }
   });

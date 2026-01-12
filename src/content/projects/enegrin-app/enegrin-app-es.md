@@ -15,7 +15,7 @@ date:
   end: "2024-09-15"
 role: "Developer, UI Designer"
 status: "finished"
-featured: true
+featured: false
 ownership: "Córdova Industrial Integradores"
 category: "IoT - Energía"
 duration: "1 año 1 mes"

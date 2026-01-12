@@ -13,7 +13,7 @@ date:
   end: "2023-08-07"
 role: "Developer, UI Designer"
 status: "finished"
-featured: true
+featured: false
 ownership: "Córdova Industrial Integradores"
 category: "E-commerce"
 duration: "16 months"

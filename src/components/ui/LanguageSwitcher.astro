@@ -55,7 +55,7 @@ const localeNames = { en: 'English', es: 'Español' };
     
     if (!toggle || !dropdown) return;
     
-    // Toggle dropdown
+    
     toggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const isHidden = dropdown.classList.contains('hidden');
@@ -63,7 +63,7 @@ const localeNames = { en: 'English', es: 'Español' };
       toggle.querySelector('svg').style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
     });
     
-    // Cerrar al hacer clic fuera
+    
     document.addEventListener('click', () => {
       dropdown.classList.add('hidden');
       toggle.querySelector('svg').style.transform = 'rotate(0deg)';
@@ -73,25 +73,25 @@ const localeNames = { en: 'English', es: 'Español' };
       e.stopPropagation();
     });
     
-    // Event listeners PARA LOS BOTONES DE IDIOMA
+    
     document.querySelectorAll('.lang-option').forEach(button => {
       button.addEventListener('click', function() {
         const lang = this.dataset.lang;
         const currentLang = '${currentLocale}';
         
         if (lang !== currentLang) {
-          // Usar setLocale de Paraglide
+          
           if (typeof setLocale === 'function') {
             setLocale(lang, { reload: false });
           } else {
             console.error('setLocale no está definida');
           }
           
-          // Cerrar dropdown
+          
           dropdown.classList.add('hidden');
           toggle.querySelector('svg').style.transform = 'rotate(0deg)';
           
-          // Recargar para ver cambios (o usar eventos personalizados)
+          
           setTimeout(() => window.location.reload(), 50);
         }
       });

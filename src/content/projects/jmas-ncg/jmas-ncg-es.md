@@ -15,7 +15,7 @@ date:
   end: "2023-08-02"
 role: "Developer, UI Designer"
 status: "finished"
-featured: true
+featured: false
 ownership: "Junta Municipal de Agua y Saneamiento de Nuevo Casas Grandes (JMAS)"
 category: "Gestión de Recursos Hídricos"
 duration: "4 meses"

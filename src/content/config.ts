@@ -1,9 +1,9 @@
-// src/content/config.ts
+
 import { defineCollection, z } from 'astro:content';
 
-// 1. Define la colección CORRECTAMENTE
+
 const projectsCollection = defineCollection({
-  type: 'content', // Esto es OBLIGATORIO para archivos .md
+  type: 'content', 
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -13,7 +13,7 @@ const projectsCollection = defineCollection({
       name: z.string(),
       url: z.string(),
     })).default([]),
-    // NO uses image() helper aquí temporalmente hasta que funcione
+    
     coverImage: z.string().optional(),
     coverAlt: z.string().optional(),
     date: z.object({
@@ -29,7 +29,7 @@ const projectsCollection = defineCollection({
   })
 });
 
-// 2. Exporta CORRECTAMENTE - ¡ESTA ES LA PARTE CLAVE!
+
 export const collections = {
-  projects: projectsCollection, // La clave debe llamarse 'projects'
+  projects: projectsCollection, 
 };

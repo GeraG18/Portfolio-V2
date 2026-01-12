@@ -11,12 +11,12 @@ import { getLocale, localizeHref } from '../../paraglide/runtime';
 
 export async function getStaticPaths() {
     try {
-        // Obtener todos los proyectos
+        
         const allProjects = await getCollection("projects" as any);
         if (!allProjects || allProjects.length === 0) {
             return [];
         }
-        // Crear rutas para cada proyecto en cada idioma
+        
         const paths: Array<{
             params: {
                 project: string;
@@ -26,15 +26,15 @@ export async function getStaticPaths() {
         const processedProjects = new Set();
         (allProjects as any[]).forEach(item => {
             try {
-                // Extraer nombre del proyecto (carpeta)
+                
                 const projectName = item.id.split("/")[0];
                 const projectKey = `${projectName}`;
-                // Solo procesar cada proyecto una vez
+                
                 if (processedProjects.has(projectKey)) {
                     return;
                 }
                 processedProjects.add(projectKey);
-                // Crear entrada para español e inglés
+                
                 paths.push({
                     params: { project: projectName },
                     props: {
@@ -55,15 +55,15 @@ export async function getStaticPaths() {
         return [];
     }
 }
-// 2. Obtener parámetro de la ruta (esto viene de getStaticPaths)
+
 const { project } = Astro.params;
 const currentLocale = getLocale() || "es";
 if (!project) {
     return Astro.redirect("/projects");
 }
-// 4. Obtener todos los proyectos (Astro pasa esto automáticamente desde getStaticPaths)
+
 const allProjects = await getCollection("projects" as any);
-// 5. Función para extraer idioma del ID
+
 function getLocaleFromId(id: string): "es" | "en" {
     const filename = id.split("/")[1] || "";
     if (filename.includes("-en"))
@@ -72,34 +72,34 @@ function getLocaleFromId(id: string): "es" | "en" {
         return "es";
     return "es";
 }
-// 6. Buscar el proyecto por nombre e idioma
+
 let foundProject = null;
 let projectData = null;
-// Debug: mostrar qué estamos buscando
+
 console.log(`🔍 Buscando proyecto: ${project} (locale: ${currentLocale})`);
 console.log(`📁 Total proyectos disponibles: ${(allProjects as any[]).length}`);
-// Mostrar todos los proyectos disponibles para debug
+
 (allProjects as any[]).forEach((item, index) => {
     const projectName = item.id.split("/")[0];
     const projectLocale = item.data.lang || getLocaleFromId(item.id);
     console.log(`   ${index + 1}. ${item.id} -> nombre: ${projectName}, locale: ${projectLocale}`);
 });
 for (const item of (allProjects as any[])) {
-    // Extraer nombre del proyecto del ID
+    
     const projectName = item.id.split("/")[0];
-    // Determinar idioma
+    
     const projectLocale = item.data.lang || getLocaleFromId(item.id);
-    // Verificar coincidencia
+    
     if (projectName === project && projectLocale === currentLocale) {
         foundProject = item;
         console.log(`✅ Proyecto encontrado: ${item.id}`);
         break;
     }
 }
-// 7. Si no se encuentra, mostrar 404
+
 if (!foundProject) {
     console.log(`❌ Proyecto no encontrado: ${project} (${currentLocale})`);
-    // Intentar encontrar cualquier versión del proyecto para sugerencia
+    
     const alternativeVersions = (allProjects as any[]).filter(item => {
         const projectName = item.id.split("/")[0];
         return projectName === project;
@@ -113,7 +113,7 @@ if (!foundProject) {
     }
     return notFound();
 }
-// 8. Renderizar contenido markdown
+
 let Content = null;
 let headings = [];
 try {
@@ -125,7 +125,7 @@ try {
 catch (error) {
     console.error("\u274C Error rendering project:", error);
 }
-// 9. Obtener todas las versiones del mismo proyecto para selector de idioma
+
 const projectVersions = (allProjects as any[])
     .filter(item => {
     const projectName = item.id.split("/")[0];
@@ -133,10 +133,10 @@ const projectVersions = (allProjects as any[])
 })
     .map(item => ({
     lang: item.data.lang || getLocaleFromId(item.id),
-    url: `/projects/${project}` // Astro maneja el prefijo de idioma automáticamente
+    url: `/projects/${project}` 
 }));
 console.log(`🌐 Versiones disponibles: ${projectVersions.map(v => v.lang).join(", ")}`);
-// 10. Extraer datos del proyecto
+
 projectData = {
     id: foundProject.id,
     slug: project,
@@ -155,33 +155,22 @@ projectData = {
     category: foundProject.data.category,
     duration: foundProject.data.duration,
 };
-// 11. Metadatos para SEO
-const metaTitle = `${projectData.title} | Proyectos`;
-const metaDescription = projectData.description || `Detalles del proyecto ${projectData.title}`;
-const metaImage = projectData.coverImage || "/images/default-project.jpg";
-// 12. Generar URL canónica
+
 const canonicalUrl = new URL(Astro.url);
 canonicalUrl.pathname = `/projects/${project}`;
 let seo: SEOProps = {
     title: `${projectData.title} | Gerardo Gallegos Jr`,
     description: projectData.description,
     openGraph: {
-        basic: {
-            title: `${projectData.title} | Gerardo Gallegos Jr`,
-            type: "website",
-            image: projectData.coverImage,
-        }
+      basic: {
+        title: `${projectData.title} | Gerardo Gallegos Jr`,
+        type: "website",
+        image: projectData.coverImage,
+      }
     },
     extend: {
-        // link: [{ rel: "icon", href: "/favicon.ico" }],
         meta: [
-            // {
-            // name: "twitter:image",
-            // content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
-            // },
-            // { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
-            // { name: "twitter:description", content: "Agent" },
-            { name: "description", content: projectData.description },
+          { name: "description", content: projectData.description },
         ],
     }
 };
@@ -199,7 +188,14 @@ let seo: SEOProps = {
     </a>
 
   </Container>
-  <ContainerTitle title={projectData.title} subtitle="main-title"/>
+  <ContainerTitle title={projectData.title} subtitle="main-title">
+    {
+      projectData.featured &&
+      <span class="material-symbols-rounded w-fit h-fit font-mono tracking-normal text-xs/8 text-blue-500">
+        star
+      </span>
+    }
+  </ContainerTitle>
   <Container className="w-full flex flex-col-reverse lg:grid lg:grid-cols-5 gap-12 relative py-2">
     <div class="col-span-3 w-full h-fit max-w-xl text-base/7 text-gray-500 pb-12 [&_ul]:list-disc [&_ul]:pl-6 [&_h1,h2,h3]:w-full [&_h1,h2,h3]:text-lg [&_h1,h2,h3]:font-bold [&_h1,h2,h3]:text-black">
       <Content/>

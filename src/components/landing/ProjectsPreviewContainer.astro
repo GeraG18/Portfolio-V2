@@ -1,5 +1,5 @@
 ---
-// src/pages/projects/index.astro
+
 import { getLocalizedProjects } from '../../utils/projects';
 import LinkButton from '../ui/LinkButton.astro';
 import { getLocale, setLocale, locales, localizeHref } from '../../paraglide/runtime';
@@ -30,7 +30,16 @@ const projects = await getLocalizedProjects(currentLocale);
                 }
             </div>
             <div>
-              <h2 class="w-full text-lg font-bold group-hover/item:text-blue-500/80">{project.data.title}</h2>
+              <h2 class="w-full text-lg font-bold group-hover/item:text-blue-500/80 flex flex-row">
+                {project.data.title}
+                &nbsp;
+                {
+                  project.data.featured &&
+                  <span class="material-symbols-rounded w-fit h-fit font-mono tracking-normal text-xs/8 text-blue-500">
+                  star
+                </span>
+                }
+              </h2>
               {project.data.description && (
                 <p class="text-gray-500 text-sm py-2">{project.data.description}</p>
               )}
