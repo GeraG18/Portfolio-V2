@@ -5,7 +5,7 @@ import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
 import alpinejs from '@astrojs/alpinejs';
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
-import node from "@astrojs/node";
+import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,7 +25,5 @@ export default defineConfig({
     ]
   },
   output: "server",
-  adapter: node({
-    mode: 'standalone'
-  })
+  adapter: vercel({edgeMiddleware: true,})
 });
