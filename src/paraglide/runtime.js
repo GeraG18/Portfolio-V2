@@ -77,9 +77,9 @@ export const urlPatterns = [
  * @type {ParaglideAsyncLocalStorage | undefined}
  */
 export let serverAsyncLocalStorage = undefined;
-export const disableAsyncLocalStorage = false;
+export const disableAsyncLocalStorage = true;
 export const experimentalMiddlewareLocaleSplitting = false;
-export const isServer = typeof window === 'undefined';
+export const isServer = import.meta.env?.SSR ?? typeof window === 'undefined';
 /**
  * Sets the server side async local storage.
  *

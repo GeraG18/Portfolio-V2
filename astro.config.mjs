@@ -20,10 +20,10 @@ export default defineConfig({
       paraglideVitePlugin({
         project: "./project.inlang",
         outdir: "./src/paraglide",
-        disableAsyncLocalStorage: false,
+        disableAsyncLocalStorage: true,
       }),
     ]
   },
-  output: "server",
+  output: "static",
   adapter: vercel()
 });
