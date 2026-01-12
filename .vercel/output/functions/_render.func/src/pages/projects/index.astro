@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/AnimatedLayout.astro";
+import ProjectsListContainer from "../../components/projects/ProjectsListContainer.astro";
+import Container from "../../components/ui/Container.astro";
+import type { SEOProps } from "astro-seo";
+import ContainerTitle from "../../components/ui/ContainerTitle.astro";
+
+import { m } from '../../paraglide/messages';
+import { getLocale, localizeHref } from '../../paraglide/runtime';
+
+let seo: SEOProps = {
+    title: `${m["last_projects.title"]()} | Gerardo Gallegos Jr`,
+    description: m["last_projects.view_all"](),
+    openGraph: {
+        basic: {
+            title: `${m["last_projects.title"]()} | Gerardo Gallegos Jr`,
+            type: "website",
+            image: "" //agregar imagen aqui y en el inicio
+        }
+    },
+    extend: {
+        meta: [
+            { name: "description", content: m["last_projects.view_all"]() },
+        ],
+    }
+};
+---
+
+<Layout>
+	<div class="pt-16">
+
+		<ContainerTitle title={m["last_projects.title"]()} subtitle="section-1"/>
+		<Container id="all-projects-section" className="flex flex-col items-start justify-center min-h-screen">
+			<ProjectsListContainer/>
+		</Container>
+	</div>
+	<!-- <ProjectsGrid /> -->
+</Layout>
