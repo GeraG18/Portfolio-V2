@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide &&  astro dev",
     "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && astro build",
+    "paraglide-compile": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide",
     "preview": "astro preview",
     "astro": "astro",
     "machine-translate": "inlang machine translate --project project.inlang"
