@@ -1,23 +1,25 @@
 ---
-import NavigationBar from '../components/NavigationBar.astro';
-import CursorDecorator from '../components/ui/CursorDecorator.astro';
+import SplashScreen from '../components/SplashScreen.astro';
 import '../styles/global.css';
 import { m } from '../paraglide/messages';
 import { getLocale, localizeHref } from '../paraglide/runtime';
 import { SEO, type Props as SEOProps } from 'astro-seo';
 
+// FORMA CORRECTA: Usar Astro.url
 interface Props {
 	// title: string;
 	seo?: SEOProps;
 }
 
 const { seo } = Astro.props;
+const showSplash = Astro.url.pathname === '/';
+const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
 ---
 
-<!doctype html>
-<html lang={getLocale()}>
-	<head>
-		<meta charset="UTF-8" />
+<!DOCTYPE html>
+<html lang={getLocale()} class={showSplash ? 'splash-active' : ''}>
+<head>
+  <meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<!-- FONTS -->
@@ -30,15 +32,86 @@ const { seo } = Astro.props;
 			title={seo?.title ?? m['portfolio.title']()}
 			description={seo?.description ?? m['portfolio.description']()}
 	  	/>
-	</head>
-	<body>
-		<main class="relative">
-			<NavigationBar/>
-			<CursorDecorator/>
-			<slot />
-		</main>
-	</body>
+</head>
+<body>
+  <!-- Splash screen solo en homepage -->
+  {isHomePage && <SplashScreen />}
+  
+  <main>
+    <slot />
+  </main>
+  
+  {isHomePage && (
+    <script>
+      // ESPERAR AL SPLASH SCREEN
+      const initAnimations = () => {
+        if (typeof gsap === 'undefined') {
+          console.error('GSAP no está cargado');
+          return;
+        }
+        
+        console.log('Iniciando animaciones GSAP...');
+        
+        // 1. ANIMAR HERO SECTION PRIMERO
+        const heroSection = document.getElementById('hero-section');
+        if (heroSection) {
+          gsap.fromTo(heroSection, 
+            { opacity: 0, y: 30 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 1.2, 
+              ease: 'power3.out',
+              clearProps: 'all' // Limpia los estilos inline después
+            }
+          );
+        }
+        
+        // 2. ANIMAR EL RESTO DE SECCIONES CON STAGGER
+        const containers = document.querySelectorAll('.Container, .ContainerTitle');
+        if (containers.length > 0) {
+          gsap.fromTo(containers,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              stagger: 0.15,
+              duration: 0.8,
+              ease: 'power2.out',
+              delay: 0.3 // Pequeño delay después del hero
+            }
+          );
+        }
+        
+        // 3. ANIMACIONES ESPECÍFICAS SI NECESITAS
+        const heroTitles = document.querySelectorAll('.hero-title, .hero-subtitle');
+        if (heroTitles.length > 0) {
+          gsap.from(heroTitles, {
+            opacity: 0,
+            y: 15,
+            stagger: 0.1,
+            duration: 0.7,
+            delay: 0.5
+          });
+        }
+        
+        console.log(`Animados ${containers.length} elementos`);
+      };
+      
+      // OPCIÓN A: Si hay splash, esperar evento
+      if (document.getElementById('splash-screen')) {
+        window.addEventListener('splashComplete', initAnimations, { once: true });
+      } 
+      // OPCIÓN B: Si no hay splash, animar inmediatamente
+      else {
+        // Pequeño delay para asegurar que el DOM esté listo
+        setTimeout(initAnimations, 100);
+      }
+    </script>
+  )}
+</body>
 </html>
+
 <style is:global>
 	:root {
 		--background: #FFFFFF;

@@ -1,0 +1,65 @@
+---
+// Este componente se monta inicialmente y se desmonta después del splash
+---
+
+<div id="splash-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+  <!-- Tu logo o contenido del splash -->
+  <div class="text-center">
+    <div id="splash-logo" class="text-4xl font-bold text-gray-800 mb-4 opacity-0">
+      TuLogo
+    </div>
+    <div id="splash-loader" class="w-32 h-1 bg-gray-300 mx-auto overflow-hidden rounded-full">
+      <div id="splash-progress" class="h-full bg-blue-600 w-0"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Esperar a que la página esté completamente cargada
+  window.addEventListener('load', () => {
+    const splash = document.getElementById('splash-screen');
+    if (!splash) return;
+    
+    // Opcional: mínimo tiempo de visualización (ej: 1.5 segundos)
+    setTimeout(() => {
+      // Iniciar animación de salida
+      const tl = gsap.timeline();
+      
+      tl.to('#splash-progress', {
+        width: '100%',
+        duration: 0.5,
+        ease: 'power2.out'
+      })
+      .to('#splash-logo', {
+        y: -20,
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.in'
+      }, '-=0.2')
+      .to('#splash-screen', {
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power2.in',
+        onComplete: () => {
+          // Remover del DOM completamente
+          splash.style.display = 'none';
+          splash.remove();
+          
+          // Emitir evento para que la página principal sepa que puede iniciar animaciones
+          window.dispatchEvent(new CustomEvent('splashComplete'));
+        }
+      });
+    }, 1500); // Tiempo mínimo del splash
+  });
+</script>
+
+<style>
+  #splash-screen {
+    transition: opacity 0.5s ease;
+  }
+  
+  /* Prevenir scroll durante el splash */
+  html.splash-active {
+    overflow: hidden;
+  }
+</style>

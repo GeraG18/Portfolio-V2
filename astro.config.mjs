@@ -4,16 +4,28 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
 import alpinejs from '@astrojs/alpinejs';
-import astroI18next from "astro-i18next";
+import { paraglideVitePlugin } from "@inlang/paraglide-js";
+import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     mdx(), 
     alpinejs(), 
-    astroI18next(),
   ],
+
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [
+      tailwindcss(), 
+      paraglideVitePlugin({
+        project: "./project.inlang",
+        outdir: "./src/paraglide",
+        disableAsyncLocalStorage: false,
+      }),
+    ]
+  },
+  output: "server",
+  adapter: node({
+    mode: 'standalone'
+  })
 });

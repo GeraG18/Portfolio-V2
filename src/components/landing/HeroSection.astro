@@ -1,7 +1,7 @@
 ---
 import DownloadIcon from "../ui/DownloadIcon.astro";
 import LinkButton from "../ui/LinkButton.astro";
-import i18next, { t } from "i18next";
+import { m } from '../../paraglide/messages';
 // import { t } from 'ez-i18n:runtime';
 // console.log('info', Astro.locals);
 
@@ -11,21 +11,24 @@ import i18next, { t } from "i18next";
     <div class="w-full h-full flex flex-col gap-8 justify-center items-start">
         <!-- <h1 id="fullName" class="font-bold text-xl">Gerardo Gallegos Jr</h1> -->
         <h1 id="hero-name" class="px-2 w-full text-4xl tracking-tighter text-balance max-lg:font-medium max-sm:px-4 sm:text-5xl lg:text-6xl xl:text-8xl font-['Switzer-Light']">
-            {t('hero_section.greetings')}
+            {m["hero_section.greetings"]()}
         </h1>
         <!-- <span class="text-center text-[2.5rem] font-['Switzer-Medium'] w-full lg:w-3/5 h-16 border border-(--accent) relative before:content-['role-span'] before:absolute before:text-xs before:-left-px before:-top-5 before:bg-(--accent) before:py-0.5 before:px-1  before:text-(--background) mt-5">
             {t('hero_section.title')}
         </span> -->
 
-        <p class="max-w-(--breakpoint-md) mx-4 px-2 text-base/7 text-gray-500 border border-blue-500/80 relative before:content-['description-span'] before:absolute before:text-xs/6 before:-left-px before:-top-7 before:bg-blue-500/80 before:py-0.5 before:px-1 before:text-(--background) before:font-mono before:whitespace-pre">{t('hero_section.description')}</p>
+        <p class="max-w-(--breakpoint-md) mx-4 px-2 text-base/7 text-gray-500 border border-blue-500/80 relative before:content-['description-span'] before:absolute before:text-xs/6 before:-left-px before:-top-7 before:bg-blue-500/80 before:py-0.5 before:px-1 before:text-(--background) before:font-mono before:whitespace-pre">
+            { m["hero_section.description"]() }
+        </p>
         <div class="px-4 flex gap-2 flex-row items-center justify-start">
-            <LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
-                {t('hero_section.download_cv')}
+            <LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/downloadable_resources/Gerardo_Gallegos_Jr_Resume.pdf">
+                { m["hero_section.download_cv"]() }
+
                 <DownloadIcon/>
             </LinkButton>
 
             <LinkButton target="_blank" width="[14rem]" id="linkedinButton" href="https://www.linkedin.com/in/gerardo-gallegos-jr/">
-                {t('hero_section.linkedin')} 
+                { m["hero_section.linkedin"]() }
                 <span class="material-symbols-rounded">
                     send
                 </span>

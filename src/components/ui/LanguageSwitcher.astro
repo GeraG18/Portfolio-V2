@@ -1,77 +1,100 @@
 ---
-import i18next, {t} from "i18next";
+import { getLocale, setLocale, locales } from '../../paraglide/runtime';
 
-const {language, languages} = i18next;
-const pathname = Astro.url.pathname;
-
-const getBasePath = (path) => {
-  if (path.match(/^\/[a-z]{2}(\/|$)/)) {
-    return path.replace(/^\/[a-z]{2}/, '') || '/';
-  }
-  return path;
-};
-
-const basePath = getBasePath(pathname);
+const currentLocale = getLocale();
+const localeNames = { en: 'English', es: 'Español' };
 ---
 
-<div class="relative" x-data="{ open: false }" x-cloak>
+<div class="relative">
   <button 
-    @click="open = !open"
+    id="lang-toggle"
     type="button"
     class="grid grid-cols-[auto_auto] items-center gap-1 rounded-full px-4 py-2 text-left text-sm/6 text-gray-700 border border-gray-700 lg:hover:bg-gray-700 lg:hover:text-white transition-colors duration-150"
-    :aria-expanded="open"
   >
-    <span class="font-medium">{language.toUpperCase()}</span>
-    <svg 
-      class="w-4 h-4 transition-transform duration-200" 
-      :class="{ 'rotate-180': open }" 
-      fill="none" 
-      stroke="currentColor" 
-      viewBox="0 0 24 24"
-    >
+    <span class="font-medium">{currentLocale.toUpperCase()}</span>
+    <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
     </svg>
   </button>
 
   <div 
-    x-show="open"
-    x-transition
-    @click.outside="open = false"
-    class="absolute right-0 mt-2 w-48 rounded-xl border border-gray-200 bg-white shadow-lg py-2 z-50"
-    style="display: none;"
+    id="lang-dropdown"
+    class="absolute right-0 mt-2 w-48 rounded-xl border border-gray-200 bg-white shadow-lg py-2 z-50 hidden"
   >
-    {languages.map((lang) => {
-      let href;
-      if (lang === 'en') {
-        href = basePath === '/' ? '/' : basePath;
-      } else {
-        href = `/${lang}${basePath}`;
-      }
+    {locales.map((lang) => {
+      const isCurrent = currentLocale === lang;
       
-      const isCurrentLang = language === lang;
-      
-      // SOLUCIÓN 1: Usar expresión inline simple
       return (
-        <a 
-          href={href}
-          @click="if (language !== '${lang}') open = false"
-          class={`flex items-center justify-between px-4 py-3 transition-colors duration-150 ${isCurrentLang ? 'bg-blue-50/80 text-blue-500 font-medium cursor-default' : 'hover:bg-blue-50 cursor-pointer'}`}
+        <button
+          type="button"
+          data-lang={lang}
+          class={`lang-option flex items-center justify-between w-full px-4 py-3 transition-colors duration-150 text-left ${isCurrent ? 'bg-blue-50/80 text-blue-500 font-medium' : 'hover:bg-blue-50'}`}
         >
           <div class="flex items-center gap-3">
             <div>
-              <div class="font-medium">
-                {t(`languages.${lang}`)}
-              </div>
+              <div class="font-medium">{localeNames[lang]}</div>
               <div class="text-xs font-mono text-gray-500">{lang.toUpperCase()}</div>
             </div>
           </div>
-          {isCurrentLang && (
+          {isCurrent && (
             <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
           )}
-        </a>
+        </button>
       );
     })}
   </div>
 </div>
+
+<script>
+  import { getLocale, setLocale, locales } from '../../paraglide/runtime';
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('lang-toggle');
+    const dropdown = document.getElementById('lang-dropdown');
+    
+    if (!toggle || !dropdown) return;
+    
+    // Toggle dropdown
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = dropdown.classList.contains('hidden');
+      dropdown.classList.toggle('hidden', !isHidden);
+      toggle.querySelector('svg').style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
+    
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', () => {
+      dropdown.classList.add('hidden');
+      toggle.querySelector('svg').style.transform = 'rotate(0deg)';
+    });
+    
+    dropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    
+    // Event listeners PARA LOS BOTONES DE IDIOMA
+    document.querySelectorAll('.lang-option').forEach(button => {
+      button.addEventListener('click', function() {
+        const lang = this.dataset.lang;
+        const currentLang = '${currentLocale}';
+        
+        if (lang !== currentLang) {
+          // Usar setLocale de Paraglide
+          if (typeof setLocale === 'function') {
+            setLocale(lang, { reload: false });
+          } else {
+            console.error('setLocale no está definida');
+          }
+          
+          // Cerrar dropdown
+          dropdown.classList.add('hidden');
+          toggle.querySelector('svg').style.transform = 'rotate(0deg)';
+          
+          // Recargar para ver cambios (o usar eventos personalizados)
+          setTimeout(() => window.location.reload(), 50);
+        }
+      });
+    });
+  });
+</script>

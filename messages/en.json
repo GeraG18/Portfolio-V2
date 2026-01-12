@@ -39,9 +39,10 @@
   },
   "last_projects": {
     "title": "Last projects",
-    "view_all": "View full projects archive"
+    "view_all": "View full projects archive",
+    "no_items": "No items found"
   },
-  "footer_text": "Loosely designed in <0>Figma</0> and coded in <1>TRAE</1> by yours truly. Built with <2>Astro.js</2> and <3>Tailwind CSS</3>, deployed with <4>Vercel</4>. All text is set in the Switzer typeface.",
+  "footer_text": "Loosely designed in {figma} and coded in {trae} by yours truly. Built with {astro} and {tailwind}, deployed with {vercel}. All text is set in the Switzer typeface.",
   "months": {
     "jan": "January",
     "feb": "February",

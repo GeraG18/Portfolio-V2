@@ -4,6 +4,7 @@ import { getLocalizedProjects } from '../../utils/projects';
 
 const currentLocale = Astro.currentLocale || 'es';
 const projects = await getLocalizedProjects(currentLocale);
+import { m } from "../../paraglide/messages";
 ---
 
 <h1>Proyectos ({projects.length})</h1>
@@ -33,5 +34,5 @@ const projects = await getLocalizedProjects(currentLocale);
     })}
   </div>
 ) : (
-  <p>No hay proyectos disponibles en {currentLocale === 'es' ? 'español' : 'inglés'}.</p>
+  <p>{m['last_projects.no_items']()}</p>
 )}

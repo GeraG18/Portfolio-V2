@@ -1,5 +1,6 @@
 ---
-import i18next, { t } from "i18next";
+import { getLocale, setLocale, locales, localizeHref } from '../../paraglide/runtime';
+import { m } from '../../paraglide/messages';
 import DynamicTag from "../ui/DynamicTag.astro";
 
 const workExperience = [
@@ -18,26 +19,26 @@ const workExperience = [
     // },
     {
         date: {
-            start: `${t('months.feb')} 2022`,
-            end: `${t('months.sep')} 2024`
+            start: `${m['months.feb']()} 2022`,
+            end: `${m['months.sep']()} 2024`
         },
         role:"Software Engineer, Full Stack Developer",
         company: "Córdova Industrial Integradores",
         companyLink: "https://cordovaindustrial.com",
-        description: t("work_experience.cii_description"),//TODO: Agregar descripciones en traducciones
+        description: m['work_experience.cii_description'](),//TODO: Agregar descripciones en traducciones
         technologies: [
             "angular", "ionic", "node-red", "twilio", "stripe", "raspberry-pi", "typescript", "javascript", "tailwind", "trello", "wordpress", "xcode", "android-studio", "git", "gitlab", "firebase", "google-cloud", "figma",
         ]
     },
     {
         date: {
-            start: `${t('months.sep')} 2024`,
-            end: `${t('months.present')}`
+            start: `${m['months.sep']()} 2024`,
+            end: `${m['months.present']()}`
         },
         role:"Software Engineer, Full Stack Developer",
         company: "Horizon Trailers",
         companyLink: "https://horizontrailers.com",
-        description: t("work_experience.ht_description"),
+        description: m['work_experience.ht_description'](),
         technologies: [
             "react", "next-js", "stripe", "typescript", "javascript", "tailwind", "jira", "git", "gitlab", "firebase", "google-cloud", "raspberry-pi", "figma", "photoshop"
         ]

@@ -1,11 +1,10 @@
 ---
 // src/pages/projects/index.astro
 import { getLocalizedProjects } from '../../utils/projects';
-import LinkButton from '../ui/LinkButton.astro';
-import { localizePath } from "astro-i18next";
-import i18next, { t } from "i18next";
+import { getLocale, setLocale, locales, localizeHref } from '../../paraglide/runtime';
+import { m } from '../../paraglide/messages';
 
-const currentLocale = i18next.language || 'es';
+const currentLocale = getLocale() || 'es';
 const projects = await getLocalizedProjects(currentLocale);
 ---
 
@@ -15,7 +14,7 @@ const projects = await getLocalizedProjects(currentLocale);
       {projects.map(project => {
         const projectName = project.id.split('/')[0];
         return (
-          <a href={localizePath(`/projects/${projectName}`)} class="group/item *border *border-gray-200 p-4 flex flex-col md:flex-row gap-2 hover:lg:bg-(--text-grayRGBA)">
+          <a href={(`/projects/${projectName}`)} class="group/item *border *border-gray-200 p-4 flex flex-col md:flex-row gap-2 hover:lg:bg-(--text-grayRGBA)">
             <div class="flex-none aspect-video relative h-20 w-fit border border-gray-200 overflow-hidden flex items-center justify-center">
                 {
                 project.data.coverImage ? 
@@ -25,7 +24,7 @@ const projects = await getLocalizedProjects(currentLocale);
                     <span class="material-symbols-rounded text-2xl">
                         image
                     </span>
-                    <span>{t('projects.no_image')}</span>
+                    <span>{m['projects.no_image']()}</span>
                 </div>
                 }
             </div>
@@ -50,6 +49,6 @@ const projects = await getLocalizedProjects(currentLocale);
       })}
     </div>
   ) : (
-    <p>No hay proyectos disponibles en {currentLocale === 'es' ? 'español' : 'inglés'}.</p>
+    <p>{m['last_projects.no_items']()}</p>
   )}
 </div>

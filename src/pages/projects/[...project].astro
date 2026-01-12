@@ -4,11 +4,10 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import ContainerTitle from "../../components/ui/ContainerTitle.astro";
 import LinkButton from "../../components/ui/LinkButton.astro";
-import i18next, { t, changeLanguage } from "i18next";
 import type { SEOProps } from "astro-seo";
-import { localizePath } from "astro-i18next";
 
-changeLanguage("en");
+import { m } from '../../paraglide/messages';
+import { getLocale, localizeHref } from '../../paraglide/runtime';
 
 export async function getStaticPaths() {
     try {
@@ -58,7 +57,7 @@ export async function getStaticPaths() {
 }
 // 2. Obtener parámetro de la ruta (esto viene de getStaticPaths)
 const { project } = Astro.params;
-const currentLocale = i18next.language || "es";
+const currentLocale = getLocale() || "es";
 if (!project) {
     return Astro.redirect("/projects");
 }
@@ -192,11 +191,11 @@ let seo: SEOProps = {
 <Layout seo={seo}>
   <Container className="flex flex-col items-start justify-center pt-20"></Container>
   <Container className="min-h-14 flex flex-row items-start justify-start">
-    <a href={localizePath("/projects")} class="flex flex-row gap-2 items-center justify-center w-fit text-gray-400">
+    <a href={("/projects")} class="flex flex-row gap-2 items-center justify-center w-fit text-gray-400">
       <span class="material-symbols-rounded">
         chevron_left
       </span>
-      {t('last_projects.title')}
+      {m["last_projects.title"]()}
     </a>
 
   </Container>
@@ -215,19 +214,19 @@ let seo: SEOProps = {
           <span class="material-symbols-rounded text-2xl">
             image
           </span>
-          <span>{t('projects.no_image')}</span>
+          <span>{m["projects.no_image"]}</span>
         </div>
         }
       </div>
       
-      <span class="w-full text-lg font-bold text-black">{t('projects.project_status')}</span>
+      <span class="w-full text-lg font-bold text-black">{m["projects.project_status"]()}</span>
       {/* published, in-progress, hold, inactive */}
       <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
         <span class="capitalize text-xs/6 font-mono px-2 bg-blue-500/70 text-white rounded-full flex-none flex items-center justify-center gap-1"> 
           {projectData.status}
         </span>
       </div>
-      <span class="w-full text-lg font-bold text-black">{t('projects.used_technologies')}</span>
+      <span class="w-full text-lg font-bold text-black">{m["projects.used_technologies"]()}</span>
       <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
         {projectData.technologies.length > 0 && (
           <div class="w-full flex flex-row flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
@@ -240,11 +239,11 @@ let seo: SEOProps = {
           </div>
         )}
       </div>
-      <span class="w-full text-lg font-bold text-black">{t('projects.roles')}</span>
+      <span class="w-full text-lg font-bold text-black">{m["projects.roles"]()}</span>
       <p class="w-full text-lg">{projectData.role}</p>
-      <span class="w-full text-lg font-bold text-black">{t('projects.urls')}</span>
+      <span class="w-full text-lg font-bold text-black">{m["projects.urls"]()}</span>
       <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
-        {projectData.urls.length === 0 ? <span class="text-lg w-full text-[--text-gray]">No hay links</span> : ''}
+        {projectData.urls.length === 0 ? <span class="text-lg w-full text-[--text-gray]">{m["last_projects.no_items"]()}</span> : ''}
         {(projectData.urls).map(({name, url}:{name: string, url:string}) => (
         <LinkButton target="_blank" width="[14rem]" extraClasses="!text-base !py-1" id="linkedinButton" href={url}>
           {name} 
@@ -254,20 +253,20 @@ let seo: SEOProps = {
         </LinkButton>
         ))}
       </div>
-      <span class="w-full text-lg font-bold text-black">{t('projects.date')}</span>
+      <span class="w-full text-lg font-bold text-black">{m["projects.date"]()}</span>
       <div class="w-full text-lg">
         <div class="meta-item">
           <span class="meta-value">
             {projectData.date?.start && (
-              projectData.date.start === t('months.present').toLowerCase() ?
-              t('months.present')
+              projectData.date.start === m["months.present"]().toLowerCase() ?
+              m["months.present"]()
               :
               new Date(projectData.date.start).toLocaleDateString(currentLocale)
             )}
             {projectData.date?.end && (' - ')}
             {projectData.date?.end && (
-              projectData.date.end === t('months.present').toLowerCase() ?
-              t('months.present')
+              projectData.date.end === m["months.present"]().toLowerCase() ?
+              m["months.present"]()
               :
               new Date(projectData.date.end).toLocaleDateString(currentLocale)
             )}

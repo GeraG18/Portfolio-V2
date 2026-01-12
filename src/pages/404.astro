@@ -1,9 +1,8 @@
 ---
-import { changeLanguage } from "i18next";
 import Layout from "../layouts/Layout.astro";
 import { type Props as SEOProps } from "astro-seo";
-
-changeLanguage("en");
+import { m } from '../paraglide/messages';
+import { getLocale, localizeHref, } from '../paraglide/runtime';
 
 let seo: SEOProps = {
     title: `Error 404 | Gerardo G.`,

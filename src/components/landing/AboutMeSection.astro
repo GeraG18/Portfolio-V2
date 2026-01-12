@@ -1,22 +1,22 @@
 ---
-import i18next, { t } from "i18next";
 import SystemWindow from "../ui/SystemWindow.astro";
+import { m } from "../../paraglide/messages";
 ---
 
 <div class="flex flex-col items-center justify-center mx-auto">
     <div class="w-full h-fit flex flex-col md:flex-row justify-start px-4 py-8 md:py-12 items-center">
         <div class="w-full flex flex-col items-start justify-center gap-4">
             <p class="max-w-xl text-base/7 text-gray-500">
-                {t('about_me.paragraph_1')}
+                {m["about_me.paragraph_1"]()}
             </p>
             <p class="max-w-xl text-base/7 text-gray-500">
-                {t('about_me.paragraph_2')}
+                {m["about_me.paragraph_2"]()}
             </p>
         </div>
         
         <SystemWindow className="w-full md:w-3/4" contentClassName="text-gray-500 text-base/7 grid grid-cols-1 grid-rows-[auto_1fr] gap-2">
             <p class="w-full h-fit">
-                {t('about_me.paragraph_3')}
+                {m["about_me.paragraph_3"]}
             </p>
             <div class="grid grid-cols-7 md:grid-cols-14 gap-4 h-fit w-full">
                 <i class={"icon icon-figma text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>

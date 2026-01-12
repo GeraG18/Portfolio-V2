@@ -39,9 +39,10 @@
   },
   "last_projects": {
     "title": "Últimos proyectos",
-    "view_all": "Ver todos los proyectos"
+    "view_all": "Ver todos los proyectos",
+    "no_items": "No hay elementos disponibles"
   },
-  "footer_text": "Diseñado libremente en <0>Figma</0> y programado en <1>TRAE</1> por mí. Construido con <2>Astro.js</2> y <3>Tailwind CSS</3>, desplegado en <4>Vercel</4>. Todos los textos utilizan la tipografía Switzer.",
+  "footer_text": "Diseñado libremente en {figma} y programado en {trae} por mí. Construido con {astro} y {tailwind}, desplegado en {vercel}. Todos los textos utilizan la tipografía Switzer.",
   "months": {
     "jan": "Enero",
     "feb": "Febrero",

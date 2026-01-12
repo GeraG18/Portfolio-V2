@@ -3,8 +3,9 @@
 import LanguageSwitcher from './ui/LanguageSwitcher.astro';
 import LinkButton from './ui/LinkButton.astro';
 import LogoIcon from './ui/LogoIcon.astro';
-import { localizePath } from "astro-i18next";
-import i18next, { t } from "i18next";
+
+import { localizeHref } from '../paraglide/runtime';
+import { m } from '../paraglide/messages';
 ---
 
 <header class="fixed top-0 w-full transition duration-300 h-16 z-50 border-b border-b-gray-200 px-4" x-data="{ scrolled: false }"
@@ -12,7 +13,7 @@ import i18next, { t } from "i18next";
 >
     <nav class="px-2.5 w-full h-full lg:mx-auto *max-w-5xl flex flex-row items-center justify-between" :class="{ 'border-x border-x-transparent': scrolled, ' border-x border-x-gray-200': !scrolled }">
 
-      <a href={localizePath("/")} class="flex flex-row gap-2 items-center justify-center">
+      <a href={("/")} class="flex flex-row gap-2 items-center justify-center">
         <div class="flex items-center justify-center p-1.5 bg-(--text) rounded-full w-10 h-10">
           <LogoIcon className="w-3/4 h-3/4 text-white mr-0.5" />
         </div>
@@ -24,7 +25,7 @@ import i18next, { t } from "i18next";
     
       <div class="flex flex-row items-center justify-center gap-2">
         <LinkButton target="_blank" width="[14rem]" id="send-mail-button" href="mailto:gera.ga.dev@gmail.com">
-          {t('nav.send_mail')} <!-- ✅ Esto ahora SÍ funcionará -->
+          { m['nav.send_mail']() }
           <span class="material-symbols-rounded">
               send
           </span>
