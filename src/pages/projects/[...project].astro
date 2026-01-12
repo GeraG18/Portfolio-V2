@@ -9,52 +9,52 @@ import type { SEOProps } from "astro-seo";
 import { m } from '../../paraglide/messages';
 import { getLocale, localizeHref } from '../../paraglide/runtime';
 
-export async function getStaticPaths() {
-    try {
-        // Obtener todos los proyectos
-        const allProjects = await getCollection("projects" as any);
-        if (!allProjects || allProjects.length === 0) {
-            return [];
-        }
-        // Crear rutas para cada proyecto en cada idioma
-        const paths: Array<{
-            params: {
-                project: string;
-            };
-            props?: any;
-        }> = [];
-        const processedProjects = new Set();
-        (allProjects as any[]).forEach(item => {
-            try {
-                // Extraer nombre del proyecto (carpeta)
-                const projectName = item.id.split("/")[0];
-                const projectKey = `${projectName}`;
-                // Solo procesar cada proyecto una vez
-                if (processedProjects.has(projectKey)) {
-                    return;
-                }
-                processedProjects.add(projectKey);
-                // Crear entrada para español e inglés
-                paths.push({
-                    params: { project: projectName },
-                    props: {
-                        projectName,
-                        defaultLocale: "es"
-                    }
-                });
-            }
-            catch (error) {
-                console.error(`Error procesando proyecto ${item.id}:`, error);
-            }
-        });
-        console.log(`✅ Rutas generadas: ${paths.length} proyectos`);
-        return paths;
-    }
-    catch (error) {
-        console.error("\u274C Error en getStaticPaths:", error);
-        return [];
-    }
-}
+// export async function getStaticPaths() {
+//     try {
+//         // Obtener todos los proyectos
+//         const allProjects = await getCollection("projects" as any);
+//         if (!allProjects || allProjects.length === 0) {
+//             return [];
+//         }
+//         // Crear rutas para cada proyecto en cada idioma
+//         const paths: Array<{
+//             params: {
+//                 project: string;
+//             };
+//             props?: any;
+//         }> = [];
+//         const processedProjects = new Set();
+//         (allProjects as any[]).forEach(item => {
+//             try {
+//                 // Extraer nombre del proyecto (carpeta)
+//                 const projectName = item.id.split("/")[0];
+//                 const projectKey = `${projectName}`;
+//                 // Solo procesar cada proyecto una vez
+//                 if (processedProjects.has(projectKey)) {
+//                     return;
+//                 }
+//                 processedProjects.add(projectKey);
+//                 // Crear entrada para español e inglés
+//                 paths.push({
+//                     params: { project: projectName },
+//                     props: {
+//                         projectName,
+//                         defaultLocale: "es"
+//                     }
+//                 });
+//             }
+//             catch (error) {
+//                 console.error(`Error procesando proyecto ${item.id}:`, error);
+//             }
+//         });
+//         console.log(`✅ Rutas generadas: ${paths.length} proyectos`);
+//         return paths;
+//     }
+//     catch (error) {
+//         console.error("\u274C Error en getStaticPaths:", error);
+//         return [];
+//     }
+// }
 // 2. Obtener parámetro de la ruta (esto viene de getStaticPaths)
 const { project } = Astro.params;
 const currentLocale = getLocale() || "es";

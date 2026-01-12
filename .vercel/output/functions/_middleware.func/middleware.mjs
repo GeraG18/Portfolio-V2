@@ -277,8 +277,7 @@ var require_dist = __commonJS({
   }
 });
 
-// dist/server/chunks/runtime_CvrDTCWp.mjs
-var __vite_import_meta_env__ = { "ASSETS_PREFIX": void 0, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "SITE": void 0, "SSR": true };
+// dist/server/chunks/runtime_BazHYirc.mjs
 var baseLocale = "en";
 var locales = (
   /** @type {const} */
@@ -292,7 +291,7 @@ var strategy = [
   "baseLocale"
 ];
 var serverAsyncLocalStorage = void 0;
-var isServer = Object.assign(__vite_import_meta_env__, { _: process.env._, LANG: process.env.LANG })?.SSR ?? typeof window === "undefined";
+var isServer = typeof window === "undefined";
 function overwriteServerAsyncLocalStorage(value) {
   serverAsyncLocalStorage = value;
 }
@@ -9632,7 +9631,7 @@ async function middleware(request, context) {
     const response2 = await fetch(new URL("/_render", request.url), {
       headers: {
         ...Object.fromEntries(request.headers.entries()),
-        "x-astro-middleware-secret": "3977567d-d988-4dcd-b591-b1f0981bf7dc",
+        "x-astro-middleware-secret": "c02b372c-ccb5-47f8-a242-ce3680a5d18a",
         "x-astro-path": request.url.replace(origin, ""),
         "x-astro-locals": trySerializeLocals(locals)
       }

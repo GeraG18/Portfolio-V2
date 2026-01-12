@@ -1,4 +1,4 @@
-import { g as getLocale, t as trackMessageCall } from './runtime_CvrDTCWp.mjs';
+import { g as getLocale, t as trackMessageCall } from './runtime_BazHYirc.mjs';
 import { c as createComponent, d as createAstro, e as addAttribute, b as renderTemplate, s as spreadAttributes, u as unescapeHTML, r as renderComponent } from './astro/server_GOUyW78n.mjs';
 import 'piccolore';
 import 'clsx';

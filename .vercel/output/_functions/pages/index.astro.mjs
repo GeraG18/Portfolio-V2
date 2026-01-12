@@ -1,12 +1,12 @@
 import { c as createComponent, m as maybeRenderHead, b as renderTemplate, d as createAstro, r as renderComponent, a as renderScript, e as addAttribute, g as renderSlot, u as unescapeHTML } from '../chunks/astro/server_GOUyW78n.mjs';
 import 'piccolore';
-import { a as $$LinkButton, $ as $$Layout } from '../chunks/Layout_Dnv8xzrq.mjs';
-import { p as projects_no_image, l as last_projects_no_items, b as $$Container, $ as $$ContainerTitle, a as last_projects_title } from '../chunks/ContainerTitle_DfSgzJDH.mjs';
+import { a as $$LinkButton, $ as $$Layout } from '../chunks/Layout_DdN2PxwL.mjs';
+import { p as projects_no_image, l as last_projects_no_items, b as $$Container, $ as $$ContainerTitle, a as last_projects_title } from '../chunks/ContainerTitle_vDxBEMtt.mjs';
 import 'clsx';
 /* empty css                                 */
-import { g as getLocale, t as trackMessageCall } from '../chunks/runtime_CvrDTCWp.mjs';
-import { g as getLocalizedProjects } from '../chunks/projects_4iAOpvxo.mjs';
-import { m as months_present } from '../chunks/months_present_BT5Gp1RR.mjs';
+import { g as getLocale, t as trackMessageCall } from '../chunks/runtime_BazHYirc.mjs';
+import { g as getLocalizedProjects } from '../chunks/projects_CNyHEFL1.mjs';
+import { m as months_present } from '../chunks/months_present_DHAfTBNv.mjs';
 export { renderers } from '../renderers.mjs';
 
 /* eslint-disable */

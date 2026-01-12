@@ -17,13 +17,13 @@ export default defineConfig({
   vite: {
     plugins: [
       tailwindcss(), 
-      // paraglideVitePlugin({
-      //   project: "./project.inlang",
-      //   outdir: "./src/paraglide",
-      //   disableAsyncLocalStorage: false,
-      // }),
+      paraglideVitePlugin({
+        project: "./project.inlang",
+        outdir: "./src/paraglide",
+        disableAsyncLocalStorage: false,
+      }),
     ]
   },
   output: "server",
-  adapter: vercel({edgeMiddleware: true,})
+  adapter: vercel()
 });

@@ -1,9 +1,9 @@
 import { c as createComponent, d as createAstro, r as renderComponent, b as renderTemplate, m as maybeRenderHead, e as addAttribute } from '../../chunks/astro/server_GOUyW78n.mjs';
 import 'piccolore';
-import { g as getCollection, b as $$Container, a as last_projects_title, $ as $$ContainerTitle, p as projects_no_image, l as last_projects_no_items } from '../../chunks/ContainerTitle_DfSgzJDH.mjs';
-import { $ as $$Layout, a as $$LinkButton } from '../../chunks/Layout_Dnv8xzrq.mjs';
-import { g as getLocale, t as trackMessageCall } from '../../chunks/runtime_CvrDTCWp.mjs';
-import { m as months_present } from '../../chunks/months_present_BT5Gp1RR.mjs';
+import { g as getCollection, b as $$Container, a as last_projects_title, $ as $$ContainerTitle, p as projects_no_image, l as last_projects_no_items } from '../../chunks/ContainerTitle_vDxBEMtt.mjs';
+import { $ as $$Layout, a as $$LinkButton } from '../../chunks/Layout_DdN2PxwL.mjs';
+import { g as getLocale, t as trackMessageCall } from '../../chunks/runtime_BazHYirc.mjs';
+import { m as months_present } from '../../chunks/months_present_DHAfTBNv.mjs';
 export { renderers } from '../../renderers.mjs';
 
 /* eslint-disable */
@@ -162,40 +162,6 @@ const projects_date = (inputs = {}, options = {}) => {
 };
 
 const $$Astro = createAstro();
-async function getStaticPaths() {
-  try {
-    const allProjects = await getCollection("projects");
-    if (!allProjects || allProjects.length === 0) {
-      return [];
-    }
-    const paths = [];
-    const processedProjects = /* @__PURE__ */ new Set();
-    allProjects.forEach((item) => {
-      try {
-        const projectName = item.id.split("/")[0];
-        const projectKey = `${projectName}`;
-        if (processedProjects.has(projectKey)) {
-          return;
-        }
-        processedProjects.add(projectKey);
-        paths.push({
-          params: { project: projectName },
-          props: {
-            projectName,
-            defaultLocale: "es"
-          }
-        });
-      } catch (error) {
-        console.error(`Error procesando proyecto ${item.id}:`, error);
-      }
-    });
-    console.log(`\u2705 Rutas generadas: ${paths.length} proyectos`);
-    return paths;
-  } catch (error) {
-    console.error("\u274C Error en getStaticPaths:", error);
-    return [];
-  }
-}
 const $$ = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$;
@@ -327,7 +293,6 @@ const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
 	__proto__: null,
 	default: $$,
 	file: $$file,
-	getStaticPaths,
 	url: $$url
 }, Symbol.toStringTag, { value: 'Module' }));
 

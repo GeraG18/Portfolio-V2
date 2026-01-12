@@ -3,10 +3,10 @@ import 'piccolore';
 import 'clsx';
 /* empty css                                 */
 /* empty css                                 */
-import { p as portfolio_description, a as portfolio_title, $ as $$SEO } from '../chunks/SEO_CafdEOBz.mjs';
-import { g as getLocale } from '../chunks/runtime_CvrDTCWp.mjs';
-import { g as getLocalizedProjects } from '../chunks/projects_4iAOpvxo.mjs';
-import { p as projects_no_image, l as last_projects_no_items, $ as $$ContainerTitle, a as last_projects_title, b as $$Container } from '../chunks/ContainerTitle_DfSgzJDH.mjs';
+import { p as portfolio_description, a as portfolio_title, $ as $$SEO } from '../chunks/SEO_CxsZYzAf.mjs';
+import { g as getLocale } from '../chunks/runtime_BazHYirc.mjs';
+import { g as getLocalizedProjects } from '../chunks/projects_CNyHEFL1.mjs';
+import { p as projects_no_image, l as last_projects_no_items, $ as $$ContainerTitle, a as last_projects_title, b as $$Container } from '../chunks/ContainerTitle_vDxBEMtt.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$SplashScreen = createComponent(($$result, $$props, $$slots) => {

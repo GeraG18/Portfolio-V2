@@ -1,10 +1,10 @@
 import { c as createComponent, m as maybeRenderHead, a as renderScript, e as addAttribute, b as renderTemplate, d as createAstro, g as renderSlot, r as renderComponent, f as renderHead } from './astro/server_GOUyW78n.mjs';
 import 'piccolore';
 import 'clsx';
-import { g as getLocale, l as locales, t as trackMessageCall } from './runtime_CvrDTCWp.mjs';
+import { g as getLocale, l as locales, t as trackMessageCall } from './runtime_BazHYirc.mjs';
 /* empty css                         */
 /* empty css                         */
-import { p as portfolio_description, a as portfolio_title, $ as $$SEO } from './SEO_CafdEOBz.mjs';
+import { p as portfolio_description, a as portfolio_title, $ as $$SEO } from './SEO_CxsZYzAf.mjs';
 
 const $$LanguageSwitcher = createComponent(($$result, $$props, $$slots) => {
   const currentLocale = getLocale();

@@ -1,4 +1,4 @@
-import { g as getCollection } from './ContainerTitle_DfSgzJDH.mjs';
+import { g as getCollection } from './ContainerTitle_vDxBEMtt.mjs';
 
 function toProject(item) {
   try {
