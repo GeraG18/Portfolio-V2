@@ -6,8 +6,8 @@
     "es"
   ],
   "modules": [
-    "./plugins/message-format.js",
-    "./plugins/m-function-matcher.js"
+    "./project.inlang/plugins/message-format.js",
+    "./project.inlang/plugins/m-function-matcher.js"
   ],
   "plugin.inlang.messageFormat": {
     "pathPattern": "./messages/{locale}.json"
