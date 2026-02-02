@@ -26,6 +26,7 @@
     "material-symbols": "^0.40.2",
     "tailwindcss": "^4.1.17",
     "tsparticles": "^3.9.1",
+    "tsparticles-engine": "^2.12.0",
     "tsparticles-slim": "^2.12.0",
     "webfontloader": "^1.6.28"
   },

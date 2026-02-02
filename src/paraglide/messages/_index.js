@@ -1,8 +1,8 @@
 /* eslint-disable */
-import { getLocale, trackMessageCall, experimentalMiddlewareLocaleSplitting, isServer } from "../runtime.js"
+import { getLocale, trackMessageCall, experimentalMiddlewareLocaleSplitting, isServer, experimentalStaticLocale } from "../runtime.js"
 /** @typedef {import('../runtime.js').LocalizedString} LocalizedString */
-import * as en from "./en.js"
-import * as es from "./es.js"
+import * as __en from "./en.js"
+import * as __es from "./es.js"
 /**
 * This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
 *
@@ -20,10 +20,10 @@ const portfolio_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.portfolio_title(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("portfolio_title", locale)
-	if (locale === "en") return en.portfolio_title(inputs)
-	return es.portfolio_title(inputs)
+	if (locale === "en") return __en.portfolio_title(inputs)
+	return __es.portfolio_title(inputs)
 };
 export { portfolio_title as "portfolio.title" }
 /**
@@ -43,10 +43,10 @@ const portfolio_description = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.portfolio_description(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("portfolio_description", locale)
-	if (locale === "en") return en.portfolio_description(inputs)
-	return es.portfolio_description(inputs)
+	if (locale === "en") return __en.portfolio_description(inputs)
+	return __es.portfolio_description(inputs)
 };
 export { portfolio_description as "portfolio.description" }
 /**
@@ -66,10 +66,10 @@ const nav_home = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.nav_home(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("nav_home", locale)
-	if (locale === "en") return en.nav_home(inputs)
-	return es.nav_home(inputs)
+	if (locale === "en") return __en.nav_home(inputs)
+	return __es.nav_home(inputs)
 };
 export { nav_home as "nav.home" }
 /**
@@ -89,10 +89,10 @@ const nav_about = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.nav_about(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("nav_about", locale)
-	if (locale === "en") return en.nav_about(inputs)
-	return es.nav_about(inputs)
+	if (locale === "en") return __en.nav_about(inputs)
+	return __es.nav_about(inputs)
 };
 export { nav_about as "nav.about" }
 /**
@@ -112,10 +112,10 @@ const nav_contact = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.nav_contact(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("nav_contact", locale)
-	if (locale === "en") return en.nav_contact(inputs)
-	return es.nav_contact(inputs)
+	if (locale === "en") return __en.nav_contact(inputs)
+	return __es.nav_contact(inputs)
 };
 export { nav_contact as "nav.contact" }
 /**
@@ -135,10 +135,10 @@ const nav_send_mail = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.nav_send_mail(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("nav_send_mail", locale)
-	if (locale === "en") return en.nav_send_mail(inputs)
-	return es.nav_send_mail(inputs)
+	if (locale === "en") return __en.nav_send_mail(inputs)
+	return __es.nav_send_mail(inputs)
 };
 export { nav_send_mail as "nav.send_mail" }
 /**
@@ -158,10 +158,10 @@ const hero_section_greetings = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_section_greetings(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("hero_section_greetings", locale)
-	if (locale === "en") return en.hero_section_greetings(inputs)
-	return es.hero_section_greetings(inputs)
+	if (locale === "en") return __en.hero_section_greetings(inputs)
+	return __es.hero_section_greetings(inputs)
 };
 export { hero_section_greetings as "hero_section.greetings" }
 /**
@@ -181,10 +181,10 @@ const hero_section_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_section_title(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("hero_section_title", locale)
-	if (locale === "en") return en.hero_section_title(inputs)
-	return es.hero_section_title(inputs)
+	if (locale === "en") return __en.hero_section_title(inputs)
+	return __es.hero_section_title(inputs)
 };
 export { hero_section_title as "hero_section.title" }
 /**
@@ -204,10 +204,10 @@ const hero_section_description = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_section_description(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("hero_section_description", locale)
-	if (locale === "en") return en.hero_section_description(inputs)
-	return es.hero_section_description(inputs)
+	if (locale === "en") return __en.hero_section_description(inputs)
+	return __es.hero_section_description(inputs)
 };
 export { hero_section_description as "hero_section.description" }
 /**
@@ -227,10 +227,10 @@ const hero_section_download_cv = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_section_download_cv(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("hero_section_download_cv", locale)
-	if (locale === "en") return en.hero_section_download_cv(inputs)
-	return es.hero_section_download_cv(inputs)
+	if (locale === "en") return __en.hero_section_download_cv(inputs)
+	return __es.hero_section_download_cv(inputs)
 };
 export { hero_section_download_cv as "hero_section.download_cv" }
 /**
@@ -250,10 +250,10 @@ const hero_section_linkedin = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_section_linkedin(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("hero_section_linkedin", locale)
-	if (locale === "en") return en.hero_section_linkedin(inputs)
-	return es.hero_section_linkedin(inputs)
+	if (locale === "en") return __en.hero_section_linkedin(inputs)
+	return __es.hero_section_linkedin(inputs)
 };
 export { hero_section_linkedin as "hero_section.linkedin" }
 /**
@@ -273,10 +273,10 @@ const about_me_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.about_me_title(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("about_me_title", locale)
-	if (locale === "en") return en.about_me_title(inputs)
-	return es.about_me_title(inputs)
+	if (locale === "en") return __en.about_me_title(inputs)
+	return __es.about_me_title(inputs)
 };
 export { about_me_title as "about_me.title" }
 /**
@@ -296,10 +296,10 @@ const about_me_paragraph_1 = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.about_me_paragraph_1(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("about_me_paragraph_1", locale)
-	if (locale === "en") return en.about_me_paragraph_1(inputs)
-	return es.about_me_paragraph_1(inputs)
+	if (locale === "en") return __en.about_me_paragraph_1(inputs)
+	return __es.about_me_paragraph_1(inputs)
 };
 export { about_me_paragraph_1 as "about_me.paragraph_1" }
 /**
@@ -319,10 +319,10 @@ const about_me_paragraph_2 = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.about_me_paragraph_2(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("about_me_paragraph_2", locale)
-	if (locale === "en") return en.about_me_paragraph_2(inputs)
-	return es.about_me_paragraph_2(inputs)
+	if (locale === "en") return __en.about_me_paragraph_2(inputs)
+	return __es.about_me_paragraph_2(inputs)
 };
 export { about_me_paragraph_2 as "about_me.paragraph_2" }
 /**
@@ -342,10 +342,10 @@ const about_me_paragraph_3 = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.about_me_paragraph_3(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("about_me_paragraph_3", locale)
-	if (locale === "en") return en.about_me_paragraph_3(inputs)
-	return es.about_me_paragraph_3(inputs)
+	if (locale === "en") return __en.about_me_paragraph_3(inputs)
+	return __es.about_me_paragraph_3(inputs)
 };
 export { about_me_paragraph_3 as "about_me.paragraph_3" }
 /**
@@ -365,10 +365,10 @@ const projects_no_image = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_no_image(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_no_image", locale)
-	if (locale === "en") return en.projects_no_image(inputs)
-	return es.projects_no_image(inputs)
+	if (locale === "en") return __en.projects_no_image(inputs)
+	return __es.projects_no_image(inputs)
 };
 export { projects_no_image as "projects.no_image" }
 /**
@@ -388,10 +388,10 @@ const projects_project_status = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_project_status(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_project_status", locale)
-	if (locale === "en") return en.projects_project_status(inputs)
-	return es.projects_project_status(inputs)
+	if (locale === "en") return __en.projects_project_status(inputs)
+	return __es.projects_project_status(inputs)
 };
 export { projects_project_status as "projects.project_status" }
 /**
@@ -411,10 +411,10 @@ const projects_used_technologies = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_used_technologies(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_used_technologies", locale)
-	if (locale === "en") return en.projects_used_technologies(inputs)
-	return es.projects_used_technologies(inputs)
+	if (locale === "en") return __en.projects_used_technologies(inputs)
+	return __es.projects_used_technologies(inputs)
 };
 export { projects_used_technologies as "projects.used_technologies" }
 /**
@@ -434,10 +434,10 @@ const projects_roles = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_roles(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_roles", locale)
-	if (locale === "en") return en.projects_roles(inputs)
-	return es.projects_roles(inputs)
+	if (locale === "en") return __en.projects_roles(inputs)
+	return __es.projects_roles(inputs)
 };
 export { projects_roles as "projects.roles" }
 /**
@@ -457,10 +457,10 @@ const projects_urls = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_urls(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_urls", locale)
-	if (locale === "en") return en.projects_urls(inputs)
-	return es.projects_urls(inputs)
+	if (locale === "en") return __en.projects_urls(inputs)
+	return __es.projects_urls(inputs)
 };
 export { projects_urls as "projects.urls" }
 /**
@@ -480,10 +480,10 @@ const projects_date = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_date(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_date", locale)
-	if (locale === "en") return en.projects_date(inputs)
-	return es.projects_date(inputs)
+	if (locale === "en") return __en.projects_date(inputs)
+	return __es.projects_date(inputs)
 };
 export { projects_date as "projects.date" }
 /**
@@ -503,10 +503,10 @@ const projects_start_date = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_start_date(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_start_date", locale)
-	if (locale === "en") return en.projects_start_date(inputs)
-	return es.projects_start_date(inputs)
+	if (locale === "en") return __en.projects_start_date(inputs)
+	return __es.projects_start_date(inputs)
 };
 export { projects_start_date as "projects.start_date" }
 /**
@@ -526,10 +526,10 @@ const projects_end_date = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_end_date(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_end_date", locale)
-	if (locale === "en") return en.projects_end_date(inputs)
-	return es.projects_end_date(inputs)
+	if (locale === "en") return __en.projects_end_date(inputs)
+	return __es.projects_end_date(inputs)
 };
 export { projects_end_date as "projects.end_date" }
 /**
@@ -549,10 +549,10 @@ const projects_featured = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.projects_featured(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("projects_featured", locale)
-	if (locale === "en") return en.projects_featured(inputs)
-	return es.projects_featured(inputs)
+	if (locale === "en") return __en.projects_featured(inputs)
+	return __es.projects_featured(inputs)
 };
 export { projects_featured as "projects.featured" }
 /**
@@ -572,10 +572,10 @@ const work_experience_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.work_experience_title(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("work_experience_title", locale)
-	if (locale === "en") return en.work_experience_title(inputs)
-	return es.work_experience_title(inputs)
+	if (locale === "en") return __en.work_experience_title(inputs)
+	return __es.work_experience_title(inputs)
 };
 export { work_experience_title as "work_experience.title" }
 /**
@@ -595,10 +595,10 @@ const work_experience_cii_description = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.work_experience_cii_description(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("work_experience_cii_description", locale)
-	if (locale === "en") return en.work_experience_cii_description(inputs)
-	return es.work_experience_cii_description(inputs)
+	if (locale === "en") return __en.work_experience_cii_description(inputs)
+	return __es.work_experience_cii_description(inputs)
 };
 export { work_experience_cii_description as "work_experience.cii_description" }
 /**
@@ -618,10 +618,10 @@ const work_experience_ht_description = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.work_experience_ht_description(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("work_experience_ht_description", locale)
-	if (locale === "en") return en.work_experience_ht_description(inputs)
-	return es.work_experience_ht_description(inputs)
+	if (locale === "en") return __en.work_experience_ht_description(inputs)
+	return __es.work_experience_ht_description(inputs)
 };
 export { work_experience_ht_description as "work_experience.ht_description" }
 /**
@@ -641,10 +641,10 @@ const last_projects_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.last_projects_title(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("last_projects_title", locale)
-	if (locale === "en") return en.last_projects_title(inputs)
-	return es.last_projects_title(inputs)
+	if (locale === "en") return __en.last_projects_title(inputs)
+	return __es.last_projects_title(inputs)
 };
 export { last_projects_title as "last_projects.title" }
 /**
@@ -664,10 +664,10 @@ const last_projects_view_all = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.last_projects_view_all(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("last_projects_view_all", locale)
-	if (locale === "en") return en.last_projects_view_all(inputs)
-	return es.last_projects_view_all(inputs)
+	if (locale === "en") return __en.last_projects_view_all(inputs)
+	return __es.last_projects_view_all(inputs)
 };
 export { last_projects_view_all as "last_projects.view_all" }
 /**
@@ -687,10 +687,10 @@ const last_projects_no_items = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.last_projects_no_items(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("last_projects_no_items", locale)
-	if (locale === "en") return en.last_projects_no_items(inputs)
-	return es.last_projects_no_items(inputs)
+	if (locale === "en") return __en.last_projects_no_items(inputs)
+	return __es.last_projects_no_items(inputs)
 };
 export { last_projects_no_items as "last_projects.no_items" }
 /**
@@ -710,10 +710,10 @@ export const footer_text = (inputs, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_text(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("footer_text", locale)
-	if (locale === "en") return en.footer_text(inputs)
-	return es.footer_text(inputs)
+	if (locale === "en") return __en.footer_text(inputs)
+	return __es.footer_text(inputs)
 };
 /**
 * This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
@@ -732,10 +732,10 @@ const months_jan = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_jan(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_jan", locale)
-	if (locale === "en") return en.months_jan(inputs)
-	return es.months_jan(inputs)
+	if (locale === "en") return __en.months_jan(inputs)
+	return __es.months_jan(inputs)
 };
 export { months_jan as "months.jan" }
 /**
@@ -755,10 +755,10 @@ const months_feb = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_feb(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_feb", locale)
-	if (locale === "en") return en.months_feb(inputs)
-	return es.months_feb(inputs)
+	if (locale === "en") return __en.months_feb(inputs)
+	return __es.months_feb(inputs)
 };
 export { months_feb as "months.feb" }
 /**
@@ -778,10 +778,10 @@ const months_mar = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_mar(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_mar", locale)
-	if (locale === "en") return en.months_mar(inputs)
-	return es.months_mar(inputs)
+	if (locale === "en") return __en.months_mar(inputs)
+	return __es.months_mar(inputs)
 };
 export { months_mar as "months.mar" }
 /**
@@ -801,10 +801,10 @@ const months_apr = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_apr(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_apr", locale)
-	if (locale === "en") return en.months_apr(inputs)
-	return es.months_apr(inputs)
+	if (locale === "en") return __en.months_apr(inputs)
+	return __es.months_apr(inputs)
 };
 export { months_apr as "months.apr" }
 /**
@@ -824,10 +824,10 @@ const months_may = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_may(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_may", locale)
-	if (locale === "en") return en.months_may(inputs)
-	return es.months_may(inputs)
+	if (locale === "en") return __en.months_may(inputs)
+	return __es.months_may(inputs)
 };
 export { months_may as "months.may" }
 /**
@@ -847,10 +847,10 @@ const months_jun = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_jun(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_jun", locale)
-	if (locale === "en") return en.months_jun(inputs)
-	return es.months_jun(inputs)
+	if (locale === "en") return __en.months_jun(inputs)
+	return __es.months_jun(inputs)
 };
 export { months_jun as "months.jun" }
 /**
@@ -870,10 +870,10 @@ const months_jul = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_jul(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_jul", locale)
-	if (locale === "en") return en.months_jul(inputs)
-	return es.months_jul(inputs)
+	if (locale === "en") return __en.months_jul(inputs)
+	return __es.months_jul(inputs)
 };
 export { months_jul as "months.jul" }
 /**
@@ -893,10 +893,10 @@ const months_aug = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_aug(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_aug", locale)
-	if (locale === "en") return en.months_aug(inputs)
-	return es.months_aug(inputs)
+	if (locale === "en") return __en.months_aug(inputs)
+	return __es.months_aug(inputs)
 };
 export { months_aug as "months.aug" }
 /**
@@ -916,10 +916,10 @@ const months_sep = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_sep(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_sep", locale)
-	if (locale === "en") return en.months_sep(inputs)
-	return es.months_sep(inputs)
+	if (locale === "en") return __en.months_sep(inputs)
+	return __es.months_sep(inputs)
 };
 export { months_sep as "months.sep" }
 /**
@@ -939,10 +939,10 @@ const months_oct = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_oct(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_oct", locale)
-	if (locale === "en") return en.months_oct(inputs)
-	return es.months_oct(inputs)
+	if (locale === "en") return __en.months_oct(inputs)
+	return __es.months_oct(inputs)
 };
 export { months_oct as "months.oct" }
 /**
@@ -962,10 +962,10 @@ const months_nov = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_nov(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_nov", locale)
-	if (locale === "en") return en.months_nov(inputs)
-	return es.months_nov(inputs)
+	if (locale === "en") return __en.months_nov(inputs)
+	return __es.months_nov(inputs)
 };
 export { months_nov as "months.nov" }
 /**
@@ -985,10 +985,10 @@ const months_dec = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_dec(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_dec", locale)
-	if (locale === "en") return en.months_dec(inputs)
-	return es.months_dec(inputs)
+	if (locale === "en") return __en.months_dec(inputs)
+	return __es.months_dec(inputs)
 };
 export { months_dec as "months.dec" }
 /**
@@ -1008,10 +1008,10 @@ const months_present = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.months_present(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("months_present", locale)
-	if (locale === "en") return en.months_present(inputs)
-	return es.months_present(inputs)
+	if (locale === "en") return __en.months_present(inputs)
+	return __es.months_present(inputs)
 };
 export { months_present as "months.present" }
 /**
@@ -1031,10 +1031,10 @@ const languages_en = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.languages_en(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("languages_en", locale)
-	if (locale === "en") return en.languages_en(inputs)
-	return es.languages_en(inputs)
+	if (locale === "en") return __en.languages_en(inputs)
+	return __es.languages_en(inputs)
 };
 export { languages_en as "languages.en" }
 /**
@@ -1054,9 +1054,9 @@ const languages_es = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.languages_es(inputs) 
 	}
-	const locale = options.locale ?? getLocale()
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
 	trackMessageCall("languages_es", locale)
-	if (locale === "en") return en.languages_es(inputs)
-	return es.languages_es(inputs)
+	if (locale === "en") return __en.languages_es(inputs)
+	return __es.languages_es(inputs)
 };
 export { languages_es as "languages.es" }

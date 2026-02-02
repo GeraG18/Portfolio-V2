@@ -2,15 +2,12 @@
 import DownloadIcon from "../ui/DownloadIcon.astro";
 import LinkButton from "../ui/LinkButton.astro";
 import { m } from '../../paraglide/messages';
-
-
-
 ---
 
 <div class="flex flex-col-reverse xl:flex-row gap-1 w-full *max-w-5xl">
     <div class="w-full h-full flex flex-col gap-8 justify-center items-start">
         <!-- <h1 id="fullName" class="font-bold text-xl">Gerardo Gallegos Jr</h1> -->
-        <h1 id="hero-name" class="px-2 w-full text-4xl tracking-tighter text-balance max-lg:font-medium max-sm:px-4 sm:text-5xl lg:text-6xl xl:text-8xl font-['Switzer-Light']">
+        <h1 id="hero-name" class="px-2 w-full text-4xl tracking-tighter text-balance max-lg:font-medium max-sm:px-4 sm:text-5xl lg:text-6xl xl:text-8xl font-switzer-l">
             {m["hero_section.greetings"]()}
         </h1>
         <!-- <span class="text-center text-[2.5rem] font-['Switzer-Medium'] w-full lg:w-3/5 h-16 border border-(--accent) relative before:content-['role-span'] before:absolute before:text-xs before:-left-px before:-top-5 before:bg-(--accent) before:py-0.5 before:px-1  before:text-(--background) mt-5">
@@ -29,7 +26,7 @@ import { m } from '../../paraglide/messages';
 
             <LinkButton target="_blank" width="[14rem]" id="linkedinButton" href="https://www.linkedin.com/in/gerardo-gallegos-jr/">
                 { m["hero_section.linkedin"]() }
-                <span class="material-symbols-rounded">
+                <span class="material-symbols-rounded w-6 h-6">
                     send
                 </span>
             </LinkButton>
@@ -48,37 +45,12 @@ import { m } from '../../paraglide/messages';
     import gsap from "gsap";
     import SplitText from "gsap/src/SplitText";
 
-    const tl = gsap.timeline();
+    // const tl = gsap.timeline();
     const split = new SplitText("#hero-name", {type:"words", wordsClass: "word-animated"});
     console.log('split', split);
     
     const { words } = split;
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
     gsap.set(words, {
         opacity: 0,
         scale: 0,

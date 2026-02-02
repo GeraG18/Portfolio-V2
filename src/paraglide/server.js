@@ -17,6 +17,8 @@ import * as runtime from "./runtime.js";
  * - If URL doesn't match the determined locale, redirects to localized URL (only for document requests)
  * - De-localizes URLs before passing to server (e.g., `/fr/about` → `/about`)
  *
+ * @see https://inlang.com/m/gerre34r/library-inlang-paraglideJs/middleware
+ *
  * @template T - The return type of the resolve function
  *
  * @param {Request} request - The incoming request object
@@ -98,12 +100,8 @@ import * as runtime from "./runtime.js";
  * ```
  */
 export async function paraglideMiddleware(request, resolve, callbacks) {
-    if (!runtime.disableAsyncLocalStorage && !runtime.serverAsyncLocalStorage) {
-        const { AsyncLocalStorage } = await import("async_hooks");
-        runtime.overwriteServerAsyncLocalStorage(new AsyncLocalStorage());
-    }
-    else if (!runtime.serverAsyncLocalStorage) {
-        runtime.overwriteServerAsyncLocalStorage(createMockAsyncLocalStorage());
+    if (!runtime.serverAsyncLocalStorage) {
+      runtime.overwriteServerAsyncLocalStorage(createMockAsyncLocalStorage());
     }
     const decision = await runtime.shouldRedirect({ request });
     const locale = decision.locale;
@@ -212,6 +210,8 @@ function createMockAsyncLocalStorage() {
         },
     };
 }
+// Used in generated server.js when async local storage is disabled.
+void createMockAsyncLocalStorage;
 /**
  * The compiled messages for the server middleware.
  *

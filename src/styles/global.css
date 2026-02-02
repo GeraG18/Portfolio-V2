@@ -2,3 +2,7 @@
 @import 'material-symbols';
 @import './switzer.css';
 @import './icomoon/style.css';
+
+@theme {
+    --font-switzer-l: "Switzer-Light", Arial, sans-serif;
+}
