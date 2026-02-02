@@ -11,11 +11,10 @@ const words = title.split(' ');
         <span class="flex min-h-6 items-end px-2 font-mono text-xs/6 whitespace-pre text-black/20 max-sm:px-4 sm:h-10">
             {subtitle || 'section'}
         </span>
-        <h2 class="max-w-lg px-2 text-[2.5rem]/10 tracking-tighter text-balance max-sm:px-4 2xl:mt-0 min-h-10 mb-2">
-            <!-- px-2.5 -->
+        <h2 class="max-w-lg px-2 2xl:mt-0 min-h-10 mb-2 text-2xl tracking-tighter text-balance max-lg:font-medium max-sm:px-4 lg:text-4xl font-switzer-l">
             {
                 words.map((word, index) => (
-                    <span class={ 'text-[2.5rem]/10 ' + (index === words.length - 1 ? 'bg-linear-to-r from-blue-500/80 to-blue-500 bg-clip-text text-transparent' : 'text-(--text)') }>
+                    <span class={ '' + (index === words.length - 1 ? 'bg-linear-to-r from-blue-500/80 to-blue-500 bg-clip-text text-transparent' : 'text-(--text)') }>
                     {word}
                 </span>
             ))

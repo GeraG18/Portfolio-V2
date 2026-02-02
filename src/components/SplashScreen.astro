@@ -5,53 +5,17 @@ import IsotypeIcon from "./ui/IsotypeIcon.astro";
 ---
 
 <div id="splash-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
-  <!-- Tu logo o contenido del splash -->
   <div class="text-center">
-    <div id="splash-logo" class="w-12 h-12 text-gray-500 mb-4 opacity-100">
-      <!-- TuLogo -->
+    <div id="splash-logo" class="w-10 h-10 text-gray-500 mb-4 opacity-100">
        <IsotypeIcon />
     </div>
   </div>
 </div>
-
-<script>
-  
-  window.addEventListener('load', () => {
-    const splash = document.getElementById('splash-screen');
-    if (!splash) return;
-    
-    
-    setTimeout(() => {
-      
-      const tl = gsap.timeline();
-      
-      tl.to('#splash-logo', {
-        y: -20,
-        opacity: 0,
-        duration: 0.4,
-        ease: 'power2.in'
-      }, '-=0.2')
-      .to('#splash-screen', {
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.in',
-        onComplete: () => {
-          splash.style.display = 'none';
-          splash.remove();
-          window.dispatchEvent(new CustomEvent('splashComplete'));
-        }
-      });
-    }, 1500); 
-  });
-</script>
-
 <style>
   #splash-screen {
     transition: opacity 0.5s ease;
   }
-  
-  /* Prevenir scroll durante el splash */
   html.splash-active {
-    overflow: hidden;
+    overflow: hidden; /* Disables scroll */
   }
 </style>

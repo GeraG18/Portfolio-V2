@@ -27,12 +27,19 @@ let seo: SEOProps = {
 ---
 
 <Layout>
-	<div class="pt-16">
+	<div class="pt-20">
+        <Container className="min-h-14 flex flex-row items-start justify-start">
+            <a href={("/")} class="flex flex-row gap-2 items-center justify-center w-fit text-gray-400">
+            <span class="material-symbols-rounded w-6 h-6">
+                chevron_left
+            </span>
+            {m["nav.home"]()}
+            </a>
 
+        </Container>
 		<ContainerTitle title={m["last_projects.title"]()} subtitle="section-1"/>
 		<Container id="all-projects-section" className="flex flex-col items-start justify-center min-h-screen">
 			<ProjectsListContainer/>
 		</Container>
 	</div>
-	<!-- <ProjectsGrid /> -->
 </Layout>
