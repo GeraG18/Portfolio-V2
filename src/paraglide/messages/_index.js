@@ -269,6 +269,29 @@ export { hero_section_linkedin as "hero_section.linkedin" }
 * @returns {LocalizedString}
 */
 /* @__NO_SIDE_EFFECTS__ */
+const not_found_section_description = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.not_found_section_description(inputs) 
+	}
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
+	trackMessageCall("not_found_section_description", locale)
+	if (locale === "en") return __en.not_found_section_description(inputs)
+	return __es.not_found_section_description(inputs)
+};
+export { not_found_section_description as "not_found_section.description" }
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "es" }} options
+* @returns {LocalizedString}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 const about_me_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.about_me_title(inputs) 

@@ -6,39 +6,29 @@ import { m } from '../../paraglide/messages';
 
 <div class="flex flex-col-reverse xl:flex-row gap-1 w-full *max-w-5xl">
     <div class="w-full h-full flex flex-col gap-8 justify-center items-start">
-        <!-- <h1 id="fullName" class="font-bold text-xl">Gerardo Gallegos Jr</h1> -->
         <h1 id="hero-name" data-loading="true" class="px-2 w-full text-4xl tracking-tighter text-balance max-lg:font-medium max-sm:px-4 sm:text-5xl lg:text-6xl xl:text-8xl font-switzer-l">
-            {m["hero_section.greetings"]()}
+            Error 404
+            <!-- {m["hero_section.greetings"]()} -->
         </h1>
-        <!-- <span class="text-center text-[2.5rem] font-['Switzer-Medium'] w-full lg:w-3/5 h-16 border border-(--accent) relative before:content-['role-span'] before:absolute before:text-xs before:-left-px before:-top-5 before:bg-(--accent) before:py-0.5 before:px-1  before:text-white mt-5">
-            {t('hero_section.title')}
-        </span> -->
 
-        <p class="max-w-(--breakpoint-md) mx-4 px-2 text-base/7 text-gray-500 border border-blue-500/80 relative before:content-['description-span'] before:absolute before:text-xs/6 before:-left-px before:-top-7 before:bg-blue-500/80 before:py-0.5 before:px-1 before:text-white before:font-mono before:whitespace-pre">
-            { m["hero_section.description"]() }
+        <p class="max-w-(--breakpoint-md) mx-4 px-2 text-base/7 text-gray-500 border border-red-500/80 relative before:content-['error-span'] before:absolute before:text-xs/6 before:-left-px before:-top-7 before:bg-red-500/80 before:py-0.5 before:px-1 before:text-white before:font-mono before:whitespace-pre">
+            { m["not_found_section.description"]() }
         </p>
         <div class="px-4 flex gap-2 flex-row items-center justify-start">
-            <LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/downloadable_resources/Gerardo_Gallegos_Jr_Resume.pdf">
+            <!-- <LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/downloadable_resources/Gerardo_Gallegos_Jr_Resume.pdf">
                 { m["hero_section.download_cv"]() }
 
                 <DownloadIcon/>
-            </LinkButton>
+            </LinkButton> -->
 
-            <LinkButton target="_blank" width="[14rem]" id="linkedinButton" href="https://www.linkedin.com/in/gerardo-gallegos-jr/">
-                { m["hero_section.linkedin"]() }
+            <LinkButton width="[14rem]" id="homeButton" href={("/")}>
+                { m["nav.home"]() }
                 <span class="material-symbols-rounded w-6 h-6">
-                    send
+                    home
                 </span>
             </LinkButton>
         </div>
     </div>
-    <!-- <div class="w-full h-full flex items-center justify-center !px-4 !py-4 md:!py-0">
-            <div class="relative flex items-center justify-center md:h-[80%] max-w-screen-xl">
-                <Image src={Background} alt="Imágen de Ciudad Cyberpunk" class="z-5 absolute rounded-full !mb-[4rem]"/>
-                <Image src={Avatar} alt="Avatar de Gerardo" class="z-10 h-[38vh] xl:h-fit image-mask !mt-[4rem]"/>
-                
-            </div>
-    </div> -->
 </div>
 <style>
     [data-loading="true"] {
@@ -70,7 +60,7 @@ import { m } from '../../paraglide/messages';
 
         // Aplicar gradiente a la última palabra
         words[words.length - 1].classList.add(
-            'bg-gradient-to-r', 'from-blue-500/80', 'to-blue-500', 
+            'bg-gradient-to-r', 'from-red-500/80', 'to-red-500', 
             'bg-clip-text', 'text-transparent'
         );
 

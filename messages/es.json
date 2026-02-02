@@ -16,6 +16,9 @@
     "download_cv":"Descargar CV",
     "linkedin": "LinkedIn"
   },
+  "not_found_section": {
+    "description": "Esta ruta es \"undefined\". Te has topado con un puntero nulo. Mientras refactorizo la realidad, volvamos a un lugar seguro."
+  },
   "about_me": {
     "title": "Sobre mí",
     "paragraph_1": "Hola! Soy Gerardo. Tengo una Maestría en Ingeniería de Software y una Licenciatura en Ingeniería en Sistemas Computacionales con especialización en Desarrollo de Software. He desarrollado las habilidades para ser un mejor profesional y para producir y desarrollar software de la más alta calidad, asumiendo nuevos desafíos cada día.",

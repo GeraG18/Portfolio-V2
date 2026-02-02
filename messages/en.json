@@ -16,6 +16,9 @@
     "download_cv":"Download CV",
     "linkedin": "LinkedIn"
   },
+  "not_found_section": {
+    "description": "This path is \"undefined\". You've wandered into a null pointer. While I refactor reality, let's get you back to safety."
+  },
   "about_me": {
     "title": "About me",
     "paragraph_1": "Hi! I'm Gerardo. I have a Master's Degree in Software Engineering and a Bachelor Degree in Computer Systems Engineering focused on Software Development. I have developed the skills to be a better professional and to produce and develop software of the best quality, taking new challenges every day.",

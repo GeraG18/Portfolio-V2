@@ -1,6 +1,16 @@
 ---
 import SystemWindow from "../ui/SystemWindow.astro";
 import { m } from "../../paraglide/messages";
+import Tooltip from "../ui/Tooltip.astro";
+
+const techStack = [
+  "figma", "stripe", "twilio", "node-js", "aws", "mysql", "maria-db", 
+  "notion", "google-cloud", "firestore", "php", "firebase", "gitlab", 
+  "typescript", "android", "apple", "angular", "astro", "ember", "html", 
+  "ionic", "javascript", "python", "node-red", "react", "sass", "tailwind", 
+  "trello", "wordpress", "css", "git", "raspberry-pi", "next-js", "github", 
+  "photoshop", "xcode", "vscode", "express-js", "android-studio", "gimp", "zustand"
+];
 ---
 
 <div class="flex flex-col items-center justify-center mx-auto">
@@ -19,47 +29,13 @@ import { m } from "../../paraglide/messages";
                 {m["about_me.paragraph_3"]}
             </p>
             <div class="grid grid-cols-7 md:grid-cols-14 gap-4 h-fit w-full">
-                <i class={"icon icon-figma text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-stripe text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-twilio text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-node-js text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-aws text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-mysql text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-maria-db text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-notion text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-google-cloud text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-firestore text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-php text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-firebase text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-gitlab text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-typescript text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-android text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-apple text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-angular text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-astro text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-ember text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-html text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-ionic text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-javascript text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-node-red text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-react text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-sass text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-tailwind text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-trello text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-wordpress text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-css text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-git text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-raspberry-pi text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-next-js text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-github text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-photoshop text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-xcode text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-vscode text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-express-js text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-android-studio text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-gimp text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-                <i class={"icon icon-zustand text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105"}></i>
-
+                {
+                    techStack.map((tech) => (
+                    <Tooltip message={tech.replaceAll('-', ' ')} position="top">
+                        <i class={`icon icon-${tech} text-2xl w-fit h-fit lg:hover:text-blue-500/80 lg:hover:scale-105`}></i>
+                    </Tooltip>
+                    ))
+                }
             </div>
         </SystemWindow>
     </div>

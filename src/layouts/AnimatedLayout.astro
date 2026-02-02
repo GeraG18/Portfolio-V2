@@ -1,115 +1,88 @@
 ---
-import SplashScreen from '../components/SplashScreen.astro';
+import NavigationBar from '../components/NavigationBar.astro';
+import CursorDecorator from '../components/ui/CursorDecorator.astro';
+import SplashScreen from '../components/SplashScreen.astro'; // Asegúrate de crear este archivo
 import '../styles/global.css';
 import { m } from '../paraglide/messages';
-import { getLocale, localizeHref } from '../paraglide/runtime';
+import { getLocale } from '../paraglide/runtime';
 import { SEO, type Props as SEOProps } from 'astro-seo';
 
-
 interface Props {
-	
-	seo?: SEOProps;
+    seo?: SEOProps;
 }
 
 const { seo } = Astro.props;
-const showSplash = Astro.url.pathname === '/';
-const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
 ---
 
-<!DOCTYPE html>
-<html lang={getLocale()} class={showSplash ? 'splash-active' : ''}>
-<head>
-  <meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<!-- FONTS -->
-		<link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
-		<meta name="generator" content={Astro.generator} />
-		<SEO
-			{...seo}
-			title={seo?.title ?? m['portfolio.title']()}
-			description={seo?.description ?? m['portfolio.description']()}
-	  	/>
-</head>
-<body>
-  <!-- Splash screen solo en homepage -->
-  {isHomePage && <SplashScreen />}
-  
-  <main>
-    <slot />
-  </main>
-  
-  {isHomePage && (
-    <script>
-      
-      const initAnimations = () => {
-        if (typeof gsap === 'undefined') {
-          console.error('GSAP no está cargado');
-          return;
-        }
+<!doctype html>
+<html lang={getLocale()}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Kode+Mono:wght@400..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
         
-        console.log('Iniciando animaciones GSAP...');
-        
-        
-        const heroSection = document.getElementById('hero-section');
-        if (heroSection) {
-          gsap.fromTo(heroSection, 
-            { opacity: 0, y: 30 },
-            { 
-              opacity: 1, 
-              y: 0, 
-              duration: 1.2, 
-              ease: 'power3.out',
-              clearProps: 'all' 
-            }
-          );
-        }
-        
-        
-        const containers = document.querySelectorAll('.Container, .ContainerTitle');
-        if (containers.length > 0) {
-          gsap.fromTo(containers,
-            { opacity: 0, y: 20 },
-            {
-              opacity: 1,
-              y: 0,
-              stagger: 0.15,
-              duration: 0.8,
-              ease: 'power2.out',
-              delay: 0.3 
-            }
-          );
-        }
-        
-        
-        const heroTitles = document.querySelectorAll('.hero-title, .hero-subtitle');
-        if (heroTitles.length > 0) {
-          gsap.from(heroTitles, {
-            opacity: 0,
-            y: 15,
-            stagger: 0.1,
-            duration: 0.7,
-            delay: 0.5
-          });
-        }
-        
-        console.log(`Animados ${containers.length} elementos`);
-      };
-      
-      
-      if (document.getElementById('splash-screen')) {
-        window.addEventListener('splashComplete', initAnimations, { once: true });
-      } 
-      
-      else {
-        
-        setTimeout(initAnimations, 100);
-      }
-    </script>
-  )}
-</body>
+        <meta name="generator" content={Astro.generator} />
+        <SEO
+            {...seo}
+            title={seo?.title ?? m['portfolio.title']()}
+            description={seo?.description ?? m['portfolio.description']()}
+        />
+    </head>
+    <body>
+        <SplashScreen />
+
+        <main id="main-content" class="relative opacity-0">
+            <NavigationBar/>
+            <CursorDecorator/>
+            <slot />
+        </main>
+
+        <script>
+            import { gsap } from "gsap";
+
+            // Manejador de carga
+            window.addEventListener('load', async () => {
+                try {
+                    // Esperar a que las fuentes se carguen completamente
+                    await document.fonts.ready;
+                    
+                    const tl = gsap.timeline();
+
+                    // Animación de salida del Splash
+                    tl.to("#splash-screen", {
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            const splash = document.getElementById("splash-screen");
+                            if (splash) splash.remove();
+                        }
+                    });
+
+                    // Aparecer el contenido principal
+                    tl.to("#main-content", {
+                        opacity: 1,
+                        duration: 0.6,
+                        ease: "power1.out"
+                    }, "-=0.4");
+
+                    // Lanzar el evento para que el Hero empiece su animación
+                    tl.call(() => {
+                        window.dispatchEvent(new Event('startHeroAnimation'));
+                    });
+
+                } catch (error) {
+                    console.error("Error en la carga:", error);
+                    // Fail-safe: Mostrar contenido si algo falla
+                    document.getElementById("main-content").style.opacity = "1";
+                    document.getElementById("splash-screen").style.display = "none";
+                }
+            });
+        </script>
+    </body>
 </html>
 
 <style is:global>

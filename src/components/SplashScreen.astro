@@ -1,15 +1,15 @@
 ---
+import IsotypeIcon from "./ui/IsotypeIcon.astro";
+
 
 ---
 
 <div id="splash-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
   <!-- Tu logo o contenido del splash -->
   <div class="text-center">
-    <div id="splash-logo" class="text-4xl font-bold text-gray-800 mb-4 opacity-0">
-      TuLogo
-    </div>
-    <div id="splash-loader" class="w-32 h-1 bg-gray-300 mx-auto overflow-hidden rounded-full">
-      <div id="splash-progress" class="h-full bg-blue-600 w-0"></div>
+    <div id="splash-logo" class="w-12 h-12 text-gray-500 mb-4 opacity-100">
+      <!-- TuLogo -->
+       <IsotypeIcon />
     </div>
   </div>
 </div>
@@ -25,12 +25,7 @@
       
       const tl = gsap.timeline();
       
-      tl.to('#splash-progress', {
-        width: '100%',
-        duration: 0.5,
-        ease: 'power2.out'
-      })
-      .to('#splash-logo', {
+      tl.to('#splash-logo', {
         y: -20,
         opacity: 0,
         duration: 0.4,
@@ -41,11 +36,8 @@
         duration: 0.5,
         ease: 'power2.in',
         onComplete: () => {
-          
           splash.style.display = 'none';
           splash.remove();
-          
-          
           window.dispatchEvent(new CustomEvent('splashComplete'));
         }
       });
