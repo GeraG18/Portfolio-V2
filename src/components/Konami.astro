@@ -1,0 +1,26 @@
+---
+---
+<script>
+    const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
+    let cursor = 0;
+
+    const handleKonami = (event) => {
+        const match = event.key.toLowerCase() === KONAMI_CODE[cursor].toLowerCase();
+        if (!match) { cursor = 0; return; }
+        cursor++;
+        if (cursor === KONAMI_CODE.length) {
+            const secret = "mi_frase_secreta"; 
+            const timestamp = Math.floor(Date.now() / 60000); 
+            const hash = btoa(secret + timestamp); 
+            localStorage.setItem('secret_ticket', hash);
+            window.location.href = `/secret?ticket=${hash}`;
+            cursor = 0;
+        }
+    };
+
+    window.addEventListener('keydown', handleKonami);
+    document.addEventListener('astro:after-swap', () => {
+        window.removeEventListener('keydown', handleKonami);
+        window.addEventListener('keydown', handleKonami);
+    });
+</script>

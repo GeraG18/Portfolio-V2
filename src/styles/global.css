@@ -3,6 +3,7 @@
 @import './switzer.css';
 @import './icomoon/style.css';
 
-@theme {
-    --font-switzer-l: "Switzer-Light", Arial, sans-serif;
+/* Opción A: La forma correcta de extender el tema en v4 */
+@theme inline {
+  --font-switzer-l: "Switzer-Light", Arial, sans-serif;
 }
