@@ -1,4 +1,11 @@
 ---
+interface Props {
+  href?: string;
+  id?: string;
+  width?: string;
+  target?: string;
+  extraClasses?: string;
+}
 const { href, id, width, target, extraClasses } = Astro.props
 
 const actualClasses: string = `

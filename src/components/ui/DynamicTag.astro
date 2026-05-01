@@ -1,6 +1,16 @@
 ---
-const { tag: Tag, href, children, ...props } = Astro.props;
-const tagProps = Tag === 'a' && href ? { href } : {};
+import type { HTMLAttributes } from 'astro/types';
+
+type ValidTags = 'a' | 'button' | 'div' | 'span' | 'section';
+
+interface Props extends HTMLAttributes<any> {
+  tag: ValidTags;
+  className?: string;
+}
+
+const { tag: Tag, href, ...props } = Astro.props;
+
+const tagProps = (Tag === 'a' && href) ? { href } : {};
 ---
 
 <Tag {...tagProps} {...props}>

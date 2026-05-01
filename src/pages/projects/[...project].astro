@@ -1,7 +1,7 @@
 ---
 import Container from "../../components/ui/Container.astro";
 import Layout from "../../layouts/AnimatedLayout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content"; // FIX: Importar 'render'
 import ContainerTitle from "../../components/ui/ContainerTitle.astro";
 import LinkButton from "../../components/ui/LinkButton.astro";
 import type { SEOProps } from "astro-seo";
@@ -11,22 +11,16 @@ import { getLocale, localizeHref } from '../../paraglide/runtime';
 
 export async function getStaticPaths() {
     try {
-        
-        const allProjects = await getCollection("projects" as any);
+        const allProjects = await getCollection("projects");
         if (!allProjects || allProjects.length === 0) {
             return [];
         }
         
-        const paths: Array<{
-            params: {
-                project: string;
-            };
-            props?: any;
-        }> = [];
+        const paths = [];
         const processedProjects = new Set();
-        (allProjects as any[]).forEach(item => {
+
+        allProjects.forEach(item => {
             try {
-                
                 const projectName = item.id.split("/")[0];
                 const projectKey = `${projectName}`;
                 
@@ -51,7 +45,7 @@ export async function getStaticPaths() {
         return paths;
     }
     catch (error) {
-        console.error("\u274C Error en getStaticPaths:", error);
+        console.error("❌ Error en getStaticPaths:", error);
         return [];
     }
 }
@@ -62,32 +56,21 @@ if (!project) {
     return Astro.redirect("/projects");
 }
 
-const allProjects = await getCollection("projects" as any);
+const allProjects = await getCollection("projects");
 
 function getLocaleFromId(id: string): "es" | "en" {
     const filename = id.split("/")[1] || "";
-    if (filename.includes("-en"))
-        return "en";
-    if (filename.includes("-es"))
-        return "es";
+    if (filename.includes("-en")) return "en";
+    if (filename.includes("-es")) return "es";
     return "es";
 }
 
 let foundProject = null;
-let projectData = null;
 
 console.log(`🔍 Buscando proyecto: ${project} (locale: ${currentLocale})`);
-console.log(`📁 Total proyectos disponibles: ${(allProjects as any[]).length}`);
 
-(allProjects as any[]).forEach((item, index) => {
+for (const item of allProjects) {
     const projectName = item.id.split("/")[0];
-    const projectLocale = item.data.lang || getLocaleFromId(item.id);
-    console.log(`   ${index + 1}. ${item.id} -> nombre: ${projectName}, locale: ${projectLocale}`);
-});
-for (const item of (allProjects as any[])) {
-    
-    const projectName = item.id.split("/")[0];
-    
     const projectLocale = item.data.lang || getLocaleFromId(item.id);
     
     if (projectName === project && projectLocale === currentLocale) {
@@ -97,50 +80,32 @@ for (const item of (allProjects as any[])) {
     }
 }
 
+// Fallback: si no encuentra la versión del idioma actual, busca cualquiera disponible
 if (!foundProject) {
-    console.log(`❌ Proyecto no encontrado: ${project} (${currentLocale})`);
-    
-    const alternativeVersions = (allProjects as any[]).filter(item => {
-        const projectName = item.id.split("/")[0];
-        return projectName === project;
-    });
-    if (alternativeVersions.length > 0) {
-        console.log(`💡 Versiones alternativas encontradas:`);
-        alternativeVersions.forEach(v => {
-            const lang = v.data.lang || getLocaleFromId(v.id);
-            console.log(`   - ${lang}: ${v.id}`);
-        });
-    }
-    return notFound();
+    foundProject = allProjects.find(item => item.id.split("/")[0] === project);
+}
+
+if (!foundProject) {
+    return Astro.redirect("/404");
 }
 
 let Content = null;
 let headings = [];
 try {
-    const rendered = await foundProject.render();
+    // FIX para Astro 6: se usa la función render() de astro:content
+    const rendered = await render(foundProject);
     Content = rendered.Content;
     headings = rendered.headings || [];
     console.log(`📝 Contenido renderizado exitosamente`);
 }
 catch (error) {
-    console.error("\u274C Error rendering project:", error);
+    console.error("❌ Error rendering project:", error);
 }
 
-const projectVersions = (allProjects as any[])
-    .filter(item => {
-    const projectName = item.id.split("/")[0];
-    return projectName === project;
-})
-    .map(item => ({
-    lang: item.data.lang || getLocaleFromId(item.id),
-    url: `/projects/${project}` 
-}));
-console.log(`🌐 Versiones disponibles: ${projectVersions.map(v => v.lang).join(", ")}`);
-
-projectData = {
+const projectData = {
     id: foundProject.id,
     slug: project,
-    title: foundProject.data.title || "Sin t\u00EDtulo",
+    title: foundProject.data.title || "Sin título",
     description: foundProject.data.description || "",
     lang: foundProject.data.lang || getLocaleFromId(foundProject.id),
     technologies: foundProject.data.technologies || [],
@@ -151,13 +116,10 @@ projectData = {
     role: foundProject.data.role,
     status: foundProject.data.status || "finished",
     featured: Boolean(foundProject.data.featured),
-    client: foundProject.data.client,
     category: foundProject.data.category,
     duration: foundProject.data.duration,
 };
 
-const canonicalUrl = new URL(Astro.url);
-canonicalUrl.pathname = `/projects/${project}`;
 let seo: SEOProps = {
     title: `${projectData.title} | Gerardo Gallegos Jr`,
     description: projectData.description,
@@ -167,104 +129,83 @@ let seo: SEOProps = {
         type: "website",
         image: projectData.coverImage,
       }
-    },
-    extend: {
-        meta: [
-          { name: "description", content: projectData.description },
-        ],
     }
 };
 ---
 <Layout seo={seo}>
   <Container className="flex flex-col items-start justify-center pt-20"></Container>
   <Container className="min-h-14 flex flex-row items-start justify-start">
-    <a href={("/projects")} class="flex flex-row gap-2 items-center justify-center w-fit text-gray-400">
-      <span class="material-symbols-rounded w-6 h-6">
-        chevron_left
-      </span>
+    <a href={localizeHref("/projects")} class="flex flex-row gap-2 items-center justify-center w-fit text-gray-400">
+      <span class="material-symbols-rounded w-6 h-6">chevron_left</span>
       {m["last_projects.title"]()}
     </a>
   </Container>
+
   <ContainerTitle title={projectData.title} subtitle="main-title">
-    {
-      projectData.featured &&
-      <span class="material-symbols-rounded w-3 h-3 font-mono tracking-normal text-xs/8 text-blue-500">
-        star
-      </span>
-    }
+    {projectData.featured && (
+      <span class="material-symbols-rounded w-3 h-3 font-mono tracking-normal text-xs/8 text-blue-500">star</span>
+    )}
   </ContainerTitle>
+
   <Container className="w-full flex flex-col-reverse lg:grid lg:grid-cols-5 gap-12 relative py-2">
     <div class="col-span-3 w-full h-fit max-w-xl text-base/7 text-gray-500 pb-12 [&_ul]:list-disc [&_ul]:pl-6 [&_h1,h2,h3]:w-full [&_h1,h2,h3]:text-lg [&_h1,h2,h3]:font-bold [&_h1,h2,h3]:text-black">
-      <Content/>
+      {Content ? <Content /> : <p>Error loading content.</p>}
     </div>
+
     <div class="col-span-2 w-full h-fit flex gap-2 flex-col items-center justify-start friendly-sticky top-0 text-base/7 text-gray-500 pb-12">
       <div class="aspect-video relative w-full border border-[--text-grayRGBA] overflow-hidden group flex items-center justify-center">
-        {
-        projectData.coverImage ? 
-        <img src={projectData.coverImage} alt={projectData.coverAlt} class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out border-none"/>
-        : 
-        <div class="absolute bg-gray-200 w-full h-full text-[--text] text-lg flex flex-col items-center justify-center">
-          <span class="material-symbols-rounded text-2xl w-6 h-6">
-            image
-          </span>
-          <span>{m["projects.no_image"]}</span>
-        </div>
-        }
-      </div>
-      
-      <span class="w-full text-lg font-bold text-black">{m["projects.project_status"]()}</span>
-      {/* published, in-progress, hold, inactive */}
-      <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
-        <span class="capitalize text-xs/6 font-mono px-2 bg-blue-500/70 text-white rounded-full flex-none flex items-center justify-center gap-1"> 
-          {projectData.status}
-        </span>
-      </div>
-      <span class="w-full text-lg font-bold text-black">{m["projects.used_technologies"]()}</span>
-      <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
-        {projectData.technologies.length > 0 && (
-          <div class="w-full flex flex-row flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
-            {projectData.technologies.map((tech, index) => (
-              <span class="capitalize text-xs/6 font-mono px-2 bg-blue-500/70 text-white rounded-full flex-none flex items-center justify-center gap-1"> 
-                  <i class={"icon icon-"+tech}></i>
-                  {tech.replace('-',' ')}
-              </span>
-            ))}
+        {projectData.coverImage ? (
+          <img src={projectData.coverImage} alt={projectData.coverAlt} class="absolute inset-0 h-full w-full object-cover"/>
+        ) : (
+          <div class="absolute bg-gray-200 w-full h-full flex flex-col items-center justify-center">
+            <span class="material-symbols-rounded text-2xl">image</span>
+            <span>{m["projects.no_image"]()}</span>
           </div>
         )}
       </div>
-      <span class="w-full text-lg font-bold text-black">{m["projects.roles"]()}</span>
-      <p class="w-full text-lg">{projectData.role}</p>
-      <span class="w-full text-lg font-bold text-black">{m["projects.urls"]()}</span>
-      <div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
-        {projectData.urls.length === 0 ? <span class="text-lg w-full text-[--text-gray]">{m["last_projects.no_items"]()}</span> : ''}
-        {(projectData.urls).map(({name, url}:{name: string, url:string}) => (
-        <LinkButton target="_blank" width="[14rem]" extraClasses="!text-base !py-1" id="linkedinButton" href={url}>
-          {name} 
-          <span class="material-symbols-rounded w-6 h-6">
-            captive_portal
+      
+      <span class="w-full text-lg font-bold text-black">{m["projects.project_status"]()}</span>
+      <div class="w-full flex flex-wrap gap-2 text-sm items-center justify-start">
+        <span class="capitalize text-xs/6 font-mono px-2 bg-blue-500/70 text-white rounded-full"> 
+          {projectData.status}
+        </span>
+      </div>
+
+      <span class="w-full text-lg font-bold text-black">{m["projects.used_technologies"]()}</span>
+      <div class="w-full flex flex-wrap gap-2 text-sm items-center justify-start">
+        {projectData.technologies.map((tech) => (
+          <span class="capitalize text-xs/6 font-mono px-2 bg-blue-500/70 text-white rounded-full flex items-center gap-1"> 
+              <i class={`icon icon-${tech}`}></i>
+              {tech.replace('-',' ')}
           </span>
-        </LinkButton>
         ))}
       </div>
+
+      <span class="w-full text-lg font-bold text-black">{m["projects.roles"]()}</span>
+      <p class="w-full text-lg">{projectData.role}</p>
+
+      <span class="w-full text-lg font-bold text-black">{m["projects.urls"]()}</span>
+      <div class="w-full flex flex-col gap-2">
+        {projectData.urls.length === 0 ? (
+          <span class="text-lg text-gray-400">{m["last_projects.no_items"]()}</span>
+        ) : (
+          projectData.urls.map(({name, url}) => (
+            <LinkButton target="_blank" extraClasses="!text-base flex-none !py-1 w-fit" href={url}>
+              {name} 
+              <span class="material-symbols-rounded w-6 h-6">captive_portal</span>
+            </LinkButton>
+          ))
+        )}
+      </div>
+
       <span class="w-full text-lg font-bold text-black">{m["projects.date"]()}</span>
       <div class="w-full text-lg">
-        <div class="meta-item">
-          <span class="meta-value">
-            {projectData.date?.start && (
-              projectData.date.start === m["months.present"]().toLowerCase() ?
-              m["months.present"]()
-              :
-              new Date(projectData.date.start).toLocaleDateString(currentLocale)
-            )}
-            {projectData.date?.end && (' - ')}
-            {projectData.date?.end && (
-              projectData.date.end === m["months.present"]().toLowerCase() ?
-              m["months.present"]()
-              :
-              new Date(projectData.date.end).toLocaleDateString(currentLocale)
-            )}
-          </span>
-        </div>
+          {projectData.date?.start && (
+              <span>{projectData.date.start === "actualidad" ? m["months.present"]() : new Date(projectData.date.start).toLocaleDateString(currentLocale)}</span>
+          )}
+          {projectData.date?.end && (
+              <span> - {projectData.date.end === "actualidad" ? m["months.present"]() : new Date(projectData.date.end).toLocaleDateString(currentLocale)}</span>
+          )}
       </div>
     </div>
   </Container>

@@ -10,13 +10,13 @@ coverImage: "/projects/horizon-trailers-website.svg"
 coverAlt: "Horizon Trailers website homepage"
 date:
   start: "2024-09-15"
-  end: "present"
+  end: "2026-02-05"
 role: "Lead Developer, UI/UX Designer"
-status: "active"
+status: "finished"
 featured: true
 ownership: "Horizon Trailers (H7X Group)"
 category: "Corporate Website"
-duration: "In progress"
+duration: "Concluded"
 ---
 
 # Horizon Trailers Website

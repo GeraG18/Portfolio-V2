@@ -10,13 +10,13 @@ coverImage: "/projects/ranchboss-website.svg"
 coverAlt: "Página principal del sitio web de RanchBoss"
 date:
   start: "2025-09-08"
-  end: "actualidad"
+  end: "2026-02-05"
 role: "Lead Developer, UI/UX Designer"
-status: "active"
+status: "finished"
 featured: false
 ownership: "RanchBoss (H7X Group)"
 category: "E-commerce Especializado"
-duration: "En progreso"
+duration: "Concluído"
 ---
 
 # RanchBoss Website

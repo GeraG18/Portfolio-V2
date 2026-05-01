@@ -1,36 +1,34 @@
 ---
-title: "Horizon Trailers Website"
-description: "Sitio web corporativo completo para el fabricante líder de remolques Horizon Trailers"
+title: "GRN Agroindustrial Website"
+description: "Sitio web de venta de maquinaria para el área agrícola e industrial"
 lang: es
-technologies: ["next-js", "react", "typescript", "tailwind", "figma"]
+technologies: ["next-js", "react", "zustand", "gsap", "typescript", "tailwind", "figma", "coolify"]
 urls:
   - name: 'Sitio Web'
     url: 'https://horizontrailers.com'
-coverImage: "/projects/horizon-trailers-website.svg"
+coverImage: "/projects/grn-agroindustrial-website.svg"
 coverAlt: "Página principal del sitio web de Horizon Trailers"
 date:
   start: "2024-09-15"
-  end: "2026-02-05"
+  end: "actualidad"
 role: "Lead Developer, UI/UX Designer"
-status: "finished"
+status: "active"
 featured: true
-ownership: "Horizon Trailers (H7X Group)"
-category: "Sitio Web Corporativo"
-duration: "Concluído"
+ownership: "Grupo Remolques del Norte"
+category: "Sitio Web"
+duration: "En progreso"
 ---
 
-# Horizon Trailers Website
+# GRN Agroindustrial
 
-**Horizon Trailers Website** es el sitio web corporativo principal desarrollado para Horizon Trailers, fabricante líder en la industria de remolques y parte del grupo corporativo H7X. Esta plataforma integral presenta la completa gama de productos de remolques utilitarios, comerciales y especializados, ofreciendo a clientes empresariales e individuales una experiencia digital moderna para explorar productos, solicitar cotizaciones y acceder a recursos técnicos.
+**GRN Agroindustrial** es el sitio web de una de las empresas del Grupo Remolques del Norte, la cual se encarga de la venta de maquinaria para el área agrícola e industrial. Dicha página cuenta con el catálogo completo de los productos que se ofrecen, además cuenta con herramientas que ayudarán al cliente a elegir la maquinaria que él necesita. La infraestructura se optó por Coolify en vez del uso de Google Cloud Platform (GCP).
 
 ## Características principales
 
-- Catálogo completo de remolques con especificaciones técnicas detalladas
-- Sistema de cotizaciones en línea integrado
+- Catálogo completo de maquinaria agrícola e industrial con especificaciones técnicas detalladas
+- Herramientas de asistencia para el usuario para la selección de equipo.
 - Galería multimedia de productos y aplicaciones reales
-- Sección de recursos para clientes y distribuidores
 - Diseño responsivo optimizado para todos los dispositivos
-- Integración con sistemas CRM y de gestión empresarial
 
 ### Responsabilidades y Logros Clave:
 

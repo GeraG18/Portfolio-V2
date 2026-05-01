@@ -10,13 +10,13 @@ coverImage: "/projects/loadboss-website.svg"
 coverAlt: "LoadBoss website homepage"
 date:
   start: "2025-01-07"
-  end: "present"
+  end: "2026-02-05"
 role: "Lead Developer, UI/UX Designer"
-status: "active"
+status: "finished"
 featured: false
 ownership: "LoadBoss (H7X Group)"
 category: "Industrial Website"
-duration: "In progress"
+duration: "Concluded"
 ---
 
 # LoadBoss Website

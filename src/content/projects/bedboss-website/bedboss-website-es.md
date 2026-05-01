@@ -10,13 +10,13 @@ coverImage: "/projects/bedboss-website.svg"
 coverAlt: "Página principal del sitio web de BedBoss"
 date:
   start: "2025-09-03"
-  end: "actualidad"
+  end: "2026-02-05"
 role: "Lead Developer, UI/UX Designer"
-status: "active"
-featured: true
+status: "finished"
+featured: false
 ownership: "BedBoss (H7X Group)"
 category: "E-commerce Automotriz"
-duration: "En progreso"
+duration: "Concluído"
 ---
 
 # BedBoss Website

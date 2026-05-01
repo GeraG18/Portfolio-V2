@@ -1,7 +1,7 @@
 
 import { getCollection } from 'astro:content';
 
-interface ProjectData {
+export interface ProjectData {
   title: string;
   description?: string;
   lang: 'es' | 'en';
@@ -125,8 +125,8 @@ export async function getLocalizedProjects(locale: string = 'es'): Promise<Proje
   try {
     console.log(`🔍 Buscando proyectos para locale: ${locale}`);
     
-    
     const allProjects = await getCollection('projects');
+    // const alllBlogs = await getCollection('blog');
     console.log('allProjects:', allProjects.length);
     
     if (!allProjects || allProjects.length === 0) {
