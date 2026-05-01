@@ -201,10 +201,10 @@ let seo: SEOProps = {
       <span class="w-full text-lg font-bold text-black">{m["projects.date"]()}</span>
       <div class="w-full text-lg">
           {projectData.date?.start && (
-              <span>{projectData.date.start === "actualidad" ? m["months.present"]() : new Date(projectData.date.start).toLocaleDateString(currentLocale)}</span>
+              <span>{["actualidad", "present"].includes(projectData.date.start) ? m["months.present"]() : new Date(projectData.date.start).toLocaleDateString(currentLocale)}</span>
           )}
           {projectData.date?.end && (
-              <span> - {projectData.date.end === "actualidad" ? m["months.present"]() : new Date(projectData.date.end).toLocaleDateString(currentLocale)}</span>
+              <span> - {["actualidad", "present"].includes(projectData.date.end) ? m["months.present"]() : new Date(projectData.date.end).toLocaleDateString(currentLocale)}</span>
           )}
       </div>
     </div>
