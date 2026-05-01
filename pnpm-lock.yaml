@@ -35,9 +35,6 @@ importers:
       astro:
         specifier: ^6.2.1
         version: 6.2.1(@vercel/functions@3.5.0)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.57.1)(typescript@5.9.3)(yaml@2.8.2)
-      astro-particles:
-        specifier: ^2.10.0
-        version: 2.10.0
       astro-seo:
         specifier: ^0.8.4
         version: 0.8.4(prettier@3.8.1)(typescript@5.9.3)
@@ -1174,9 +1171,6 @@ packages:
   astring@1.9.0:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
-
-  astro-particles@2.10.0:
-    resolution: {integrity: sha512-DE1azMdcu2dkXxEKd7seoRqbhlh4UnTfinWM+RF5jm00tPtaJ+cjrz5nKHRnzYcyTAR18MaRAC4lIKf3tu86iQ==}
 
   astro-seo@0.8.4:
     resolution: {integrity: sha512-Ou1vzQSXAxa0K8rtNtXNvSpYqOGEgMhh0immMxJeXmbVZac3UKCNWAoXWyOQDFYsZvBugCRSg0N1phBqPMVgCw==}
@@ -4027,10 +4021,6 @@ snapshots:
   array-timsort@1.0.3: {}
 
   astring@1.9.0: {}
-
-  astro-particles@2.10.0:
-    dependencies:
-      tsparticles-engine: 2.12.0
 
   astro-seo@0.8.4(prettier@3.8.1)(typescript@5.9.3):
     dependencies:
