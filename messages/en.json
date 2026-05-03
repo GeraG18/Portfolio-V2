@@ -13,7 +13,7 @@
     "greetings": "Hey there! My name is Gerardo",
     "title": "Software Engineer",
     "description": "Developer with the goal of building technological innovations, constantly improving, and solving challenges.",
-    "download_cv":"Download CV",
+    "download_cv": "Download CV",
     "linkedin": "LinkedIn"
   },
   "not_found_section": {
@@ -34,12 +34,14 @@
     "date": "Date",
     "start_date": "Start date",
     "end_date": "End date",
-    "featured":"Featured"
+    "featured": "Featured"
   },
   "work_experience": {
     "title": "Work experience",
     "cii_description": "At Córdova Industrial, I worked on implementing the freelance project called InteliHogar for smart homes. My contributions included coding the store profile for device control, implementing subscription plan management logic for smart home benefits, redesigning the Ionic-based application to make it more intuitive with natural screen flow, contributing to the development of a smart alarm system and monitoring application for home monitoring personnel. I was also responsible for implementing SEO and SSR on the Angular-based website and worked on its translation for the American market (InteliHom, now discontinued). Other projects I worked on included Enegrin, Cord, and JMAS (Municipal Water and Sanitation Board), which involved remote PLC control management through bridge applications for activating and deactivating PLC options. Technologies used included Ionic, Node-RED, and Raspberry Pi. In these projects, I played a significant role in the interface design created in Figma.",
-    "ht_description": "At Horizon Trailers, I worked on the Horizon Trailers, Loadboss, Bedboss, Ranchboss projects, and an application that I cannot mention at the moment as it is still under development. In these projects, I was directly involved in designing the web pages in Figma and developing these pages using Next.js and React, implementing SEO and SSR efficiently. Additionally, I worked on the performance and accessibility of these pages, improving their efficiency and load time by 80%, ensuring that there are no delays longer than 1.5 seconds on initial loads (though other factors such as Google Cloud bucket requirements also play a role). I also worked on their security by regularly reviewing Next.js versions and updating when necessary, as well as conducting reviews on data encryption handled behind the pages."
+    "ht_description": "At Horizon Trailers, I worked on the Horizon Trailers, Loadboss, Bedboss, Ranchboss projects, and an application that I cannot mention at the moment as it is still under development. In these projects, I was directly involved in designing the web pages in Figma and developing these pages using Next.js and React, implementing SEO and SSR efficiently. Additionally, I worked on the performance and accessibility of these pages, improving their efficiency and load time by 80%, ensuring that there are no delays longer than 1.5 seconds on initial loads (though other factors such as Google Cloud bucket requirements also play a role). I also worked on their security by regularly reviewing Next.js versions and updating when necessary, as well as conducting reviews on data encryption handled behind the pages.",
+    "grn_description": "As a Senior Software Engineer, I am leading the modernization of the corporate digital ecosystem, transforming legacy platforms with design and performance deficiencies into high-impact web applications. I have optimized efficiency and load speeds by 90%, ensuring response times under 1.5 seconds for first paints by optimizing Google Cloud Bucket resource management. Additionally, I strengthen the security infrastructure through constant Next.js version audits and the implementation of advanced end-to-end data encryption protocols.",
+    "ink_description": "In my role as Lead Developer & UX Strategist, I spearhead the agency's technological evolution, merging printing system precision with the power of modern web development. I focus on creating digital ecosystems where creativity and performance converge, implementing optimized interfaces that eliminate critical usability flaws. Under my leadership, we have standardized the use of Next.js to ensure secure, scalable applications with exceptional accessibility that transforms ideas into measurable results."
   },
   "last_projects": {
     "title": "Last projects",

@@ -660,6 +660,52 @@ export { work_experience_ht_description as "work_experience.ht_description" }
 * @returns {LocalizedString}
 */
 /* @__NO_SIDE_EFFECTS__ */
+const work_experience_grn_description = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.work_experience_grn_description(inputs) 
+	}
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
+	trackMessageCall("work_experience_grn_description", locale)
+	if (locale === "en") return __en.work_experience_grn_description(inputs)
+	return __es.work_experience_grn_description(inputs)
+};
+export { work_experience_grn_description as "work_experience.grn_description" }
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "es" }} options
+* @returns {LocalizedString}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+const work_experience_ink_description = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.work_experience_ink_description(inputs) 
+	}
+	const locale = experimentalStaticLocale ?? options.locale ?? getLocale()
+	trackMessageCall("work_experience_ink_description", locale)
+	if (locale === "en") return __en.work_experience_ink_description(inputs)
+	return __es.work_experience_ink_description(inputs)
+};
+export { work_experience_ink_description as "work_experience.ink_description" }
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "es" }} options
+* @returns {LocalizedString}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 const last_projects_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.last_projects_title(inputs) 

@@ -4,19 +4,6 @@ import { m } from '../../paraglide/messages';
 import DynamicTag from "../ui/DynamicTag.astro";
 
 const workExperience = [
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     {
         date: {
             start: `${m['months.feb']()} 2022`,
@@ -33,14 +20,40 @@ const workExperience = [
     {
         date: {
             start: `${m['months.sep']()} 2024`,
-            end: `${m['months.present']()}`
+            end: `${m['months.feb']()} 2026`,
         },
         role:"Software Engineer, Full Stack Developer",
-        company: "Horizon Trailers",
+        company: "H7X Holdings",
         companyLink: "https://horizontrailers.com",
         description: m['work_experience.ht_description'](),
         technologies: [
             "react", "next-js", "stripe", "typescript", "javascript", "tailwind", "jira", "git", "gitlab", "firebase", "google-cloud", "raspberry-pi", "figma", "photoshop"
+        ]
+    },
+    {
+        date: {
+            start: `${m['months.feb']()} 2026`,
+            end: `${m['months.present']()}`
+        },
+        role:"Software Engineer, Full Stack Developer",
+        company: "Grupo Remolques del Norte",
+        companyLink: "https://trailer.com.mx",
+        description: m['work_experience.grn_description'](),
+        technologies: [
+            "react", "next-js", "typescript", "javascript", "tailwind", "git", "github", "coolify", "figma", "photoshop"
+        ]
+    },
+    {
+        date: {
+            start: `${m['months.feb']()} 2026`,
+            end: `${m['months.present']()}`
+        },
+        role:"Software Engineer, Full Stack Developer",
+        company: "Inkspire Capi",
+        companyLink: "https://inkspirecapi.com",
+        description: m['work_experience.ink_description'](),
+        technologies: [
+            "astro", "react", "next-js", "typescript", "javascript", "tailwind", "git", "github", "coolify", "figma", "photoshop"
         ]
     },
 ];

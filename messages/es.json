@@ -13,7 +13,7 @@
     "greetings": "Hola! Mi nombre es Gerardo",
     "title": "Ingeniero en Software",
     "description": "Desarrollador con el objetivo de construir innovaciones tecnológicas, estar en mejora constante y resolver desafios.",
-    "download_cv":"Descargar CV",
+    "download_cv": "Descargar CV",
     "linkedin": "LinkedIn"
   },
   "not_found_section": {
@@ -34,12 +34,14 @@
     "date": "Fecha",
     "start_date": "Fecha de inicio",
     "end_date": "Fecha de finalización",
-    "featured":"Destacado"
+    "featured": "Destacado"
   },
   "work_experience": {
     "title": "Experiencia laboral",
     "cii_description": "En Córdova Industrial estube trabajando en la implementación del proyecto freelance llamado InteliHogar que es de casas inteligentes, en el cual aporté la codificación del perfil en la tienda online para su accionamiento, realicé la lógica de la gestión de planes de suscripción para contar con ventajas en el hogar inteligente, hice el rediseño de la aplicación del proyecto trabajada en Ionic para hacerla más intuitiva y que contase con un seguimiento de pantallas más natural, contribuí a la fabricación de una alarma inteligente y una aplicación de monitoreo para el personal de monitoreo de hogares, también estuve encargado de la implementación de SEO y SSR en la página hecha en Angular, también trabajé en su traducción para su marca en el público estadounidense (InteliHom, ya descontinuado). Otro de los proyectos trabajados fue Enegrin, Cord y JMAS (Junta Municipal de Agua y Saneamiento) que los proyectos eran haciendo uso de control remoto de PLCs, gestionando el control remoto por medio de unas aplicaciones que hacían de puente para activar y desactivar opciones de dichos PLCs, se usaron las tecnologías Ionic, Node Red y Raspberry Pi, en dichos proyectos influí en gran parte en el diseño de interfaz realizado en Figma.",
-    "ht_description": "En Horizon Trailers estuve trabajando en los proyectos Horizon Trailers, Loadboss, Bedboss, Ranchboss y una aplicación de la cual no puedo hacer mención de momento porque sigue en desarrollo, en dichos proyectos estuve trabajando directamente con el diseño de las páginas web en Figma, hice el desarrollo de dichas páginas en Next.js y React, haciendo una implementación de SEO, SSR de una manera eficiente. Además en dichas páginas estuve trabajando en el rendimiento y en la accesibilidad, mejorando su eficiencia y carga en un 80%, haciendo que no haya demoras mayores a 1.5 segundos en sus primeras cargas (aunque aquí influyen otros factores como lo son los requisitos del bucket de Google Cloud), además he estado trabajando en la seguridad de las mismas revisando de forma periódica las versiones de Next.js y actualizando cuando es necesario, además de hacer revisiones sobre la encriptación de datos que se llegan a manejar por detrás de la página."
+    "ht_description": "En H7X Holdings estuve trabajando en los proyectos Horizon Trailers, Loadboss, Bedboss, Ranchboss y una aplicación de la cual no puedo hacer mención de momento porque sigue en desarrollo, en dichos proyectos estuve trabajando directamente con el diseño de las páginas web en Figma, hice el desarrollo de dichas páginas en Next.js y React, haciendo una implementación de SEO, SSR de una manera eficiente. Además en dichas páginas estuve trabajando en el rendimiento y en la accesibilidad, mejorando su eficiencia y carga en un 80%, haciendo que no haya demoras mayores a 1.5 segundos en sus primeras cargas (aunque aquí influyen otros factores como lo son los requisitos del bucket de Google Cloud), además he estado trabajando en la seguridad de las mismas revisando de forma periódica las versiones de Next.js y actualizando cuando es necesario, además de hacer revisiones sobre la encriptación de datos que se llegan a manejar por detrás de la página.",
+    "grn_description": "Como Senior Software Engineer, lidero la modernización del ecosistema digital corporativo, transformando plataformas legacy con deficiencias de diseño y rendimiento en aplicaciones web de alto impacto. He logrado optimizar la eficiencia y velocidad de carga en un 90%, garantizando tiempos de respuesta inferiores a 1.5 segundos en el primer renderizado mediante la optimización de recursos en Google Cloud Buckets. Además, refuerzo la infraestructura de seguridad mediante auditorías constantes de versiones en Next.js y la implementación de protocolos avanzados de encriptación de datos end-to-end.",
+    "ink_description": "En mi rol como Líder de Desarrollo y Estrategia UX, dirijo la evolución tecnológica de la agencia, fusionando la precisión de los sistemas de impresión con la potencia del desarrollo web moderno. Me enfoco en crear ecosistemas digitales donde la creatividad y el rendimiento convergen, implementando interfaces optimizadas que eliminan fallos críticos de usabilidad. Bajo mi dirección, hemos estandarizado el uso de Next.js para garantizar aplicaciones seguras, escalables y con una accesibilidad excepcional que transforma ideas en resultados medibles."
   },
   "last_projects": {
     "title": "Últimos proyectos",
