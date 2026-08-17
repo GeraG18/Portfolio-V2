@@ -2,6 +2,9 @@
   "name": "portfolio-v20",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide &&  astro dev",
     "build": "astro build",

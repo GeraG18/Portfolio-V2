@@ -2,7 +2,7 @@
 title: "Inkspire Capi - Creative Agency & Digital Strategy"
 description: "Inkspire Capi Website, merging printing precision with modern web development."
 lang: en
-technologies: ["astro", "typescript", "gsap", "tailwind-css", "figma"]
+technologies: ["astro", "typescript", "gsap", "tailwind", "figma"]
 urls: [{ "name": "Website", "url": "https://inkspirecapi.com" }]
 coverImage: "/projects/inkspire-capi-website.svg"
 coverAlt: "Inkspire Capi platform interface"
